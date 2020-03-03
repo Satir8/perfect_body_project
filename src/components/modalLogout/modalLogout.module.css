@@ -1,0 +1,29 @@
+.moduleCase {
+    width: 320px;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    align-items: center;
+
+}
+
+.line {
+    border: none;
+    background-color: #284060;
+    color: #284060;
+    height: 2px;
+    width: 256px;
+}
+
+.btnCase {
+    display: flex;
+    flex-direction: column;
+}
+
+.btnNo {
+
+}
+
+.btnYes {
+
+}

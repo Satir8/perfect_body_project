@@ -1,11 +1,11 @@
 import React from "react";
-import moment from "moment";
 import "./App.css";
-import QuotesCarousel from "./components/dashboard/achievement/carousel/QuotesCarousel";
+import ModalLogout from "./components/modalLogout/modalLogout"
 // console.log(moment().format());
 
 function App() {
-  return <QuotesCarousel />;
+  return (
+    <ModalLogout/>);
 }
 
 export default App;
