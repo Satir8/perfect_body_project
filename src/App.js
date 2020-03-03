@@ -14,7 +14,6 @@ const state = {
     { id: 4, name: "Копченности" }
   ],
   summCalories: 2800,
-  btnStartBurn: "Начать худеть"
 };
 
 function App() {

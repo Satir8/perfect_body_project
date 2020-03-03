@@ -1,13 +1,18 @@
 import React from "react";
+import PropTypes from "prop-types";
 import "./ModalWindow.css";
 import WithModalBackdrop from "../../HOC/WithModalBackdrop/WithModalBackdrop";
 
 const ModalWindow = props => {
-  const { products, summCalories, btnStartBurn, onCloseModal } = props.state;
+  const { products, summCalories, onCloseModal } = props.state;
   return (
     <div className="modalWindow">
       <div className="modalHeader">
-        <button type="button" className="closeBtn" onClick={onCloseModal}></button>
+        <button
+          type="button"
+          className="closeBtn"
+          onClick={onCloseModal}
+        ></button>
         <h2 className="title">
           Ваша рекомендуемая суточная норма калорий составляет:
         </h2>
@@ -33,7 +38,7 @@ const ModalWindow = props => {
       </div>
       <div className="modalFooter">
         <button type="button" className="startLoosingWeight">
-          {btnStartBurn}
+          Начать худеть
         </button>
       </div>
     </div>
@@ -41,3 +46,18 @@ const ModalWindow = props => {
 };
 
 export default WithModalBackdrop(ModalWindow);
+
+ModalWindow.defaultProps = {
+  products: []
+};
+
+ModalWindow.propTypes = {
+  products: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.number,
+      name: PropTypes.string
+    })
+  ),
+  summCalories: PropTypes.string.isRequired,
+  onCloseModal: PropTypes.func.isRequired
+};
