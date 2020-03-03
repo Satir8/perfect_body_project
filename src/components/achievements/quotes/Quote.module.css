@@ -1,0 +1,22 @@
+.quoteContainer {
+  width: 600px;
+  text-align: center;
+  margin: 0 auto;
+  padding-bottom: 50px;
+  font-family: 'Playfair Display', cursive;
+  font-style: italic;
+}
+
+.quoteText {
+  padding: 0 30px 10px 30px;
+  font-size: 22px;
+  font-weight: 700;
+  line-height: 33px;
+}
+
+.quoteAuthor {
+  text-align: right;
+  font-size: 14px;
+  color: #999daa;
+  padding-right: 20px;
+}

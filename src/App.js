@@ -1,8 +1,12 @@
-import React from "react";
-import "./App.css";
+import React from 'react';
+import './App.css';
+import Achievements from './components/achievements/Achievements';
 
-function App() {
-  return <p>Slim Mom</p>;
-}
+const App = () => (
+  <>
+    {/* <p>Slim App</p> */}
+    <Achievements />
+  </>
+);
 
 export default App;

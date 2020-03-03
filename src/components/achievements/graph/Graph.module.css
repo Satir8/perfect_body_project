@@ -1,0 +1,33 @@
+html {
+  box-sizing: border-box;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+}
+
+.graphChart {
+  width: 100%;
+  height: 336px;
+  padding: 0 22px 0 22px;
+  font-family: "Gotham-Pro", serif;
+  font-size: 10px;
+}
+
+.graphChart h3 {
+  padding-bottom: 20px;
+}
+
+canvas {
+  background-color: #eff1f3;
+}
+
+ /* desktop */
+@media (min-width: 1000px) {
+  .graphChart {
+    width: 600px;
+    height: 340px;
+  }
+}
