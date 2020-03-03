@@ -1,0 +1,48 @@
+.homePageContainer {
+  width: 320px;
+  margin: 0 auto;
+}
+
+.homePageHeader {
+  width: 320px;
+  margin: 0 auto;
+  margin-bottom: 24px;
+}
+.homePageBody {
+  width: 320px;
+  padding-top: 24px;
+}
+@media screen and (min-width 768px) {
+  .homePageContainer {
+    width: 660px;
+    margin: 0 auto;
+  }
+
+  .homePageHeader {
+    width: 660px;
+    margin-bottom: 56px;
+  }
+  .homePageBody {
+    width: 560px;
+    height: 420px;
+    background-color: rgb(71, 71, 71);
+    padding-top: 56px;
+  }
+}
+
+/* @media only screen and (min-width: 1200px) {
+  .homePageContainer {
+    width: 320px;
+    margin: 0 auto;
+  }
+
+  .homePageHeader {
+    width: 320px;
+    margin: 0 auto;
+    margin-bottom: 24px;
+  }
+  .homePageBody {
+    width: 320px;
+    padding-top: 24px;
+  }
+} */
