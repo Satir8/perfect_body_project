@@ -28,6 +28,6 @@ canvas {
 @media (min-width: 1000px) {
   .graphChart {
     width: 600px;
-    height: 340px;
+    height: 380px;
   }
 }

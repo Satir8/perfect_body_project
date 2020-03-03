@@ -34,13 +34,13 @@ class Quote extends Component {
       if (idx === arr.length - 1) {
         this.setState({ idx: 0 });
       }
-    }, 5000);
+    }, 7000);
   };
 
   render() {
     const { currentQuote, visible } = this.state;
     return (
-      <CSSTransition in={visible} timeout={2000} classNames={animation}>
+      <CSSTransition in={visible} timeout={1000} classNames={animation}>
         <figure className={styles.quoteContainer}>
           <blockquote className={styles.quoteText}>
             <p>{`"${currentQuote.text}"`}</p>

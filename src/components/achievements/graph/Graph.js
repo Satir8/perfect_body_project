@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Line } from 'react-chartjs-2';
 import axios from 'axios';
 import styles from './Graph.module.css';
+import PropTypes from 'prop-types';
 
 const options = {
   maintainAspectRatio: false,
@@ -136,6 +137,10 @@ class Graph extends Component {
       </div>
     );
   }
+}
+
+Graph.propTypes = {
+  isMobile: PropTypes.bool
 }
 
 export default Graph;
