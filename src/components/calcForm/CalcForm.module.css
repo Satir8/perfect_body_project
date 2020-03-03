@@ -1,0 +1,195 @@
+.calkform {
+  margin: 0 auto;
+  width: 320px;
+}
+
+.calkformWrapper {
+  width: 280px;
+  margin: 0;
+  padding: 40px 20px 44px;
+}
+
+.calkformTitile {
+  font-family: Verdana, Tahoma, sans-serif;
+  font-size: 17px;
+  font-weight: bold;
+  color: #212121;
+  line-height: 27px;
+}
+
+.inputForm {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  width: 280px;
+  padding-bottom: 40px;
+}
+
+.inputItem {
+  outline: none;
+  background-color: transparent;
+  height: 40px;
+  width: 276px;
+  padding-top: 18px;
+  border-top: none;
+  border-left: none;
+  border-right: none;
+}
+
+.inputItem:last-child {
+  padding-bottom: 0;
+}
+
+.inputItem::placeholder {
+  color: #999daa;
+  font-family: Verdana, Tahoma, sans-serif;
+  font-weight: bold;
+  font-size: 13px;
+  /* margin-left: 32px; */
+}
+
+/* .option {
+    width: 276px;
+} */
+
+.selectInput {
+  color: #999daa;
+  font-family: Verdana, Tahoma, sans-serif;
+  font-weight: bold;
+  font-size: 13px;
+  height: 48px;
+  width: 276px;
+  margin-top: 13px;
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  border-color: #e5e5e5;
+  outline: none;
+}
+
+
+
+.inputMeasure {
+  display: block;
+  margin: 0 auto;
+  height: 42px;
+  width: 176px;
+  background-color: #fc842c;
+  border-radius: 18px;
+  outline: none;
+  border-color: transparent;
+  color: #ffffff;
+  font-family: Verdana, Tahoma, sans-serif;
+  font-size: 14px;
+  font-weight: bold;
+  margin-top: 46px;
+}
+
+.buttonTitle {
+  color: #999daa;
+  font-family: Verdana, Tahoma, sans-serif;
+  font-weight: bold;
+  font-size: 13px;
+  margin: 0;
+}
+
+.buttonTitle {
+  padding-top: 24px;
+  padding-bottom: 4px;
+}
+
+@media (min-width: 768px) {
+  .calkform {
+    width: 768px;
+    height: 836px;
+    background-image: url(../../images/img/calcForm/BG.png);
+    background-repeat: no-repeat;
+    background-position: right bottom;
+  }
+
+  .background {
+    /* position: absolute; */
+    top: 150px;
+    left: 10px;
+    width: 300px;
+    height: 150px;
+  }
+
+  .calkformWrapper {
+    width: 524px;
+    padding: 48px 154px 424px 90px;
+  }
+
+  .calkformTitile {
+    font-family: Verdana, Tahoma, sans-serif;
+    font-size: 30px;
+    font-weight: bold;
+    color: #212121;
+    line-height: 40px;
+  }
+
+  .inputForm {
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    width: 524px;
+  }
+
+  .inputItem::placeholder {
+    color: #999daa;
+    font-family: Verdana, Tahoma, sans-serif;
+    font-weight: bold;
+    font-size: 15px;
+    /* margin-left: 32px; */
+  }
+
+  .inputFormLeft {
+    width: 236px;
+  }
+
+  .inputFormRight {
+    width: 236px;
+  }
+  .inputItem {
+    height: 52px;
+    width: 236px;
+    padding-top: 20px;
+  }
+
+  .selectInput {
+    height: 74px;
+    width: 236px;
+    font-size: 15px;
+    margin: 0;
+    padding-top: 12px;
+  }
+
+  .inputMeasure {
+    display: inline-block;
+    margin: 52px 0;
+  }
+}
+@media (min-width: 1280px) {
+  .calkform {
+    width: 790px;
+    background-image: unset;
+  }
+
+  .br {
+      visibility: hidden;
+  }
+
+  .calkformWrapper {
+    width: 522px;
+    padding: 152px 150px 110px 114px;
+  }
+
+  .calkformTitile {
+    font-size: 35px;
+    line-height: 38px;
+  }
+
+  .inputMeasure {
+    margin-left: 342px;
+  }
+}
