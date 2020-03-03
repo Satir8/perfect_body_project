@@ -1,8 +1,11 @@
 import React from "react";
+import moment from "moment";
 import "./App.css";
+import QuotesCarousel from "./components/dashboard/achievement/carousel/QuotesCarousel";
+// console.log(moment().format());
 
 function App() {
-  return <p>Slim Mom</p>;
+  return <QuotesCarousel />;
 }
 
 export default App;
