@@ -2,9 +2,9 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import styles from "./CalcForm.module.css";
 
-const getData = data => {
-  console.log("data", data);
-};
+// const getData = data => {
+//   console.log("data", data);
+// };
 
 class CalcForm extends Component {
   state = {
@@ -17,6 +17,7 @@ class CalcForm extends Component {
 
   createList = e => {
     e.preventDefault();
+    console.log(this.state);
     // this.props.getData(this.state);
   };
 
@@ -42,7 +43,7 @@ class CalcForm extends Component {
                 placeholder="Рост *"
                 name="height"
                 onChange={this.handleChange}
-              ></input>
+              />
               <input
                 type="Text"
                 className={styles.inputItem}
@@ -50,7 +51,7 @@ class CalcForm extends Component {
                 placeholder="Возраст *"
                 name="age"
                 onChange={this.handleChange}
-              ></input>
+              />
               <input
                 type="Text"
                 className={styles.inputItem}
@@ -58,7 +59,7 @@ class CalcForm extends Component {
                 placeholder="Текущий вес *"
                 name="currentWeight"
                 onChange={this.handleChange}
-              ></input>
+              />
             </div>
             <div className={styles.inputFormRight}>
               <input
@@ -68,7 +69,7 @@ class CalcForm extends Component {
                 placeholder="Желаемый вес *"
                 name="futureWeight"
                 onChange={this.handleChange}
-              ></input>
+              />
               <select
                 id="groupBlood"
                 name="groupBlood"
@@ -82,7 +83,12 @@ class CalcForm extends Component {
                 <option className={styles.option}>4</option>
               </select>
             </div>
-            <button type="submit" className={styles.inputMeasure} id="submit">
+            <button
+              type="submit"
+              className={styles.inputMeasure}
+              onClick={this.getData}
+              id="submit"
+            >
               Похудеть
             </button>
           </form>
