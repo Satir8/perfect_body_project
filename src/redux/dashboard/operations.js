@@ -1,78 +1,79 @@
 import axios from "axios";
-import {
-  loginRequest,
-  loginSuccess,
-  loginError,
-  signupRequest,
-  signupSuccess,
-  signupError,
-  refreshRequest,
-  refreshSuccess,
-  refreshError,
-  LogOut
-} from "./dashboardActions";
 
-axios.defaults.baseURL = "https://slim-moms.goit.co.ua/api/v1";
+// import {
+//   loginRequest,
+//   loginSuccess,
+//   loginError,
+//   signupRequest,
+//   signupSuccess,
+//   signupError,
+//   refreshRequest,
+//   refreshSuccess,
+//   refreshError,
+//   LogOut
+// } from "./dashboardActions";
 
-// Auth Operations
+// axios.defaults.baseURL = "https://slim-moms.goit.co.ua/api/v1";
 
-const sighUp = ({ nickname, password }) => dispatch => {
-  dispatch(signupRequest());
-  axios
-    .post(" /register", {
-      nickname: nickname,
-      password: password
-    })
-    .then(data => {
-      console.log(data);
-      dispatch(signupSuccess(data));
-    })
-    .catch(error => {
-      console.log(error);
-      dispatch(signupError(error));
-    })
-    .finally(() => dispatch(signupRequest()));
-};
+// // Auth Operations
 
-const login = ({ nickname, password }) => dispatch => {
-  dispatch(loginRequest());
-  axios
-    .post("/login", {
-      nickname: nickname,
-      password: password
-    })
-    .then(data => {
-      console.log(data);
-      dispatch(loginSuccess(data));
-    })
-    .catch(error => {
-      console.log(error);
-      dispatch(loginError(error));
-    })
-    .finally(() => dispatch(loginRequest()));
-};
+// const sighUp = ({ nickname, password }) => dispatch => {
+//   dispatch(signupRequest());
+//   axios
+//     .post(" /register", {
+//       nickname: nickname,
+//       password: password
+//     })
+//     .then(data => {
+//       console.log(data);
+//       dispatch(signupSuccess(data));
+//     })
+//     .catch(error => {
+//       console.log(error);
+//       dispatch(signupError(error));
+//     })
+//     .finally(() => dispatch(signupRequest()));
+// };
 
-const refresh = token => dispatch => {
-  dispatch(refreshRequest());
+// const login = ({ nickname, password }) => dispatch => {
+//   dispatch(loginRequest());
+//   axios
+//     .post("/login", {
+//       nickname: nickname,
+//       password: password
+//     })
+//     .then(data => {
+//       console.log(data);
+//       dispatch(loginSuccess(data));
+//     })
+//     .catch(error => {
+//       console.log(error);
+//       dispatch(loginError(error));
+//     })
+//     .finally(() => dispatch(loginRequest()));
+// };
 
-  if(!token) return;
+// const refresh = token => dispatch => {
+//   dispatch(refreshRequest());
+
+//   if(!token) return;
 
   
-};
+// };
 
-const logout = token => dispatch => {
-  axios
-    .post("/logout", {
-      Authorization: `Bearer ${token}`
-    })
-    .then(() => {
-      dispatch(LogOut());
-    })
-    .catch(error => {
-      console.log(error);
-    });
-};
+// const logout = token => dispatch => {
+//   axios
+//     .post("/logout", {
+//       Authorization: `Bearer ${token}`
+//     })
+//     .then(() => {
+//       dispatch(LogOut());
+//     })
+//     .catch(error => {
+//       console.log(error);
+//     });
+// };
 
-// Get Products for select
+// // Get Products for select
 
-const getProducts = () => () => {};
+// const getProducts = () => () => {};
