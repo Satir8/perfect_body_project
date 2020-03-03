@@ -18,7 +18,6 @@ class CalcForm extends Component {
   createList = e => {
     e.preventDefault();
     console.log(this.state);
-    // this.props.getData(this.state);
   };
 
   handleChange = e => {
