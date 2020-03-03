@@ -1,6 +1,6 @@
 .container {
   padding: 0 20px;
-  background-image: url(../../src/images/img/backgroundSummary.jpg);
+  background-image: url(../../images/img/backgroundSummary.jpg);
   background-repeat: no-repeat;
   background-size: cover;
 }
@@ -42,7 +42,7 @@
     padding-top: 76px;
     padding-bottom: 80px;
     display: flex;
-    justify-content: start;
+    justify-content: flex-start;
   }
   .blockProgres {
     width: 255px;
@@ -71,7 +71,7 @@
     padding-top: 136px;
     margin: 0;
     width: 488px;
-    background-image: url(../images/img/backGroundSummaryLap.jpg);
+    background-image: url(../../images/img/backGroundSummaryLap.jpg);
     background-repeat: no-repeat;
     flex-direction: column;
   }
@@ -87,5 +87,14 @@
     width: 100px;
     height: 30px;
     background-color: black;
+  }
+  .userName {
+    padding-right: 5px;
+    margin-right: 5px;
+    display: block;
+    border-right: 2px solid #999daa;
+  }
+  .linkRegister {
+    display: block;
   }
 }
