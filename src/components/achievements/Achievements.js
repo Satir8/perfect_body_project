@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Quote from './quotes/Quote';
 import Graph from './graph/Graph';
 import styles from './Achievements.module.css';
+// import QuotesCarousel from './quotes/QuotesCarousel';
 
 const screenWidth = window.matchMedia('(max-width: 375px)');
 

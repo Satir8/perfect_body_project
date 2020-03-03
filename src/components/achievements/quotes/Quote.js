@@ -1,37 +1,55 @@
 import React, { Component } from 'react';
 import data from './quotesData';
 import styles from './Quote.module.css';
+import { CSSTransition } from 'react-transition-group';
+import animation from './quoteAnimation.module.css';
 
 class Quote extends Component {
   state = {
-    quoteNumber: 0
+    idx: 0,
+    currentQuote: data[0],
+    visible: false
   };
 
   componentDidMount() {
-    setInterval(() => {
-      this.setState(prev => {
-        if (prev.quoteNumber >= data.length) {
-          prev.quoteNumber = -1;
-        }
-        return {
-          quoteNumber: prev.quoteNumber + 1
-        };
-      });
-    }, 50000000);
+    this.openNextQuote(data);
   }
 
+  componentDidUpdate(prevProps, prevState) {
+    if (prevState.idx !== this.state.idx) {
+      this.setState({
+        visible: false
+      });
+    }
+  }
+
+  openNextQuote = arr => {
+    setInterval(() => {
+      const { idx } = this.state;
+      this.setState(prev => ({
+        idx: prev.idx + 1,
+        currentQuote: arr[idx],
+        visible: true
+      }));
+      if (idx === arr.length - 1) {
+        this.setState({ idx: 0 });
+      }
+    }, 5000);
+  };
+
   render() {
-    const { quoteNumber } = this.state;
-    console.log(quoteNumber)
+    const { currentQuote, visible } = this.state;
     return (
-      <figure className={styles.quoteContainer}>
-        <blockquote className={styles.quoteText}>
-          <p>{`"${data[quoteNumber].text}"`}</p>
-        </blockquote>
-        <figcaption className={styles.quoteAuthor}>
-          {`(${data[quoteNumber].autor})`}
-        </figcaption>
-      </figure>
+      <CSSTransition in={visible} timeout={2000} classNames={animation}>
+        <figure className={styles.quoteContainer}>
+          <blockquote className={styles.quoteText}>
+            <p>{`"${currentQuote.text}"`}</p>
+          </blockquote>
+          <figcaption className={styles.quoteAuthor}>
+            {`(${currentQuote.autor})`}
+          </figcaption>
+        </figure>
+      </CSSTransition>
     );
   }
 }

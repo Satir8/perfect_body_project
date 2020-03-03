@@ -5,6 +5,7 @@
   padding-bottom: 50px;
   font-family: 'Playfair Display', cursive;
   font-style: italic;
+  position: absolute;
 }
 
 .quoteText {
