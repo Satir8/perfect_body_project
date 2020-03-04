@@ -4,49 +4,66 @@ import css from "./Summary.module.css";
 import moment from "moment";
 
 const data = {
-  balance: "number",
-  consumed: "number",
-  dailyRate: "number",
-  percentNorm: "number"
-};
-
-const not = {
-  a: "Все зерновые, яйца, молочные продукты, мучные изделия",
-  b: "Все молочные продукты, изделия из пшеничной муки, красное мясо",
-  d: "Все изделия из пшеничной муки, чечевица, арахис, гречка, кукуруза",
-  c: "Все мучные изделия, красное мясо, орехи, кукуруза, фасоль, гречка"
+  balance: 0,
+  consumed: 722
 };
 
 const Summary = ({ calcForm }) => {
   console.log(calcForm);
+  
   return (
-    <div className={css.container}>
+    // <div className={css.container}>
       <div className={css.blockSummary}>
-        {window.outerWidth > 1023 && (
+        {/* {window.outerWidth > 1023 && (
           <div className={css.loginBox}>
             <div className={css.blabla}></div>
           </div>
-        )}
+        )} */}
         <div className={css.blockProgres}>
           <p className={css.title}>
             Сводка за <span>{moment(data).format("MM.DD.Y")}</span>
           </p>
           <ul className={css.listProgress}>
             <li className={css.progressItem}>
-              <span>Осталось</span>
-              <span>{data.balance}ккал</span>
+              {calcForm.calories ? (
+                calcForm.calories - data.consumed >= 0 ? (
+                  <span>Осталось</span>
+                ) : (
+                  <span>Перебор</span>
+                )
+              ) : (
+                <span>Осталось</span>
+              )}
+              {calcForm.calories ? (
+                calcForm.calories - data.consumed >= 0 ? (
+                  <span> {calcForm.calories - data.consumed} ккал</span>
+                ) : (
+                  <span style={{ color: "#e70a0a94" }}>
+                    {Math.abs((calcForm.calories - data.consumed).toFixed(0))}{" "}
+                    ккал
+                  </span>
+                )
+              ) : (
+                <span> {calcForm.calories - data.consumed} ккал</span>
+              )}
             </li>
             <li className={css.progressItem}>
               <span>Употреблено</span>
-              <span>{data.consumed}ккал</span>
+              <span>{data.consumed} ккал</span>
             </li>
             <li className={css.progressItem}>
               <span>Дневная норма</span>
-              <span>{data.dailyRate}ккал</span>
+              <span>{calcForm.calories} ккал</span>
             </li>
             <li className={css.progressItem}>
               <span>n% от нормы</span>
-              <span>{data.percentNorm} %</span>
+              {calcForm.calories ? (
+                <span>
+                  {(data.consumed * (100 / calcForm.calories)).toFixed(0)} %
+                </span>
+              ) : (
+                <span>0 %</span>
+              )}
             </li>
           </ul>
         </div>
@@ -54,10 +71,12 @@ const Summary = ({ calcForm }) => {
           <p className={css.title}>
             Продукты, которые вам не рекомендовано употреблять:
           </p>
-          <p className={css.products}>{not.a}</p>
+          <p className={css.products}>
+            {calcForm.dangerProducts[0].join(", ")}
+          </p>
         </div>
       </div>
-    </div>
+    // </div>
   );
 };
 
