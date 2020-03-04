@@ -1,14 +1,18 @@
-import React from 'react';
-import './App.css';
-import DiaryBlock from './components/diary-block/DiaryBlock';
+import React from "react";
+import moment from "moment";
+import "./App.css";
+
+import Summary from "./components/Summary";
+import CalcForm from './components/calcForm/CalcForm'
+import DashboardContainer from './components/dashboard/DashboardContainer'
+
 
 function App() {
   return (
-    <>
-      <p>Slim Mom</p>
-      <DiaryBlock />
-    </>
-  );
+    // <CalcForm/>
+    //<Summary />
+    <DashboardContainer />
+  )
 }
 
 export default App;
