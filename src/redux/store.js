@@ -27,3 +27,19 @@ export const store = createStore(
 );
 
 export const persistor = persistStore(store);
+
+// import { composeWithDevTools } from "redux-devtools-extension";
+// import { applyMiddleware, createStore, combineReducers } from "redux";
+// import thunk from "redux-thunk";
+
+// const middlewares = [thunk];
+// const rootReducer = combineReducers({});
+
+// const enhancer =
+//   process.env.NODE_ENV === "development"
+//     ? composeWithDevTools(applyMiddleware(...middlewares))
+//     : applyMiddleware(...middlewares);
+
+// const store = createStore(rootReducer, composeWithDevTools(enhancer));
+
+// export default store;
