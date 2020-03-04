@@ -31,3 +31,5 @@ export const signup = credential => dispatch => {
     .then(response => dispatch(signupSuccess(response.data)))
     .catch(error => dispatch(signupError(error)))
 };
+
+export const logout = () => dispatch => dispatch(logout());

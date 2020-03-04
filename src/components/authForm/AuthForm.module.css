@@ -1,51 +1,104 @@
 .form {
-    width: 100%;
-    text-align: left;
-    border-radius: 4px;
-    box-shadow: 0px 2px 4px 2px rgba(0, 0, 0, 0.2);
-    padding: 20px 20px;
-    margin-bottom: 20px;
-}
-
-.entry {
-    font-size: 13px;
-    color: grey;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     font-weight: bold;
+    text-align: center;
+    font-size: 14px;
+    width: 100%;
+    padding: 20px 0;
 }
 
 .form input {
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     font-weight: bold;
-    font-size: 15px;
-    background: transparent;
-    vertical-align: bottom;
+    font-size: 0.875rem;
+    text-align: center;
     border: none;
-    border-bottom: 1px solid grey;
+    border-bottom: 1px solid #999daa;
     width: 100%;
     height: 50px;
-    margin-top: 20px;
+    margin-bottom: 20px;
 }
 
-.form button {
-    margin-top: 20px;
-    height: 40px;
-    width: 175px;
-    border-radius: 20px;
-    color: white;
-    background: rgb(252, 132, 44);
-    font-size: 14px;
-    box-shadow: 0 5px 10px rgb(252, 132, 44);
-    border: none;
+.form input:nth-child(2n-1) {
+    margin-bottom: 60px;
+}
+
+.entryBtn {
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     font-weight: bold;
+    font-size: 0.875rem;
+    letter-spacing: 1px;
+    color: #999daa;
+    text-transform: uppercase;
+    border-bottom: 1px solid #fc832c00;
+    margin-bottom: 50px;
     cursor: pointer;
 }
 
-.form button:focus {
+.submitBtn {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-weight: bold;
+    font-size: 0.875rem;
+    background-color: #fc842c;
+    color: #fff;
+    border: none;
+    border-radius: 20px;
+    letter-spacing: 1px;
+    line-height: 26px;
+    width: 176px;
+    height: 40px;
+    cursor: pointer;
+}
+
+.entryBtn:hover:not(:nth-child(2)),
+.entryBtn:focus:not(:nth-child(2)) {
+    color: #fc842c;
+    border-color: #fc842c;
     outline: none;
 }
 
-@media(min-width: 767px) {}
+.submitBtn:hover,
+.submitBtn:focus {
+    filter: drop-shadow(0px 6px 5px rgba(252, 132, 44, 0.33));
+    transform: scale(1.1);
+    outline: none;
+}
 
-@media(min-width: 1024px) {}
+@media(min-width: 767px) {
+    .form {
+        text-align: start;
+        max-width: 45.2%;
+        padding: 20px 12px;
+    }
+
+    .form input {
+        text-align: start;
+    }
+
+    .submitBtn {
+        max-width: 51%;
+    }
+}
+
+@media(min-width: 1024px) {
+    .form {
+        max-width: 33%
+    }
+
+    .form input {
+        height: 50px;
+    }
+
+    .entryBtn {
+        font-family: Gotham Pro, Verdana, Geneva, Tahoma, sans-serif;
+    }
+
+    .entryBtn:hover,
+    .entryBtn:focus {
+        border: none;
+    }
+
+    .submitBtn {
+        width: 51.7%;
+    }
+}

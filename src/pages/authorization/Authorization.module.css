@@ -3,11 +3,16 @@
     padding: 0;
 }
 
-.invisible {
-    opacity: 0;
+.pageWrapper{
+    padding: 36px 25px;
+    min-height: 100vh;
 }
 
-.pageWrapper {
+/* .invisible {
+    opacity: 0;
+} */
+
+/* .pageWrapper {
     width: 100%;
     text-align: center;
     background: white;
@@ -50,10 +55,18 @@
     display: flex;
     align-items: center;
     flex-direction: column;
-}
+} */
 
 @media(min-width: 767px) {
-    .pageWrapper {
+    .pageWrapper{
+
+        max-width: 85.6%;
+        padding: 70px 0 0;
+        margin: 0 auto;
+    }
+
+
+    /* .pageWrapper {
         width: 100%;
         text-align: center;
         background-repeat: no-repeat;
@@ -63,89 +76,57 @@
         align-items: flex-start;
         flex-direction: column;
 
-    }
+    } */
 
-    .loginWrapper {
+    /* .loginWrapper {
         width: 100%;
         text-align: start;
         display: flex;
         flex-direction: column;
         padding-left: 90px;
         padding-top: 60px;
-        /* background-image: url(../../assets/images/tablet-bg-register.jpg); */
+        background-image: url(../../assets/images/tablet-bg-register.jpg);
         background-repeat: no-repeat;
         background-position: bottom right;
         height: 100vh
-    }
+    } */
 
-    .inputModule {
+    /* .inputModule {
         text-align: start;
         display: flex;
         align-items: flex-start;
 
-    }
+    } */
 
-    .form input {
-        font-size: 15px;
-        height: 50px;
-        width: 220px;
-        text-align: start;
-        vertical-align: bottom;
-        border: none;
-        border-bottom: 1px solid grey;
-        margin-top: 20px;
-        font-family: Verdana, Geneva, Tahoma, sans-serif;
-        font-weight: bold;
-        background: none;
-        align-items: flex-start;
-    }
-
-    .butModule {
+    /* .butModule {
         margin-top: 45px;
         display: flex;
         align-items: flex-start;
         flex-direction: column;
 
-    }
-
-    .entry {
-        font-size: 13px;
-        padding-bottom: 35px;
-        color: grey;
-        text-align: start;
-        font-weight: bold;
-        font-family: Verdana, Geneva, Tahoma, sans-serif;
-    }
+    } */
 }
 
 @media(min-width: 1024px) {
+    .pageWrapper{
+        max-width: 82%;
+        padding: 20vh 0 0;
+        margin: 0 auto;
+    }
 
-    .pageWrapper {
+    /* .pageWrapper {
         width: 100%;
         text-align: center;
-        /* background-image: url(../../assets/images/desktop-bg-REGISTER.jpg); */
+        background-image: url(../../assets/images/desktop-bg-REGISTER.jpg);
         background-repeat: no-repeat;
         background-position: bottom right;
         background-size: cover;
         height: 847px;
         height: 100vh;
-    }
+    } */
 
-    .form input {
-        font-size: 15px;
-        height: 50px;
-        width: 345px;
-        text-align: start;
-        vertical-align: bottom;
-        border: none;
-        border-bottom: 1px solid grey;
-        margin-top: 20px;
-        font-family: Verdana, Geneva, Tahoma, sans-serif;
-        font-weight: bold;
-        background: none;
-    }
 
-    .loginWrapper {
+    /* .loginWrapper {
         text-align: start;
         padding-left: 115px;
         padding-top: 10px;
@@ -155,15 +136,8 @@
     .butModule {
         margin-top: 45px;
         text-align: start;
-    }
+    } */
 
 
-    .entry {
-        font-size: 13px;
-        padding-bottom: 35px;
-        color: grey;
-        text-align: start;
-        font-family: Verdana, Geneva, Tahoma, sans-serif;
-        font-weight: bold;
-    }
+   
 }

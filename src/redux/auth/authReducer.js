@@ -1,19 +1,12 @@
 import { combineReducers } from "redux";
 import authTypes from "./authTypes";
 
-// const session = {
-//     user: {},
-//     authenticated: false,
-//     token: "",
-//     error: ""
-// }
-
 const user = (state = {}, { type, payload }) => {
   switch (type) {
     case authTypes.LOGIN_SUCCESS:
-      return payload.user;
+      return payload.user.nickname;
     case authTypes.SIGNUP_SUCCESS:
-      return payload.user;
+      return payload.user.nickname;
     case authTypes.LOGOUT:
       return null;
     default:
@@ -49,6 +42,12 @@ const token = (state = null, { type, payload }) => {
 
 const error = (state = null, { type, payload }) => {
   switch (type) {
+    case authTypes.LOGIN_SUCCESS:
+      return null;
+    case authTypes.SIGNUP_SUCCESS:
+      return null;
+    case authTypes.LOGOUT:
+      return null;
     case authTypes.LOGIN_ERROR:
       return payload;
     default:

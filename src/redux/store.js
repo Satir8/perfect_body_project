@@ -8,7 +8,6 @@ import authReducer from './auth/authReducer'
 const persistConfig = {
   key: "root",
   storage,
-  // blacklist: ['session']
 };
 
 const middleWares = [thunk];
