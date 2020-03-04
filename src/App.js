@@ -1,4 +1,4 @@
-import { React, lazy } from "react";
+import  React, {lazy } from "react";
 import { Switch, Route } from "react-router-dom";
 // import Summary from "./components/summary/Summary";
 import HomePage from "./components/homePage/HomePage";
@@ -14,7 +14,7 @@ function App() {
       {/* <Summary /> */}
       {/* <CalcForm /> */}
 
-      <Switch>{/* <Route exact path="/" component={Home} /> */}</Switch>
+      {/* <Switch><Route exact path="/" component={Home} /></Switch> */}
       <Dashboard />
     </>
   );
