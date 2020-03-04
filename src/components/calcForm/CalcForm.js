@@ -62,7 +62,7 @@ class CalcForm extends Component {
 
     const currentDangerProducts = Object.values(
       this.getDangerProductList(groupBlood, dangerProducts)
-    ).map(item => ({ id: uuidv1(), product: item }));
+    );
 
     this.props.getTotalCalories(totalCalories);
     this.props.getDangerProducts(currentDangerProducts);

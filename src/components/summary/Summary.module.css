@@ -1,17 +1,6 @@
-.container {
-  padding: 0 20px;
-<<<<<<< HEAD:src/components/summary/Summary.module.css
-  background-image: url(../../images/img/backgroundSummary.jpg);
-=======
-  /* background-image: url(../../images/img/backgroundSummary.jpg); */
->>>>>>> dev:src/components/Summary.module.css
-  background-repeat: no-repeat;
-  background-size: cover;
-}
 
 .blockSummary {
-  padding-top: 30px;
-  padding-bottom: 30px;
+  outline: 1px solid black;
   font-family: "Gotham Pro", sans-serif;
 }
 .title {
@@ -39,12 +28,9 @@
 }
 
 @media (min-width: 768px) {
-  .container {
-    width: 638px;
-  }
   .blockSummary {
-    padding-top: 76px;
-    padding-bottom: 80px;
+    width: auto;
+    margin: 0 auto;
     display: flex;
     justify-content: flex-start;
   }
@@ -64,19 +50,9 @@
 }
 
 @media (min-width: 1024px) {
-  .container {
-    width: 1148px;
-    background-image: none;
-  }
   .blockSummary {
-    padding-left: 84px;
-    padding-right: 60px;
-    padding-bottom: 176px;
-    padding-top: 136px;
     margin: 0;
-    width: 488px;
-    background-image: url(../../images/img/backGroundSummaryLap.jpg);
-    background-repeat: no-repeat;
+    width: auto;
     flex-direction: column;
   }
   .blockProgres {
