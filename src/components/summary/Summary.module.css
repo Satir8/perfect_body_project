@@ -1,6 +1,10 @@
 .container {
   padding: 0 20px;
+<<<<<<< HEAD:src/components/summary/Summary.module.css
   background-image: url(../../images/img/backgroundSummary.jpg);
+=======
+  /* background-image: url(../../images/img/backgroundSummary.jpg); */
+>>>>>>> dev:src/components/Summary.module.css
   background-repeat: no-repeat;
   background-size: cover;
 }

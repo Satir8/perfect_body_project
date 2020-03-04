@@ -1,4 +1,5 @@
 import React from "react";
+import { connect } from "react-redux";
 import css from "./Summary.module.css";
 import moment from "moment";
 
@@ -7,14 +8,16 @@ const data = {
   consumed: 7226,
   dailyRate: 1220
 };
+
 const not = {
   a: "Все зерновые, яйца, молочные продукты, мучные изделия",
-  2: "Все молочные продукты, изделия из пшеничной муки, красное мясо",
-  3: "Все изделия из пшеничной муки, чечевица, арахис, гречка, кукуруза",
-  4: "Все мучные изделия, красное мясо, орехи, кукуруза, фасоль, гречка"
+  b: "Все молочные продукты, изделия из пшеничной муки, красное мясо",
+  d: "Все изделия из пшеничной муки, чечевица, арахис, гречка, кукуруза",
+  c: "Все мучные изделия, красное мясо, орехи, кукуруза, фасоль, гречка"
 };
-const Summary = () => {
-  // console.dir(window);
+
+const Summary = ({ calcForm }) => {
+  console.log(calcForm);
   return (
     <div className={css.container}>
       <div className={css.blockSummary}>
@@ -81,4 +84,8 @@ const Summary = () => {
   );
 };
 
-export default Summary;
+const mapStateToProps = state => ({
+  calcForm: state.calcForm
+});
+
+export default connect(mapStateToProps)(Summary);

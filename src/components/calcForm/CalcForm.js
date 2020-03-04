@@ -1,24 +1,71 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import styles from "./CalcForm.module.css";
+import { v1 as uuidv1 } from "uuid";
 
-// const getData = data => {
-//   console.log("data", data);
-// };
-
+export const dangerProducts = [
+  { "1": ["Все зерновые", "яйца", "молочные продукты", "мучные изделия"] },
+  {
+    "2": ["Все молочные продукты", "изделия из пшеничной муки", "красное мясо"]
+  },
+  {
+    "3": [
+      "Все изделия из пшеничной муки",
+      "чечевица",
+      "арахис",
+      "гречка",
+      "кукуруза"
+    ]
+  },
+  {
+    "4": [
+      "Все мучные изделия",
+      "красное мясо",
+      "орехи",
+      "кукуруза",
+      "фасоль",
+      "гречка"
+    ]
+  }
+];
 class CalcForm extends Component {
   state = {
-    height: " ",
-    age: " ",
-    currentWeight: " ",
-    futureWeight: " ",
-    groupBlood: " "
+    height: "",
+    age: "",
+    currentWeight: "",
+    futureWeight: "",
+    groupBlood: ""
+  };
+
+  calcCalories = () => {
+    const { currentWeight, height, age, futureWeight } = this.state;
+    const rez =
+      10 * Number(currentWeight) +
+      6.25 * Number(height) -
+      5 * Number(age) -
+      161 -
+      10 * Number(currentWeight - futureWeight);
+    return rez;
+  };
+
+  getDangerProductList = (groupBlood, dangerProducts) => {
+    const target = dangerProducts.find(item => {
+      return item[groupBlood];
+    });
+    return target;
   };
 
   createList = e => {
     e.preventDefault();
-    console.log(this.state);
-    // this.props.getData(this.state);
+    const { groupBlood } = this.state;
+    const totalCalories = this.calcCalories();
+
+    const currentDangerProducts = Object.values(
+      this.getDangerProductList(groupBlood, dangerProducts)
+    ).map(item => ({ id: uuidv1(), product: item }));
+
+    this.props.getTotalCalories(totalCalories);
+    this.props.getDangerProducts(currentDangerProducts);
   };
 
   handleChange = e => {
@@ -28,34 +75,33 @@ class CalcForm extends Component {
 
   render() {
     return (
-      <div className={styles.calkform}>
-        <div className={styles.calkformWrapper}>
-          <h2 className={styles.calkformTitile}>
-            Узнай свою суточную норму каллорий{" "}
-            <span className={styles.br}> прямо сейчас</span>
-          </h2>
-          <form className={styles.inputForm} onSubmit={this.createList}>
+      <>
+        <h2 className={styles.calkformTitle}>
+          Просчитай свою суточную норму каллорий прямо сейчас
+        </h2>
+        <form className={styles.inputForm} onSubmit={this.createList}>
+          <div className={styles.innerWrapper}>
             <div className={styles.inputFormLeft}>
               <input
+                required
                 type="text"
                 className={styles.inputItem}
-                id="height"
                 placeholder="Рост *"
                 name="height"
                 onChange={this.handleChange}
               />
               <input
+                required
                 type="Text"
                 className={styles.inputItem}
-                id="age"
                 placeholder="Возраст *"
                 name="age"
                 onChange={this.handleChange}
               />
               <input
+                required
                 type="Text"
                 className={styles.inputItem}
-                id="currentWeight"
                 placeholder="Текущий вес *"
                 name="currentWeight"
                 onChange={this.handleChange}
@@ -64,14 +110,14 @@ class CalcForm extends Component {
             <div className={styles.inputFormRight}>
               <input
                 type="Text"
+                required
                 className={styles.inputItem}
-                id="futureWeight"
                 placeholder="Желаемый вес *"
                 name="futureWeight"
                 onChange={this.handleChange}
               />
               <select
-                id="groupBlood"
+                required
                 name="groupBlood"
                 className={styles.selectInput}
                 onChange={this.handleChange}
@@ -83,17 +129,16 @@ class CalcForm extends Component {
                 <option className={styles.option}>4</option>
               </select>
             </div>
-            <button
-              type="submit"
-              className={styles.inputMeasure}
-              onClick={this.getData}
-              id="submit"
-            >
-              Похудеть
-            </button>
-          </form>
-        </div>
-      </div>
+          </div>
+          <button
+            type="submit"
+            className={styles.sbmtBtn}
+            onClick={this.getData}
+          >
+            Похудеть
+          </button>
+        </form>
+      </>
     );
   }
 }
