@@ -1,6 +1,6 @@
 .container {
   padding: 0 20px;
-  background-image: url(../../src/images/img/backgroundSummary.jpg);
+  background-image: url(../../images/img/backgroundSummary.jpg);
   background-repeat: no-repeat;
   background-size: cover;
 }
@@ -71,7 +71,7 @@
     padding-top: 136px;
     margin: 0;
     width: 488px;
-    background-image: url(../images/img/backGroundSummaryLap.jpg);
+    background-image: url(../../images/img/backGroundSummaryLap.jpg);
     background-repeat: no-repeat;
     flex-direction: column;
   }
