@@ -4,7 +4,7 @@ import css from "./Summary.module.css";
 import moment from "moment";
 
 const data = {
-  balance: 0,
+ 
   consumed: 722
 };
 
