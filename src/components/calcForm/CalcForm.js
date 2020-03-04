@@ -75,7 +75,7 @@ class CalcForm extends Component {
 
   render() {
     return (
-      <div className={styles.calkformWrapper}>
+      <>
         <h2 className={styles.calkformTitle}>
           Просчитай свою суточную норму каллорий прямо сейчас
         </h2>
@@ -138,7 +138,7 @@ class CalcForm extends Component {
             Похудеть
           </button>
         </form>
-      </div>
+      </>
     );
   }
 }
