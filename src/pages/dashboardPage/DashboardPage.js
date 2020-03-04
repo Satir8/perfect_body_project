@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 // import { connect } from "react-redux";
-import Summary from "../summary/Summary";
+import Summary from "../../components/summary/Summary";
 
 class DashboardContainer extends Component {
   state = {};

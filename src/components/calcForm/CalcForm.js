@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import styles from "./CalcForm.module.css";
-import { v1 as uuidv1 } from "uuid";
 
 export const dangerProducts = [
   { "1": ["Все зерновые", "яйца", "молочные продукты", "мучные изделия"] },
@@ -62,7 +61,7 @@ class CalcForm extends Component {
 
     const currentDangerProducts = Object.values(
       this.getDangerProductList(groupBlood, dangerProducts)
-    ).map(item => ({ id: uuidv1(), product: item }));
+    );
 
     this.props.getTotalCalories(totalCalories);
     this.props.getDangerProducts(currentDangerProducts);

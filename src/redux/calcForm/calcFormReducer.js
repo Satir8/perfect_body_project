@@ -11,7 +11,7 @@ export const caloriesReducer = (state = 0, { type, payload }) => {
   }
 };
 
-export const currentDangerProducts = (state = {}, { type, payload }) => {
+export const currentDangerProducts = (state = null, { type, payload }) => {
   switch (type) {
     case types.GET_DANGER_PRODUCTS:
       return payload;
