@@ -14,7 +14,7 @@ class ModalLogout extends Component {
     render() {
         return (
             <>
-            <button onClick={ () => this.openModal() }>Logout</button>
+            {/* <button onClick={ () => this.openModal() }>Logout</button> */}
             { this.state.isOpen &&
              <div className={styles.centerCase}>
                  <div className={styles.moduleCase}>
