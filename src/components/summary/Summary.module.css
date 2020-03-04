@@ -33,6 +33,9 @@
   line-height: 30px;
   font-size: 15px;
 }
+ .changeColor{
+    color: #e70a0a94;
+  }
 
 @media (min-width: 768px) {
   .container {

@@ -4,7 +4,7 @@ import moment from "moment";
 
 const data = {
   balance: 0,
-  consumed: 226,
+  consumed: 7226,
   dailyRate: 1220
 };
 const not = {
@@ -42,16 +42,12 @@ const Summary = () => {
                 data.dailyRate - data.consumed >= 0 ? (
                   <span> {data.dailyRate - data.consumed} ккал</span>
                 ) : (
-                  <span>
-                    {Math.abs((data.dailyRate - data.consumed).toFixed(0))}
-                    ккал
+                  <span style={{ color: "#e70a0a94" }}>
+                    {Math.abs((data.dailyRate - data.consumed).toFixed(0))} ккал
                   </span>
                 )
               ) : (
-                <span>
-                  {Math.abs((data.dailyRate - data.consumed).toFixed(0))}
-                  ккал
-                </span>
+                <span> {data.dailyRate - data.consumed} ккал</span>
               )}
             </li>
             <li className={css.progressItem}>
