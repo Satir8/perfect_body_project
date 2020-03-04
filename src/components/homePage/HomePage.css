@@ -1,24 +1,22 @@
 .homePageWrapper {
-  width: 100vw;
+  width: 100%;
   margin: 0 auto;
 }
 
 .homePageHeader {
   width: 320px;
-  outline: 1px solid red;
   margin: 0 auto;
   margin-bottom: 24px;
 }
 .homePageBody {
-  width: 320px;
-  outline: 1px solid red;
-  height: 500px;
+  width: 280px;
+  margin: 0 auto;
   padding-top: 24px;
+  margin-bottom: 50px;
 }
 
 @media (min-width: 768px) {
   .homePageWrapper {
-    margin: 0 auto;
     padding-bottom: 420px;
     background-image: url(../../images/img/background_tablet.png);
     background-repeat: no-repeat;
@@ -32,7 +30,6 @@
   }
   .homePageBody {
     width: 560px;
-    height: 420px;
     margin-left: 90px;
     padding-top: 56px;
   }
@@ -40,22 +37,22 @@
 
 @media (min-width: 1200px) {
   .homePageWrapper {
-    margin: 0 auto;
     padding-bottom: 110px;
     background-image: url(../../images/img/background_desktop.png);
     background-size: contain;
-
   }
 
   .homePageHeader {
     width: 550px;
     margin: 0;
     margin-left: 92px;
-    margin-bottom: 74px;
+    margin-bottom: 72px;
+    padding-top: 86px;
   }
   .homePageBody {
     width: 620px;
+    margin: 0;
     margin-left: 116px;
-    padding-top: 74px;
+    padding-top: 72px;
   }
 }

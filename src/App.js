@@ -1,12 +1,12 @@
 import React from "react";
 import "./App.css";
-import Summary from "./components/summary/Summary";
-import CalcForm from "./components/calcForm/CalcFormContainer";
+// import Summary from "./components/summary/Summary";
+import HomePage from "./components/homePage/HomePage";
 
 function App() {
   return (
     <>
-      <CalcForm />
+      <HomePage />
       {/* <Summary /> */}
     </>
   );
