@@ -5,44 +5,56 @@
 
 .homePageHeader {
   width: 320px;
+  outline: 1px solid red;
   margin: 0 auto;
   margin-bottom: 24px;
 }
 .homePageBody {
   width: 320px;
+  outline: 1px solid red;
+  height: 500px;
   padding-top: 24px;
 }
-@media screen and (min-width 768px) {
-  .homePageContainer {
-    width: 660px;
+
+@media screen and (min-width: 768px) {
+  .homePageWrapper {
+    width: 768px;
+    height: 836px;
     margin: 0 auto;
+    background-image: url(../../images/img/calcForm/BG.png);
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: right bottom;
   }
 
   .homePageHeader {
     width: 660px;
+    margin: 0 auto;
     margin-bottom: 56px;
   }
   .homePageBody {
     width: 560px;
     height: 420px;
-    background-color: rgb(71, 71, 71);
+    margin-left: 90px;
     padding-top: 56px;
   }
 }
 
-/* @media only screen and (min-width: 1200px) {
-  .homePageContainer {
-    width: 320px;
+@media only screen and (min-width: 1200px) {
+  .homePageWrapper {
+    width: 1200px;
     margin: 0 auto;
   }
 
   .homePageHeader {
-    width: 320px;
-    margin: 0 auto;
-    margin-bottom: 24px;
+    width: 550px;
+    margin: 0;
+    margin-left: 92px;
+    margin-bottom: 74px;
   }
   .homePageBody {
-    width: 320px;
-    padding-top: 24px;
+    width: 620px;
+    margin-left: 116px;
+    padding-top: 74px;
   }
-} */
+}

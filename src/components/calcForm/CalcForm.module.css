@@ -100,11 +100,11 @@
 
 @media (min-width: 768px) {
   .calkform {
-    width: 768px;
+    /* width: 768px;
     height: 836px;
-    background-image: url(../../images/img/calcForm/BG.png);
+    /* background-image: url(../../images/img/calcForm/BG.png);
     background-repeat: no-repeat;
-    background-position: right bottom;
+    background-position: right bottom; */
   }
 
   .background {
