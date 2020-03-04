@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import styles from "./CalcForm.module.css";
 import { v1 as uuidv1 } from "uuid";
 
-const dangerProducts = [
+export const dangerProducts = [
   { "1": ["Все зерновые", "яйца", "молочные продукты", "мучные изделия"] },
   {
     "2": ["Все молочные продукты", "изделия из пшеничной муки", "красное мясо"]

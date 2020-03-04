@@ -1,6 +1,6 @@
 import React from "react";
-import CalcForm from "../calcForm/CalcForm";
-import logo from "../../images/logo.png";
+import CalcForm from "../calcForm/CalcFormContainer";
+import logo from "../../images/img/logo.png";
 import "./HomePage.css";
 
 const HomePage = () => {
