@@ -1,8 +1,13 @@
-// import { connect } from "react-redux";
-// import CalcForm from "./CalcForm";
-// import {
-//   getTotalCalories,
-//   getDangerProducts
-// } from "../../redux/calcForm/calcFormActions";
+import React, { Component } from 'react'
 
-// export default connect(null, { getTotalCalories, getDangerProducts })(CalcForm);
+
+class CalcFormContainer extends Component {
+    state = {  }
+    render() {
+        return (
+            
+        );
+    }
+}
+
+export default CalcFormContainer;

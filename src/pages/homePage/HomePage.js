@@ -30,7 +30,8 @@ class HomePage extends Component {
     currentWeight: "",
     futureWeight: "",
     groupBlood: "",
-    modalObject: {}
+    modalObject: {},
+    isModalOpen: false
   };
 
   handleChange = e => {
@@ -52,14 +53,19 @@ class HomePage extends Component {
     this.props.getTotalCalories(totalCalories);
     this.props.getDangerProducts(currentDangerProducts);
 
-
+    this.openModal();
   };
 
   prepareObjectForModal = (calories, products) => {
+    // console.log(products);
+    // const test = products[0].forEach(element => {
+    //   console.log(element);
+    // });
+    // console.log(test);
     this.setState({
       modalObject: {
         calories,
-        products: products.map(item => ({ id: uuidv1(), name: item }))
+        products: products[0].map(item => ({ id: uuidv1(), name: item }))
       }
     });
   };
@@ -79,12 +85,36 @@ class HomePage extends Component {
     return dangerProducts.find(item => item[groupBlood]);
   };
 
+  openModal = () => {
+    this.setState({
+      isModalOpen: true
+    });
+  };
+
+  closeModal = event => {
+    if (event.key && event.code === "Escape") {
+      this.setState({
+        isModalOpen: false
+      });
+    }
+
+    if (
+      event.target.className === "modalBackdrop" ||
+      event.target.className === "closeBtn"
+    ) {
+      this.setState({
+        isModalOpen: false
+      });
+    }
+  };
+
   render() {
-    const { modalObject } = this.state;
+    const { modalObject, isModalOpen } = this.state;
     return (
       <>
-        {/* <ModalWindow state={modalObject} /> */}
-        <ModalWindow state={state} />
+        {isModalOpen && (
+          <ModalWindow data={modalObject} onCloseModal={this.closeModal} />
+        )}
 
         <div className="homePageWrapper">
           <div className="homePageHeader">
