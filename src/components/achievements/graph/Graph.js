@@ -141,6 +141,6 @@ class Graph extends Component {
 
 Graph.propTypes = {
   isMobile: PropTypes.bool
-}
+};
 
 export default Graph;
