@@ -10,8 +10,8 @@ const WithModalBackdrop = WrappedComponent => {
     componentDidMount() {
       document.onkeydown = this.closeModal;
     }
-    
-    componentWillUnmount(){
+
+    componentWillUnmount() {
       document.onkeydown = null;
     }
 
