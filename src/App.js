@@ -1,7 +1,6 @@
 import React from "react";
-import moment from "moment";
 import "./App.css";
-import Summary from "./components/Summary";
+import Summary from "./components/summary/Summary";
 import CalcForm from "./components/calcForm/CalcFormContainer";
 
 function App() {
