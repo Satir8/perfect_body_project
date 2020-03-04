@@ -47,8 +47,9 @@
     margin: 0;
     margin-left: 92px;
     margin-bottom: 72px;
-    padding-top: 86px;
+    /* padding-top: 86px; */
   }
+
   .homePageBody {
     width: 620px;
     margin: 0;

@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import styles from "./CalcForm.module.css";
-import { v1 as uuidv1 } from "uuid";
 
 export const dangerProducts = [
   { "1": ["Все зерновые", "яйца", "молочные продукты", "мучные изделия"] },

@@ -1,5 +1,5 @@
 import React from "react";
-import CalcForm from "../calcForm/CalcFormContainer";
+import CalcForm from "../../components/calcForm/CalcFormContainer";
 import logo from "../../images/img/logo.png";
 import "./HomePage.css";
 
