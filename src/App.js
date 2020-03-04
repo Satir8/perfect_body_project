@@ -6,6 +6,10 @@ import Summary from "./components/summary/Summary";
 // import CalcForm from "./components/calcForm/CalcFormContainer";
 import ModalWindow from "./components/modalWindow/ModalWindow";
 import "./App.css";
+import ModalLogout from "./components/modalLogout/modalLogout.jsx"
+
+// console.log(moment().format());
+
 
 const state = {
   products: 
@@ -25,6 +29,8 @@ const App = () => {
       <HomePage />
       <Summary />
       <ModalWindow state={state}/>
+      <ModalLogout/>
+      
     </>
   );
 };
