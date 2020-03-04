@@ -7,6 +7,7 @@
 
 .blockSummary {
   padding-top: 30px;
+  padding-bottom: 30px;
   font-family: "Gotham Pro", sans-serif;
 }
 .title {
@@ -18,7 +19,6 @@
   margin-bottom: 30px;
 }
 .progressItem {
-  /* margin-bottom: 10px; */
   display: flex;
   justify-content: space-between;
 }
@@ -33,9 +33,6 @@
   line-height: 30px;
   font-size: 15px;
 }
- .changeColor{
-    color: #e70a0a94;
-  }
 
 @media (min-width: 768px) {
   .container {
