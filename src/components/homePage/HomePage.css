@@ -1,5 +1,5 @@
-.homePageContainer {
-  width: 320px;
+.homePageWrapper {
+  width: 100vw;
   margin: 0 auto;
 }
 
@@ -16,14 +16,12 @@
   padding-top: 24px;
 }
 
-@media screen and (min-width: 768px) {
+@media (min-width: 768px) {
   .homePageWrapper {
-    width: 768px;
-    height: 836px;
     margin: 0 auto;
-    background-image: url(../../images/img/calcForm/BG.png);
+    padding-bottom: 420px;
+    background-image: url(../../images/img/background_tablet.png);
     background-repeat: no-repeat;
-    background-size: contain;
     background-position: right bottom;
   }
 
@@ -40,10 +38,13 @@
   }
 }
 
-@media only screen and (min-width: 1200px) {
+@media (min-width: 1200px) {
   .homePageWrapper {
-    width: 1200px;
     margin: 0 auto;
+    padding-bottom: 110px;
+    background-image: url(../../images/img/background_desktop.png);
+    background-size: contain;
+
   }
 
   .homePageHeader {

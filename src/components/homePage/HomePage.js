@@ -1,7 +1,7 @@
 import React from "react";
 import CalcForm from "../calcForm/CalcForm";
 import logo from "../../images/logo.png";
-import "./HomePage.css"
+import "./HomePage.css";
 
 const HomePage = () => {
   return (
