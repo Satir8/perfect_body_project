@@ -1,7 +1,7 @@
 import React from "react";
-import PropTypes from "prop-types";
-import "./ModalWindow.css";
+// import PropTypes from "prop-types";
 import WithModalBackdrop from "../../HOC/WithModalBackdrop/WithModalBackdrop";
+import "./ModalWindow.css";
 
 const ModalWindow = props => {
   const { products, summCalories, onCloseModal } = props.state;
@@ -47,17 +47,17 @@ const ModalWindow = props => {
 
 export default WithModalBackdrop(ModalWindow);
 
-ModalWindow.defaultProps = {
-  products: []
-};
+// ModalWindow.defaultProps = {
+//   products: []
+// };
 
-ModalWindow.propTypes = {
-  products: PropTypes.arrayOf(
-    PropTypes.shape({
-      id: PropTypes.number,
-      name: PropTypes.string
-    })
-  ),
-  summCalories: PropTypes.string.isRequired,
-  onCloseModal: PropTypes.func.isRequired
-};
+// ModalWindow.propTypes = {
+//   products: PropTypes.arrayOf(
+//     PropTypes.shape({
+//       id: PropTypes.number,
+//       name: PropTypes.string
+//     })
+//   ),
+//   summCalories: PropTypes.string.isRequired,
+//   onCloseModal: PropTypes.func.isRequired
+// };

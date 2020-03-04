@@ -1,8 +1,8 @@
-import { connect } from "react-redux";
-import CalcForm from "./CalcForm";
-import {
-  getTotalCalories,
-  getDangerProducts
-} from "../../redux/calcForm/calcFormActions";
+// import { connect } from "react-redux";
+// import CalcForm from "./CalcForm";
+// import {
+//   getTotalCalories,
+//   getDangerProducts
+// } from "../../redux/calcForm/calcFormActions";
 
-export default connect(null, { getTotalCalories, getDangerProducts })(CalcForm);
+// export default connect(null, { getTotalCalories, getDangerProducts })(CalcForm);

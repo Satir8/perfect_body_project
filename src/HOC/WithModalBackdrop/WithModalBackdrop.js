@@ -7,11 +7,18 @@ const WithModalBackdrop = WrappedComponent => {
       isModalOpen: false
     };
 
+    componentDidMount() {
+      document.onkeydown = this.closeModal;
+    }
+    
+    componentWillUnmount(){
+      document.onkeydown = null;
+    }
+
     openModal = () => {
       this.setState({
         isModalOpen: true
       });
-      document.onkeydown = null;
     };
 
     closeModal = event => {
@@ -30,7 +37,6 @@ const WithModalBackdrop = WrappedComponent => {
           isModalOpen: false
         });
       }
-      document.onkeydown = this.closeModal;
     };
 
     render() {
