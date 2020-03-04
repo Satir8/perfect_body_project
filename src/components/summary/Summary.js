@@ -3,9 +3,9 @@ import css from "./Summary.module.css";
 import moment from "moment";
 
 const data = {
-  balance: 200,
-  consumed: 500,
-  dailyRate: 1200
+  balance: 0,
+  consumed: 226,
+  dailyRate: 1220
 };
 const not = {
   a: "Все зерновые, яйца, молочные продукты, мучные изделия",
@@ -29,8 +29,30 @@ const Summary = () => {
           </p>
           <ul className={css.listProgress}>
             <li className={css.progressItem}>
-              <span>Осталось</span>
-              <span>{data.balance}ккал</span>
+              {data.dailyRate ? (
+                data.dailyRate - data.consumed >= 0 ? (
+                  <span>Осталось</span>
+                ) : (
+                  <span>Перебор</span>
+                )
+              ) : (
+                <span>Осталось</span>
+              )}
+              {data.dailyRate ? (
+                data.dailyRate - data.consumed >= 0 ? (
+                  <span> {data.dailyRate - data.consumed} ккал</span>
+                ) : (
+                  <span>
+                    {Math.abs((data.dailyRate - data.consumed).toFixed(0))}
+                    ккал
+                  </span>
+                )
+              ) : (
+                <span>
+                  {Math.abs((data.dailyRate - data.consumed).toFixed(0))}
+                  ккал
+                </span>
+              )}
             </li>
             <li className={css.progressItem}>
               <span>Употреблено</span>
