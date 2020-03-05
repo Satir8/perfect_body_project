@@ -47,7 +47,6 @@
   .hdrContainer {
     justify-content: space-between;
     padding: 0 40px 0 70px;
-    margin-bottom: 20px;
   }
 }
 
@@ -70,5 +69,6 @@
 @media (min-width: 1200px) {
   .hdrContainer {
     justify-content: flex-start;
+    margin-bottom: 80px;
   }
 }

@@ -5,3 +5,15 @@
   flex-direction: column;
   align-items: center;
 }
+
+@media (min-width: 768px) {
+  .achieveContainer {
+    padding-top: 50px;
+  }
+}
+
+@media (min-width: 1200px) {
+  .achieveContainer {
+    padding-top: 0;
+  }
+}

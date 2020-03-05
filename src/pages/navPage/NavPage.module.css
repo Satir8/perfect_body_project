@@ -16,11 +16,13 @@
   color: rgb(255, 255, 255);
 }
 
-.navListItemActive {
-  color: #212121;
+@media (max-width: 375px) {
+  .navigation {
+    height: 100vh;
+  }
 }
 
-@media (max-width: 375px) {
+@media (max-width: 1199px) {
   .navigation {
     height: 100vh;
   }
@@ -50,4 +52,7 @@
   .navListItem:hover {
     color: #212121;
   }
+  .navListItemActive {
+    color: #212121;
+  }  
 }
