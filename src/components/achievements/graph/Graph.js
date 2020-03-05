@@ -4,6 +4,8 @@ import axios from 'axios';
 import styles from './Graph.module.css';
 import PropTypes from 'prop-types';
 
+
+
 const options = {
   maintainAspectRatio: false,
   scales: {
