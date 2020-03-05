@@ -1,23 +1,18 @@
-import  React, {lazy } from "react";
-import { Switch, Route } from "react-router-dom";
-// import Summary from "./components/summary/Summary";
-import HomePage from "./components/homePage/HomePage";
-import Dashboard from "./components/dashboard/DashboardContainer";
-// import Summary from "./components/summary/Summary";
-// import CalcForm from "./components/calcForm/CalcFormContainer";
+import React, { lazy } from "react";
+// import { Switch, Route } from "react-router-dom";
+// import HomePage from "./pages/homePage/HomePage";
+// import ModalWindow from "./components/modalWindow/ModalWindow";
+import DashboardPage from "./pages/dashboardPage/DashboardPage";
 import "./App.css";
 
-function App() {
+const App = () => {
   return (
     <>
-      <HomePage />
-      {/* <Summary /> */}
-      {/* <CalcForm /> */}
-
-      {/* <Switch><Route exact path="/" component={Home} /></Switch> */}
-      <Dashboard />
+      {/* <HomePage /> */}
+      <DashboardPage />
+      {/* <ModalWindow state={state} /> */}
     </>
   );
-}
+};
 
 export default App;

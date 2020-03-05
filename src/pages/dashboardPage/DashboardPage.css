@@ -1,0 +1,64 @@
+h2 {
+  outline: 1px solid red;
+  width: 100%;
+  height: 80px;
+  margin: 0 auto;
+}
+
+.dashboardPageBody {
+  outline: 1px solid red;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.calcForm {
+  outline: 1px solid blueviolet;
+  width: 100%;
+  height: 300px;
+  background-color: #fff;
+  margin: 0 auto;
+  padding-bottom: 54px;
+}
+
+.summary {
+  outline: 1px solid blueviolet;
+  width: 100%;
+  height: 200px;
+  margin: 0 auto;
+  padding-bottom: 62px;
+}
+
+@media (min-width: 768px) {
+  .calcForm {
+    padding-top: 72px;
+    padding-bottom: 48px;
+  }
+
+  .summary {
+    padding-top: 80px;
+    padding-bottom: 80px;
+    background-color: #eff1f3;
+    background-image: url("../../images/summary_bg.png");
+    background-repeat: no-repeat;
+    background-position: right bottom;
+  }
+}
+
+@media (min-width: 1280px) {
+  .dashboardPageBody {
+    display: flex;
+    padding-top: 142px;
+  }
+
+  .calcForm {
+    width: 62%;
+    padding: 45px 20px 20px;
+  }
+
+  .summary {
+    width: 38%;
+    padding: 0;
+    background-position: center;
+    background-size: contain;
+  }
+}

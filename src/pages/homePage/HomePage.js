@@ -1,7 +1,8 @@
 import React from "react";
-import CalcForm from "../calcForm/CalcForm";
-import logo from "../../images/logo.png";
+import CalcForm from "../../components/calcForm/CalcFormContainer";
+import logo from "../../images/img/logo.png";
 import "./HomePage.css";
+import ModalWindow from "../../components/modalWindow/ModalWindow";
 
 const HomePage = () => {
   return (
@@ -11,6 +12,7 @@ const HomePage = () => {
       </div>
       <div className="homePageBody">
         <CalcForm />
+        {false && <ModalWindow/>}
       </div>
     </div>
   );
