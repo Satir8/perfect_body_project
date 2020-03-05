@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import Header from "./header/Header";
-import { Switch, Route } from "react-router-dom";
+  import { Switch, Route } from "react-router-dom";
 import NavPage from "../pages/navPage/NavPage";
-import Achievements from "./achievements/Achievements";
+
 import HomePage from "../pages/homePage/HomePage";
 import DashboardPage from "../pages/dashboardPage/DashboardPage";
 
@@ -43,19 +43,12 @@ class App extends Component {
     const { isMobile, isTablet, isDesktop } = this.state;
     return (
       <>
-        <DashboardPage />
         <Header isMobile={isMobile} isTablet={isTablet} isDesktop={isDesktop} />
+        <DashboardPage />
         <Switch>
-          <Route exact path="/" component={() => <HomePage />} />
+          <Route exact path="/" component={HomePage} />
           <Route path="/nav" component={NavPage} />
-          <Route
-            path="/authorization"
-            component={() => <div>Login/Signup</div>}
-          />
-          <Route
-            path="/achievements"
-            render={props => <Achievements {...props} isMobile={isMobile} />}
-          />
+          <Route path="/login" component={() => <div>Login/Signup</div>} />
         </Switch>
       </>
     );
