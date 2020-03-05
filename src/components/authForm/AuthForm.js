@@ -6,7 +6,6 @@ import css from "./AuthForm.module.css";
 class AuthForm extends Component {
   state = { actionTitle: "Вход" };
 
-
   handleChange = e => {
     this.setState({ [e.target.name]: e.target.value });
   };
@@ -30,8 +29,6 @@ class AuthForm extends Component {
 
   render() {
     const { actionTitle } = this.state;
-    console.dir(this.props)
-
     return (
       <>
         <form className={css.form} onSubmit={this.handleSubmit}>

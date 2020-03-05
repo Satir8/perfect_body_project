@@ -2,10 +2,6 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import styles from "./CalcForm.module.css";
 
-// const getData = data => {
-//   console.log("data", data);
-// };
-
 class CalcForm extends Component {
   state = {
     height: " ",
@@ -15,26 +11,23 @@ class CalcForm extends Component {
     groupBlood: " "
   };
 
-  createList = e => {
+  handleSubmit = e => {
     e.preventDefault();
-    console.log(this.state);
-    // this.props.getData(this.state);
   };
 
   handleChange = e => {
-    const name = e.target.name;
-    this.setState({ [name]: e.target.value });
+    this.setState({ [e.target.name]: e.target.value });
   };
 
   render() {
     return (
-      <div className={styles.calkform}>
-        <div className={styles.calkformWrapper}>
-          <h2 className={styles.calkformTitile}>
+      <div className={styles.calcform}>
+        <div className={styles.calcformWrapper}>
+          <h2 className={styles.calcformTitile}>
             Узнай свою суточную норму каллорий{" "}
             <span className={styles.br}> прямо сейчас</span>
           </h2>
-          <form className={styles.inputForm} onSubmit={this.createList}>
+          <form className={styles.inputForm} onSubmit={this.handleSubmit}>
             <div className={styles.inputFormLeft}>
               <input
                 type="text"

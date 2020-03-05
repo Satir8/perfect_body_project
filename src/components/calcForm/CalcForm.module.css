@@ -1,15 +1,15 @@
-.calkform {
+.calcform {
   margin: 0 auto;
   width: 320px;
 }
 
-.calkformWrapper {
+.calcformWrapper {
   width: 280px;
   margin: 0;
   padding: 40px 20px 44px;
 }
 
-.calkformTitile {
+.calcformTitile {
   font-family: Verdana, Tahoma, sans-serif;
   font-size: 17px;
   font-weight: bold;
@@ -99,7 +99,7 @@
 }
 
 @media (min-width: 768px) {
-  .calkform {
+  .calcform {
     width: 768px;
     height: 836px;
     background-image: url(../../images/img/calcForm/BG.png);
@@ -115,17 +115,19 @@
     height: 150px;
   }
 
-  .calkformWrapper {
+  .calcformWrapper {
     width: 524px;
     padding: 48px 154px 424px 90px;
   }
 
-  .calkformTitile {
+  .calcformTitile {
     font-family: Verdana, Tahoma, sans-serif;
     font-size: 30px;
     font-weight: bold;
     color: #212121;
     line-height: 40px;
+    width: 600px;
+    padding-bottom: 20px;
   }
 
   .inputForm {
@@ -169,8 +171,8 @@
     margin: 52px 0;
   }
 }
-@media (min-width: 1280px) {
-  .calkform {
+@media (min-width: 1200px) {
+  .calcform {
     width: 790px;
     background-image: unset;
   }
@@ -179,12 +181,12 @@
       visibility: hidden;
   }
 
-  .calkformWrapper {
+  .calcformWrapper {
     width: 522px;
-    padding: 152px 150px 110px 114px;
+    padding: 0 150px 110px 114px;
   }
 
-  .calkformTitile {
+  .calcformTitile {
     font-size: 35px;
     line-height: 38px;
   }

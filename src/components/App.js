@@ -3,6 +3,7 @@ import Header from './header/Header';
 import { Switch, Route } from 'react-router-dom';
 import NavPage from '../pages/navPage/NavPage';
 import Achievements from './achievements/Achievements';
+import CalcForm from './calcForm/CalcForm';
 
 class App extends Component {
   state = {
@@ -43,7 +44,7 @@ class App extends Component {
       <>
         <Header isMobile={isMobile} isTablet={isTablet} isDesktop={isDesktop} />
         <Switch>
-          <Route exact path='/' component={() => <div>Home</div>} />
+          <Route exact path='/' component={CalcForm} />
           <Route path='/nav' component={NavPage} />
           <Route
             path='/authorization'
