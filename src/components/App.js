@@ -44,11 +44,11 @@ class App extends Component {
     return (
       <>
         <Header isMobile={isMobile} isTablet={isTablet} isDesktop={isDesktop} />
-        <DashboardPage />
+        <DashboardPage isMobile={isMobile} />
         <Switch>
           <Route exact path="/" component={HomePage} />
           <Route path="/nav" component={NavPage} />
-          <Route path="/login" component={<div>Login/Signup</div>} />
+          {/* <Route path="/login" component={<div>Login/Signup</div>} /> */}
         </Switch>
       </>
     );
