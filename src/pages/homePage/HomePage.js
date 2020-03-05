@@ -11,18 +11,6 @@ import dangerProducts from "../../components/calcForm/dangerProducts";
 import CalcForm from "../../components/calcForm/CalcForm";
 import ModalWindow from "../../components/modalWindow/ModalWindow";
 
-const state = {
-  products: [
-    { id: 1, name: "banana" },
-    { id: 2, name: "banana" },
-    { id: 3, name: "banana" },
-    { id: 4, name: "banana" },
-    { id: 5, name: "banana" },
-    { id: 6, name: "banana" }
-  ],
-  summCalories: 2000
-};
-
 class HomePage extends Component {
   state = {
     height: "",

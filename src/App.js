@@ -1,16 +1,16 @@
-import React, { lazy } from "react";
-// import { Switch, Route } from "react-router-dom";
-import HomePage from "./pages/homePage/HomePage";
-import DashboardPage from "./pages/dashboardPage/DashboardPage";
-import "./App.css";
+// import React, { lazy } from "react";
+// // import { Switch, Route } from "react-router-dom";
+// import HomePage from "./pages/homePage/HomePage";
+// import DashboardPage from "./pages/dashboardPage/DashboardPage";
+// import "./App.css";
 
-const App = () => {
-  return (
-    <>
-      <HomePage />
-      {/* <DashboardPage /> */}
-    </>
-  );
-};
+// const App = () => {
+//   return (
+//     <>
+//       <HomePage />
+//       {/* <DashboardPage /> */}
+//     </>
+//   );
+// };
 
-export default App;
+// export default App;
