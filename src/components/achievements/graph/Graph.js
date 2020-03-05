@@ -4,8 +4,6 @@ import axios from 'axios';
 import styles from './Graph.module.css';
 import PropTypes from 'prop-types';
 
-
-
 const options = {
   maintainAspectRatio: false,
   scales: {
@@ -59,7 +57,7 @@ class Graph extends Component {
   async componentDidMount() {
     const headers = {
       Authorization:
-        'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI1ZTU5M2E4YmY0ZTlhNjQxNjE3MjkwNjgiLCJjcmVhdGVkRGF0ZSI6MTU4MjkwNTk5NTM1MCwiZXhwIjoxNTg1NDk3OTk1fQ.V0DNjQZGogaeEUleHvvIZeKRVQ2JG4AKXP_A1ZCXL8Y'
+        'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI1ZTU5M2E4YmY0ZTlhNjQxNjE3MjkwNjgiLCJjcmVhdGVkRGF0ZSI6MTU4MzQwMzA2NTI1MSwiZXhwIjoxNTg1OTk1MDY1fQ.dkjUYy8a2EKnOilAjvfDcUXGw6ljrp--xOKIyyrwc-4'
     };
     const data = await axios.get(BASE_URL, { headers });
     const day = data.data.graphData.labels;

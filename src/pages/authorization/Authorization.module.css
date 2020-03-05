@@ -1,0 +1,143 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+.pageWrapper{
+    padding: 36px 25px;
+    min-height: 100vh;
+}
+
+/* .invisible {
+    opacity: 0;
+} */
+
+/* .pageWrapper {
+    width: 100%;
+    text-align: center;
+    background: white;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.loginWrapper {
+    width: 100%;
+    text-align: center;
+    padding-top: 55px;
+}
+
+.loginWrapper input {
+    outline: none;
+    padding-left: 5px;
+}
+
+.inputModule {
+    text-align: start;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    margin-bottom: 35px;
+}
+
+.error {
+    padding-top: 10px;
+    color: red;
+    font-size: 15px;
+    font-weight: bold;
+    line-height: '20px';
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+
+}
+
+.butModule {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+} */
+
+@media(min-width: 767px) {
+    .pageWrapper{
+
+        max-width: 85.6%;
+        padding: 70px 0 0;
+        margin: 0 auto;
+    }
+
+
+    /* .pageWrapper {
+        width: 100%;
+        text-align: center;
+        background-repeat: no-repeat;
+        background-position: bottom right;
+        height: 100vh;
+        display: flex;
+        align-items: flex-start;
+        flex-direction: column;
+
+    } */
+
+    /* .loginWrapper {
+        width: 100%;
+        text-align: start;
+        display: flex;
+        flex-direction: column;
+        padding-left: 90px;
+        padding-top: 60px;
+        background-image: url(../../assets/images/tablet-bg-register.jpg);
+        background-repeat: no-repeat;
+        background-position: bottom right;
+        height: 100vh
+    } */
+
+    /* .inputModule {
+        text-align: start;
+        display: flex;
+        align-items: flex-start;
+
+    } */
+
+    /* .butModule {
+        margin-top: 45px;
+        display: flex;
+        align-items: flex-start;
+        flex-direction: column;
+
+    } */
+}
+
+@media(min-width: 1024px) {
+    .pageWrapper{
+        max-width: 82%;
+        padding: 20vh 0 0;
+        margin: 0 auto;
+    }
+
+    /* .pageWrapper {
+        width: 100%;
+        text-align: center;
+        background-image: url(../../assets/images/desktop-bg-REGISTER.jpg);
+        background-repeat: no-repeat;
+        background-position: bottom right;
+        background-size: cover;
+        height: 847px;
+        height: 100vh;
+    } */
+
+
+    /* .loginWrapper {
+        text-align: start;
+        padding-left: 115px;
+        padding-top: 10px;
+        background-image: none;
+    }
+
+    .butModule {
+        margin-top: 45px;
+        text-align: start;
+    } */
+
+
+   
+}
