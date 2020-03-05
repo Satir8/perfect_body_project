@@ -1,6 +1,6 @@
 @font-face {
   font-family: "Gotham-Pro";
-  font-style: normal;
+  font-style: light;
   font-weight: 300;
   src: local("Gotham Pro Light"), local("Gotham Pro Light"),
     url("./Gotham-Pro/gotham\ pro\ light.ttf") format("ttf");

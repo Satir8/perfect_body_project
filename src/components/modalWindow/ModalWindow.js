@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
 // import PropTypes from "prop-types";
 import "./ModalWindow.css";
 
@@ -50,9 +51,11 @@ class ModalWindow extends Component {
             )}
           </div>
           <div className="modalFooter">
+            {/* <Link to="/login"> */}
             <button type="button" className="startLoosingWeight">
               Начать худеть
             </button>
+            {/* </Link> */}
           </div>
         </div>
       </div>
