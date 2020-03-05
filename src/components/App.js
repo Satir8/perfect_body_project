@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import Header from "./header/Header";
-  import { Switch, Route } from "react-router-dom";
+import { Switch, Route } from "react-router-dom";
 import NavPage from "../pages/navPage/NavPage";
 
 import HomePage from "../pages/homePage/HomePage";
@@ -48,7 +48,7 @@ class App extends Component {
         <Switch>
           <Route exact path="/" component={HomePage} />
           <Route path="/nav" component={NavPage} />
-          <Route path="/login" component={() => <div>Login/Signup</div>} />
+          <Route path="/login" component={<div>Login/Signup</div>} />
         </Switch>
       </>
     );
