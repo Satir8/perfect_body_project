@@ -3,12 +3,20 @@ import AsyncSelect from 'react-select/async';
 import axios from 'axios';
 import styles from './AddProduct.module.css';
 
+const customStyles = {
+  
+  container: (provided) => ({ ...provided, borderBottom: '1px solid #e5e5e5' }),
+  indicatorsContainer: (provided) => ({ ...provided, display: 'none' }),
+}
+
+
 class AddProduct extends Component {
   state = {
     inputValue: '',
     selectedValue: '',
     quantityValue: '',
-    products: []
+    products: [],
+    product: {}
   };
 
   handleSelectChange = value => {
@@ -40,11 +48,10 @@ class AddProduct extends Component {
       .post(`/user/eats/${selectedValue.value}`, product)
       .then(response => {
         if (response.data.status === 'success') {
-          //console.log('ok');
-
+          //console.log(product);
           this.setState(prev => {
             return {
-              products: [...prev.products, response.data.products]
+              products: [...prev.products, product]
             };
           });
         }
@@ -53,6 +60,11 @@ class AddProduct extends Component {
         console.log(error);
       });
     this.props.updateProducts(this.state.products);
+    console.log(this.state.products);
+    this.setState({
+      selectedValue: '',
+      quantityValue: '',
+    });
   };
 
   getAsyncOptions = async query => {
@@ -78,17 +90,21 @@ class AddProduct extends Component {
     // var n = d.toISOString();
     // console.log(n);
 
+    //console.log('add-comp',this.state.products);
+
     return (
-      <form onSubmit={this.handleSubmit}>
+      <form className={styles.form} onSubmit={(e)=>this.handleSubmit(e)}>
         <div className={styles.search}>
           <div className={styles.searchSelect}>
             <AsyncSelect
+              styles={customStyles}
               cacheOptions
               loadOptions={this.loadOptions}
               defaultOptions
               onInputChange={this.handleInputSelect}
               onChange={this.handleSelectChange}
               value={selectedValue}
+              className={styles.asyncSelect}
             />
           </div>
           <div className={styles.searchInput}>

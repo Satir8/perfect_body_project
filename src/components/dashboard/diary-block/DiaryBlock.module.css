@@ -1,0 +1,16 @@
+.datePicker {
+	font-size: 17px;
+	border: none;
+	font-weight: 700;
+	line-height: 1.529;
+	width: 120px;
+	color: var(--text-color-black);
+	font-family: Verdana,sans-serif;
+	letter-spacing: .02em;
+	-webkit-transition: all .2s linear;
+	transition: all .2s linear;
+	cursor: pointer;
+	
+}
+
+

@@ -17,10 +17,10 @@
   margin: 8px 0;
   box-sizing: border-box;
   border: none;
-  border-bottom: 1px solid #000;
+  border-bottom: 1px solid #e5e5e5;
 }
 
-.searchBtn button{
+.searchBtn button {
 	width: 50px;
 	height: 50px;
 	color: #fff;
@@ -29,18 +29,23 @@
 	border-radius: 50%;
 	font-size: 25px;
 	padding: 0px;
-	
 }
 
-.Ellipse_1 {
-  border-radius: 50%;
-  background-color: rgb(252, 132, 44);
-  box-shadow: 0px 6px 10px 0px rgba(252, 132, 44, 0.33);
-  position: absolute;
-  left: 552px;
-  top: 393px;
-  width: 50px;
-  height: 50px;
-  z-index: 71;
+.asyncSelect div:first-child {
+  border: none;
+  outline: none !important;
 }
+
+.form {
+  display: none;
+}
+
+@media (min-width: 768px) {
+  .form {
+    display: block;
+  }
+}
+
+
+
 

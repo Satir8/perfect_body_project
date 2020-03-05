@@ -1,5 +1,5 @@
 import React from "react";
-import css from "./Summary.module.css";
+// import css from "./Summary.module.css";
 import moment from "moment";
 
 const data = {

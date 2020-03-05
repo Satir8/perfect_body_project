@@ -1,0 +1,66 @@
+.table { 
+	border-spacing: 15px;
+	border-collapse: separate;
+	width: 100%;
+}
+.cell {
+	border-bottom: 1px solid #e5e5e5;
+	padding: 10px 0;
+	margin-right: 10px;
+	text-align: right;
+	width: 25%;
+}
+.first {
+	width:50%;
+	text-align: left;
+}
+
+.unit {
+	font-size: 12px;
+	padding-left: 2px;
+}
+
+.delete {
+	background: url(../../../../images/icons/delete/baseline-clear-24px.svg) no-repeat center;
+	background-size: contain;
+	cursor: pointer;
+	display: inline-block;
+	height: 18px;
+	width: 18px;
+	border: none;
+	outline: none;
+}
+
+.searchBtn {
+	padding-top: 20px;
+	text-align: center;
+}
+
+.searchBtn button {
+	width: 50px;
+	height: 50px;
+	color: #fff;
+	background-color: rgb(252, 132, 44);
+	box-shadow: 0px 6px 10px 0px rgba(252, 132, 44, 0.33);
+	border-radius: 50%;
+	font-size: 25px;
+	padding: 0px;
+}
+
+@media(min-width: 768px) {
+	.cell {
+		width: 15%;
+	}
+	.first {
+		width: 70%;
+	}
+	.unit {
+		font-size: 14px;
+		padding-left: 4px;
+	}
+	.searchBtn button {
+		display: none;
+	}
+}
+
+@media(min-width: 1024px) {}
