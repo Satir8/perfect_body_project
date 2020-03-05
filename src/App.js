@@ -1,18 +1,30 @@
-import React from "react";
-import moment from "moment";
+import React, { Component } from 'react'
+import { connect } from 'react-redux';
+import * as authOperations from "./redux/auth/authOperations";
+
+// import moment from "moment";
 import "./App.css";
 import Auth from "./pages/authorization/Authorization";
-import Summary from "./components/Summary";
-import CalcForm from "./components/calcForm/CalcForm";
+// import Summary from "./components/Summary";
+// import CalcForm from "./components/calcForm/CalcForm";
 
-function App() {
-  return (
-    <>
+class App extends Component {
+  state = {  }
+  render() {
+    return (
+      <>
       {/* <CalcForm /> */}
-      <Summary />
+      {/* <Summary /> */}
       <Auth />
     </>
-  );
+    );
+  }
 }
 
-export default App;
+
+const mapDispatchToProps = {
+  refreshUser: authOperations.refreshUser
+}
+
+
+export default connect(null, mapDispatchToProps)(App);
