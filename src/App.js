@@ -1,18 +1,18 @@
 import React from "react";
 //import moment from "moment";
 import "./App.css";
-
+import AuthForm from "./pages/authorization/Authorization";
 // import Summary from "./components/Summary";
-//import CalcForm from './components/calcForm/CalcForm'
-import DashboardContainer from './components/dashboard/DashboardContainer'
-
+import CalcForm from "./components/calcForm/CalcFormContainer";
+import DashboardContainer from "./components/dashboard/DashboardContainer";
 
 function App() {
   return (
-    // <CalcForm/>
+    <CalcForm />
     //<Summary />
-    <DashboardContainer />
-  )
+    // <AuthForm />
+    // <DashboardContainer />
+  );
 }
 
 export default App;

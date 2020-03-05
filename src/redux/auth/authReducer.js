@@ -27,6 +27,17 @@ const authenticated = (state = false, { type }) => {
   }
 };
 
+const loading = (state = false, { type }) => {
+  switch (type) {
+    case authTypes.LOGIN_REQUEST:
+      return !state;
+    case authTypes.SIGNUP_REQUEST:
+      return !state;
+    default:
+      return state;
+  }
+};
+
 const token = (state = null, { type, payload }) => {
   switch (type) {
     case authTypes.LOGIN_SUCCESS:
@@ -48,7 +59,7 @@ const error = (state = null, { type, payload }) => {
       return null;
     case authTypes.LOGOUT:
       return null;
-    case authTypes.LOGIN_ERROR:
+    case authTypes.AUTH_ERROR:
       return payload;
     default:
       return state;
@@ -59,5 +70,6 @@ export default combineReducers({
   user,
   authenticated,
   token,
+  loading,
   error
 });

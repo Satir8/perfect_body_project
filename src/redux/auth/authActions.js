@@ -9,11 +9,6 @@ export const loginSuccess = ( request ) => ({
     payload: request 
 });
 
-export const loginError = ( error ) => ({
-    type: authTypes.LOGIN_ERROR,
-    payload: error 
-});
-
 export const signupRequest = () => ({
     type: authTypes.SIGNUP_REQUEST
 });
@@ -23,8 +18,17 @@ export const signupSuccess = ( request ) => ({
     payload: request 
 });
 
-export const signupError = ( error ) => ({
-    type: authTypes.SIGNUP_ERROR,
+export const refreshUserRequest = () => ({
+    type: authTypes.REFRESH_REQUEST
+});
+
+export const refreshUserSuccess = ( request ) => ({
+    type: authTypes.REFRESH_SUCCESS,
+    payload: request 
+});
+
+export const authError = ( error ) => ({
+    type: authTypes.AUTH_ERROR,
     payload: error 
 });
 
