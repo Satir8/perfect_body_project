@@ -8,12 +8,15 @@ class CalcForm extends Component {
     age: " ",
     currentWeight: " ",
     futureWeight: " ",
-    groupBlood: " "
+    groupBlood: " ",
+    showModal: false
   };
 
   handleSubmit = e => {
     e.preventDefault();
-    // show modal window
+    this.setState({
+      showModal: true
+    })
   };
 
   handleChange = e => {
@@ -22,6 +25,7 @@ class CalcForm extends Component {
 
   render() {
     return (
+      <>
       <div className={styles.calcform}>
         <div className={styles.calcformWrapper}>
           <h2 className={styles.calcformTitile}>
@@ -88,6 +92,7 @@ class CalcForm extends Component {
           </form>
         </div>
       </div>
+      </>
     );
   }
 }
