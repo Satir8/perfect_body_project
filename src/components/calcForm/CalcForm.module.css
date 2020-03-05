@@ -45,12 +45,7 @@
   font-family: Verdana, Tahoma, sans-serif;
   font-weight: bold;
   font-size: 13px;
-  /* margin-left: 32px; */
 }
-
-/* .option {
-    width: 276px;
-} */
 
 .selectInput {
   color: #999daa;
@@ -142,7 +137,6 @@
     font-family: Verdana, Tahoma, sans-serif;
     font-weight: bold;
     font-size: 15px;
-    /* margin-left: 32px; */
   }
 
   .inputFormLeft {

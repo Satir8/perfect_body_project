@@ -13,6 +13,7 @@ class CalcForm extends Component {
 
   handleSubmit = e => {
     e.preventDefault();
+    // show modal window
   };
 
   handleChange = e => {
