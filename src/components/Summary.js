@@ -1,0 +1,61 @@
+import React from "react";
+import css from "./Summary.module.css";
+import moment from "moment";
+
+const data = {
+  balance: "number",
+  consumed: "number",
+  dailyRate: "number",
+  percentNorm: "number"
+};
+const not = {
+  a: "Все зерновые, яйца, молочные продукты, мучные изделия",
+  2: "Все молочные продукты, изделия из пшеничной муки, красное мясо",
+  3: "Все изделия из пшеничной муки, чечевица, арахис, гречка, кукуруза",
+  4: "Все мучные изделия, красное мясо, орехи, кукуруза, фасоль, гречка"
+};
+const Summary = () => {
+  // console.dir(window);
+  return (
+    <div className={css.container}>
+      <div className={css.blockSummary}>
+        {window.outerWidth > 1023 && (
+          <div className={css.loginBox}>
+            <div className={css.blabla}></div>
+          </div>
+        )}
+        <div className={css.blockProgres}>
+          <p className={css.title}>
+            Сводка за <span>{moment(data).format("MM.DD.Y")}</span>
+          </p>
+          <ul className={css.listProgress}>
+            <li className={css.progressItem}>
+              <span>Осталось</span>
+              <span>{data.balance}ккал</span>
+            </li>
+            <li className={css.progressItem}>
+              <span>Употреблено</span>
+              <span>{data.consumed}ккал</span>
+            </li>
+            <li className={css.progressItem}>
+              <span>Дневная норма</span>
+              <span>{data.dailyRate}ккал</span>
+            </li>
+            <li className={css.progressItem}>
+              <span>n% от нормы</span>
+              <span>{data.percentNorm} %</span>
+            </li>
+          </ul>
+        </div>
+        <div className={css.blockProducts}>
+          <p className={css.title}>
+            Продукты, которые вам не рекомендовано употреблять:
+          </p>
+          <p className={css.products}>{not.a}</p>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default Summary;
