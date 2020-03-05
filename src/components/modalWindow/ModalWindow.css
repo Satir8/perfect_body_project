@@ -1,3 +1,12 @@
+.modalBackdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.3);
+}
+
 /* width*/
 .modalWindow::-webkit-scrollbar {
   width: 6px;
@@ -8,15 +17,14 @@
 .modalWindow::-webkit-scrollbar-thumb {
   background-color: rgb(40, 64, 96);
 }
+
 .modalWindow {
   position: relative;
-  top: 50px;
   font-family: "Verdana";
   width: 100vw;
   height: 100vh;
-  overflow: scroll;
   background-color: rgb(255, 255, 255);
-  padding: 38px 0;
+  padding: 48px 0px 38px 0px;
   z-index: 1;
 }
 
@@ -47,7 +55,7 @@
   font-weight: bold;
   line-height: 1.38;
   text-align: left;
-  margin-bottom: 40px;
+  margin-bottom: 30px;
 }
 
 .resultText {
@@ -57,16 +65,9 @@
   font-weight: bold;
   line-height: 0.78;
   text-align: center;
-  margin-bottom: 70px;
-}
-
-.resultText::after {
-  display: block;
-  position: absolute;
-  content: "";
-  border: 1px solid #999daa;
-  width: 100%;
-  top: 90px;
+  border-bottom: 1.5px solid #999daa;
+  padding-bottom: 30px;
+  margin-bottom: 20px;
 }
 
 .resultUnits {
@@ -81,7 +82,7 @@
   font-weight: bold;
   line-height: 1.53;
   text-align: left;
-  margin-bottom: 26px;
+  margin-bottom: 30px;
 }
 
 .list {
@@ -91,10 +92,10 @@
   text-align: left;
   list-style: decimal;
   padding-left: 20px;
-  margin-bottom: 50px;
+  margin-bottom: 40px;
 }
 
-li(:last-child) {
+li:last-child {
   margin-bottom: 0;
 }
 
@@ -125,7 +126,7 @@ li(:last-child) {
     left: 50%;
     transform: translate(-50%, -50%);
     box-shadow: 0px 10px 43px 0px rgba(0, 0, 0, 0.4);
-    padding: 68px 0;
+    padding: 30px 0;
     overflow: hidden;
   }
 
@@ -141,7 +142,7 @@ li(:last-child) {
     margin-bottom: 36px;
   }
 
-  .closeBtn{
+  .closeBtn {
     width: 12px;
     height: 12px;
   }
@@ -153,15 +154,11 @@ li(:last-child) {
   .resultText {
     margin-bottom: 56px;
   }
-  .resultText::after {
-    width: 296px;
-    left: 50%;
-    transform: translateX(-50%);
-    margin-bottom: 40px;
-  }
 }
+
 @media screen and (min-width: 1280px) {
   .modalWindow {
-    width: 672px;
+    width: 726px;
+    padding: 16px 0px 30px 0px;
   }
 }

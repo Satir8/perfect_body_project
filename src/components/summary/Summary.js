@@ -12,7 +12,7 @@ const Summary = ({ calcForm }) => {
   console.log(calcForm);
   
   return (
-    // <div className={css.container}>
+    <div className={css.sectionSummary}>
       <div className={css.blockSummary}>
         {/* {window.outerWidth > 1023 && (
           <div className={css.loginBox}>
@@ -76,7 +76,7 @@ const Summary = ({ calcForm }) => {
           </p>
         </div>
       </div>
-    // </div>
+     </div>
   );
 };
 
