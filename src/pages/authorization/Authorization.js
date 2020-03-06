@@ -14,4 +14,3 @@ class AuthPage extends Component {
 }
 
 export default WithAuthRedirect(AuthPage);
-// export default AuthPage;

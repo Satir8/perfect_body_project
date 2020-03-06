@@ -1,4 +1,5 @@
 import axios from 'axios'
+import * as sessionSelectors from './authSelectors'
 import {
   loginRequest,
   loginSuccess,
@@ -9,7 +10,6 @@ import {
   authError,
   logOut
 } from "./authActions";
-import * as sessionSelectors from './authSelectors'
 
 axios.defaults.baseURL = "https://slim-moms.goit.co.ua/api/v1";
 
@@ -53,8 +53,8 @@ export const refreshUser = () => (dispatch, getState) => {
   }
 
   axios.get( "/user", options )
-      .then(response => {console.log(response); dispatch(refreshUserSuccess(response.data))})
-      .catch(error => {console.log(error); dispatch(authError(error))})
+      .then(response => dispatch(refreshUserSuccess(response.data)))
+      .catch(error => dispatch(authError(error.response)))
       .finally(()=>dispatch(refreshUserRequest()))
 };
 
