@@ -11,17 +11,11 @@ const Summary = ({ calcForm, children }) => {
   console.log(calcForm);
 
   return (
-<<<<<<< HEAD
-    <div className={css.sectionSummary}>
-      <div className={css.blockSummary}>
-        {/* {window.outerWidth > 1023 && (
-=======
     <>
       {children}
       <div className={css.sectionSummary}>
         <div className={css.blockSummary}>
           {/* {window.outerWidth > 1023 && (
->>>>>>> dev
           <div className={css.loginBox}>
             <div className={css.blabla}></div>
           </div>
@@ -84,11 +78,7 @@ const Summary = ({ calcForm, children }) => {
           </div>
         </div>
       </div>
-<<<<<<< HEAD
-     </div>
-=======
     </>
->>>>>>> dev
   );
 };
 
