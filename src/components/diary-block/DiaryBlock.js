@@ -10,7 +10,7 @@ import MomentLocaleUtils, {
   parseDate
 } from 'react-day-picker/moment';
 import 'moment/locale/ru';
-//import styles from './DiaryBlock.module.css'
+
 import 'react-day-picker/lib/style.css';
 //import {classNames} from '../../../images/icons/calendar/baseline-date_range-black-24/2x/baseline_date_range_black_24dp.png'
 
@@ -18,18 +18,20 @@ axios.defaults.baseURL = 'https://slim-moms.goit.co.ua/api/v1';
 axios.defaults.headers.common['Authorization'] =
   'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI1ZTVhNmQxNGY0ZTlhNjQxNjE3MjkwNzYiLCJjcmVhdGVkRGF0ZSI6MTU4Mjk4NDYyNDIzMSwiZXhwIjoxNTg1NTc2NjI0fQ.viN0Tv3O8ppDN8dKn87jBDEqBcDD900IUFQPIEwoMfY';
 
-  const customStyles = {
-    border: 'none',
-    fontSize: '18px',
-    fontWeight: 700,
-    width: '120px',
-    cursor: 'pointer',
-    backgroundImage: 'url(../../../images/icons/calendar/baseline-date_range-black-24/2x/baseline_date_range_black_24dp.png)'
-  }
+const customStyles = {
+  border: 'none',
+  fontSize: '18px',
+  fontWeight: 700,
+  width: '120px',
+  cursor: 'pointer',
+  backgroundImage:
+    'url(../../../images/icons/calendar/baseline-date_range-black-24/2x/baseline_date_range_black_24dp.png)'
+};
 class DiaryBlock extends Component {
   state = {
     selectedDay: moment().toISOString(),
-    products: []
+    products: [],
+    caloriesSumm: null
   };
 
   getFetchData = async () => {
@@ -41,11 +43,9 @@ class DiaryBlock extends Component {
 
   handleDayChange = async selectedDay => {
     const date = moment(selectedDay).toISOString();
-    this.setState(
-      { selectedDay: date },
-      () => { this.getFetchData()}
-    );
-    console.log(this.state.selectedDay);
+    this.setState({ selectedDay: date }, () => {
+      this.getFetchData();
+    });
   };
 
   async componentDidMount() {
@@ -62,16 +62,14 @@ class DiaryBlock extends Component {
   };
 
   async componentDidUpdate(prevProps, prevState) {
-    // console.log('current', this.state.products.length);
-    // console.log('prev', prevState.products.length);
-
     if (prevState.products.length !== this.state.products.length) {
-      //console.log('state has changed.');
+      console.log('state has changed.');
       const data = await axios.get(`/user/eats/${this.state.selectedDay}`);
       this.setState({
         products: data.data.products.reverse()
       });
-      //console.log(data);
+      this.getCaloriesSumm();
+      console.log(this.state.caloriesSumm)
     }
   }
 
@@ -91,10 +89,21 @@ class DiaryBlock extends Component {
       });
   };
 
+  getCaloriesSumm = () => {
+    const { products } = this.state;
+    const calSum = products.reduce(
+      (totalCal, product) => totalCal + product.calories,
+      0
+    );
+    this.setState({
+      caloriesSumm: Math.round(calSum)
+    });
+  };
+
   render() {
-//const x = "styles.asd";
     const { selectedDay, products } = this.state;
-    //console.log('diary-products',products);
+    //console.log('cal', this.getCaloriesSumm());
+    //this.getCaloriesSumm();
 
     //console.log(selectedDay);
     //console.log(moment('2019-03-20').toISOString());
@@ -102,7 +111,7 @@ class DiaryBlock extends Component {
       <>
         <DayPickerInput
           //style={styles.datePicker}
-          inputProps={{ style: customStyles  }}
+          inputProps={{ style: customStyles }}
           value={moment(selectedDay).format('L')}
           onDayChange={this.handleDayChange}
           formatDate={formatDate}

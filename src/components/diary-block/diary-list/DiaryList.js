@@ -19,7 +19,7 @@ const DiaryList = ({ productsList, deleteProduct }) => {
         {productsList.map(({ _id, title, weight, calories }) => (
           <Tr key={_id}>
             <Td className={[styles.cell, styles.first].join(' ')} key={_id + 1}>
-              {title.ru}
+              {title.ru || 'no title'}
             </Td>
             <Td className={styles.cell} key={_id + 2}>
               {weight}
