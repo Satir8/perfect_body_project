@@ -10,7 +10,7 @@ import MomentLocaleUtils, {
   parseDate
 } from 'react-day-picker/moment';
 import 'moment/locale/ru';
-//import styles from './DiaryBlock.module.css'
+
 import 'react-day-picker/lib/style.css';
 //import {classNames} from '../../../images/icons/calendar/baseline-date_range-black-24/2x/baseline_date_range_black_24dp.png'
 
@@ -18,18 +18,21 @@ axios.defaults.baseURL = 'https://slim-moms.goit.co.ua/api/v1';
 axios.defaults.headers.common['Authorization'] =
   'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI1ZTVhNmQxNGY0ZTlhNjQxNjE3MjkwNzYiLCJjcmVhdGVkRGF0ZSI6MTU4Mjk4NDYyNDIzMSwiZXhwIjoxNTg1NTc2NjI0fQ.viN0Tv3O8ppDN8dKn87jBDEqBcDD900IUFQPIEwoMfY';
 
-  const customStyles = {
-    border: 'none',
-    fontSize: '18px',
-    fontWeight: 700,
-    width: '120px',
-    cursor: 'pointer',
-    backgroundImage: 'url(../../../images/icons/calendar/baseline-date_range-black-24/2x/baseline_date_range_black_24dp.png)'
-  }
+const customStyles = {
+  border: 'none',
+  fontSize: '18px',
+  fontWeight: 700,
+  width: '120px',
+  cursor: 'pointer',
+  backgroundImage:
+    'url(../../../images/icons/calendar/baseline-date_range-black-24/2x/baseline_date_range_black_24dp.png)'
+};
 class DiaryBlock extends Component {
   state = {
     selectedDay: moment().toISOString(),
-    products: []
+    products: [],
+    caloriesSumm: null,
+
   };
 
   getFetchData = async () => {
@@ -41,11 +44,9 @@ class DiaryBlock extends Component {
 
   handleDayChange = async selectedDay => {
     const date = moment(selectedDay).toISOString();
-    this.setState(
-      { selectedDay: date },
-      () => { this.getFetchData()}
-    );
-    console.log(this.state.selectedDay);
+    this.setState({ selectedDay: date }, () => {
+      this.getFetchData();
+    });
   };
 
   async componentDidMount() {
@@ -55,32 +56,23 @@ class DiaryBlock extends Component {
     });
   }
 
-  updateProducts = value => {
-    this.setState({
-      products: value
-    });
+  updateProducts = () => {
+    this.setState((prev) => ({
+      check: !prev.check
+    }));
   };
 
-  async componentDidUpdate(prevProps, prevState) {
-    // console.log('current', this.state.products.length);
-    // console.log('prev', prevState.products.length);
 
-    if (prevState.products.length !== this.state.products.length) {
-      //console.log('state has changed.');
-      const data = await axios.get(`/user/eats/${this.state.selectedDay}`);
-      this.setState({
-        products: data.data.products.reverse()
-      });
-      //console.log(data);
-    }
-  }
+
+
+
 
   deleteProduct = id => {
     axios
       .delete(`/user/eats/${id}`)
       .then(response => {
         if (response.data.status === 'success') {
-          console.log('ok');
+
           this.setState(prev => ({
             products: prev.products.filter(elem => elem._id !== id)
           }));
@@ -91,10 +83,31 @@ class DiaryBlock extends Component {
       });
   };
 
+  getCaloriesSumm = () => {
+    const { products } = this.state;
+    const calSum = products.reduce(
+      (totalCal, product) => totalCal + product.calories,
+      0
+    );
+    this.setState({
+      caloriesSumm: Math.round(calSum)
+    });
+  };
+
+  getUpdateProducts = async()=> {
+    const data = await axios.get(`/user/eats/${this.state.selectedDay}`);
+    this.getCaloriesSumm();
+      this.setState({
+        products:  data.data.products.reverse()
+      });
+  }
+
   render() {
-//const x = "styles.asd";
     const { selectedDay, products } = this.state;
-    //console.log('diary-products',products);
+    //console.log('products', products)
+
+    //console.log('cal', this.getCaloriesSumm());
+    //this.getCaloriesSumm();
 
     //console.log(selectedDay);
     //console.log(moment('2019-03-20').toISOString());
@@ -102,7 +115,7 @@ class DiaryBlock extends Component {
       <>
         <DayPickerInput
           //style={styles.datePicker}
-          inputProps={{ style: customStyles  }}
+          inputProps={{ style: customStyles }}
           value={moment(selectedDay).format('L')}
           onDayChange={this.handleDayChange}
           formatDate={formatDate}
@@ -114,7 +127,7 @@ class DiaryBlock extends Component {
             localeUtils: MomentLocaleUtils
           }}
         />
-        <AddProduct updateProducts={this.updateProducts} />
+        <AddProduct getUpdateProducts={this.getUpdateProducts} updateProducts={this.updateProducts} />
         <DiaryList productsList={products} deleteProduct={this.deleteProduct} />
       </>
     );
