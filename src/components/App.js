@@ -1,12 +1,12 @@
 import React, { Component } from "react";
 import { Switch, Route } from "react-router-dom";
 import { connect } from 'react-redux';
-import * as authOperations from '../redux/auth/authOperations'
 import NavPage from "../pages/navPage/NavPage";
 import HomePage from "../pages/homePage/HomePage";
 import DashboardPage from "../pages/dashboardPage/DashboardPage";
 import AuthorizationPage from "../pages/authorization/Authorization";
 import Header from "./header/Header";
+import * as authOperations from '../redux/auth/authOperations'
 
 class App extends Component {
   state = {

@@ -3,8 +3,7 @@ import { connect } from "react-redux";
 import { CSSTransition } from "react-transition-group";
 import * as authOperations from "../../redux/auth/authOperations";
 import * as authSelectors from "../../redux/auth/authSelectors";
-import * as opacityWithShakeTransition from "../../transitions/opacityWithShakeTransition.module.css";
-import { Loader } from "../loader/Loader";
+import * as opacityTransition from "../../transitions/opacityTransition.module.css";
 import css from "./AuthForm.module.css";
 
 // default authorization action
@@ -92,26 +91,17 @@ const INITIAL_STATE = {
 class AuthForm extends Component {
   state = { ...INITIAL_STATE };
 
-  componentDidUpdate(_, prevState) {
-    const { isErrorVisible, isSetTimeOut } = this.state
-    if (prevState.isErrorVisible === isErrorVisible) {
+  // componentDidUpdate(_, prevState) {
 
-      console.log(isErrorVisible)
-      if(isSetTimeOut === true) return
-
-      isErrorVisible === true && setTimeout(() => this.setState({ isErrorVisible: false }), 3000);
-
-      this.setState({isSetTimeOut: true});
-      
+    // if (prevState.isErrorVisible === this.state.isErrorVisible) {
+      // isErrorVisible === true && setTimeout(() => this.setState({ isErrorVisible: false }), 3000);
+      // if (prevState.isErrorVisible === false) return;
+      // else
+      // console.log(isErrorVisible)
       // console.log(this.state)
       // console.log(prevState)
-    }
-
-    // if (prevState.isErrorVisible === true) {
-    //   setTimeout(() => this.setState({ isErrorVisible: false, isSetTimeOut: true }), 7000);
     // }
-    // console.log(this.state.isErrorVisible)
-  }
+  // }
 
   handleChange = e => {
     this.setState({ [e.target.name]: e.target.value });
@@ -157,17 +147,13 @@ class AuthForm extends Component {
   render() {
     const { action, isErrorVisible, errorMsg } = this.state;
     const { loading } = this.props;
-
+    // console.dir(this.props);
     const changeLogin = activeActionLogin(action);
     const changeSignup = activeActionSignup(action);
-
+    
     return (
       <>
-        <form
-          className={css.form}
-          onSubmit={this.handleSubmit}
-          autoComplete="off"
-        >
+        <form className={css.form} onSubmit={this.handleSubmit}>
           <button
             style={changeLogin}
             className={css.entryBtn}
@@ -202,7 +188,7 @@ class AuthForm extends Component {
           <CSSTransition
             in={isErrorVisible}
             timeout={700}
-            classNames={opacityWithShakeTransition}
+            classNames={opacityTransition}
             unmountOnExit
           >
             <p className={css.errorNotification}>{errorMsg}</p>
@@ -212,7 +198,9 @@ class AuthForm extends Component {
             {action}
           </button>
         </form>
-        {loading && <Loader />}
+        {loading && (
+          <h2 style={{ color: "red", padding: "20px 20px" }}>Loading...</h2>
+        )}
       </>
     );
   }
