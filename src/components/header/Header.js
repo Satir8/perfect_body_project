@@ -17,6 +17,7 @@ class Header extends Component {
   };
 
   openExitModal = () => {
+    console.log('aaaaaaaaaaaaaaa')
     this.setState({showExitModal: true})
   }
 
@@ -27,7 +28,7 @@ class Header extends Component {
 
   render() {
     const { showExitModal } = this.state
-    const { isMobile, isTablet, isDesktop, auth, nickname, logOut } = this.props;
+    const { isMobile, isTablet, isDesktop, auth, logOut } = this.props;
     return (
       <>
       <div className={styles.hdrContainer}>
@@ -62,7 +63,7 @@ class Header extends Component {
             {auth && <Burger burgerIcon={burgerIcon} closeIcon={closeIcon} />}
           </>
         )}
-        {isDesktop && <NavPage isDesktop={isDesktop} openExitModal={this.openExitModal} />}
+        {isDesktop && <NavPage openExitModal={this.openExitModal} />}
       </div>
       {showExitModal && <ModalLogout closeModal={this.closeModal} logOut={logOut} />}
       </>

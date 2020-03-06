@@ -50,7 +50,7 @@ class App extends Component {
         <DashboardPage isMobile={isMobile} />
         <Switch>
           <Route exact path="/" component={HomePage} />
-          <Route path="/nav" component={NavPage} />
+          <Route path="/nav" render={props => <NavPage {...props} isMobile={isMobile} isDesktop={isDesktop} />} />
           <Route path="/authorization" component={AuthorizationPage} />
         </Switch>
       </>

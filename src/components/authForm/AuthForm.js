@@ -143,10 +143,8 @@ class AuthForm extends Component {
   render() {
     const { action, isErrorVisible, errorMsg } = this.state;
     const { loading } = this.props;
-    // console.dir(this.props);
     const changeLogin = activeActionLogin(action);
     const changeSignup = activeActionSignup(action);
-    console.log("object");
     return (
       <>
         <form className={css.form} onSubmit={this.handleSubmit}>
