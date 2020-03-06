@@ -9,28 +9,26 @@ import css from "./AuthForm.module.css";
 // default authorization action
 
 const actions = {
-  login: "Вход", // actions.login
-  signup: "Регистрация" // actions.signup
+  login: "Вход",
+  signup: "Регистрация"
 };
 
 // active enter-button styles
 
 const activeActionLogin = activeAction => {
-  if (activeAction === actions.login) {
+  if (activeAction === actions.login)
     return {
       color: "#fc842c",
       borderColor: "#fc842c"
     };
-  }
 };
 
 const activeActionSignup = activeAction => {
-  if (activeAction === actions.signup) {
+  if (activeAction === actions.signup)
     return {
       color: "#fc842c",
       borderColor: "#fc842c"
     };
-  }
 };
 
 // testing
@@ -94,8 +92,11 @@ class AuthForm extends Component {
   state = { ...INITIAL_STATE };
 
   componentDidUpdate(_, prevState) {
-    if (prevState.isErrorVisible === true)
-      setTimeout(() => this.setState({ isErrorVisible: false }), 5000);
+    if (prevState.isErrorVisible === true) {
+      // if (prevState.isErrorVisible === false) return;
+      // else
+      setTimeout(() => this.setState({ isErrorVisible: false }), 7000);
+    }
   }
 
   handleChange = e => {
@@ -145,7 +146,7 @@ class AuthForm extends Component {
     // console.dir(this.props);
     const changeLogin = activeActionLogin(action);
     const changeSignup = activeActionSignup(action);
-
+    console.log("object");
     return (
       <>
         <form className={css.form} onSubmit={this.handleSubmit}>
@@ -175,14 +176,14 @@ class AuthForm extends Component {
             placeholder="Логин *"
           />
           <input
-            type="text"
+            type="password"
             name="password"
             onChange={this.handleChange}
             placeholder="Пароль *"
           />
           <CSSTransition
             in={isErrorVisible}
-            timeout={2000}
+            timeout={700}
             classNames={opacityTransition}
             unmountOnExit
           >

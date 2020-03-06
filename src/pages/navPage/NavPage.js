@@ -1,39 +1,63 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 import styles from './NavPage.module.css';
+import { connect } from 'react-redux';
+import Nickname from '../../components/header/Nickname';
 
-const NavPage = () => (
+const NavPage = ({ auth, isDesktop, openExitModal }) => (
   <nav className={styles.navigation}>
-    <ul className={styles.navList}>
-      <li>
-        <NavLink
-          to='/diary'
-          className={styles.navListItem}
-          activeClassName={styles.navListItemActive}
-        >
-          Дневник
-        </NavLink>
-      </li>
-      <li>
-        <NavLink
-          to='/calculator'
-          className={styles.navListItem}
-          activeClassName={styles.navListItemActive}
-        >
-          Калькулятор
-        </NavLink>
-      </li>
-      <li>
-        <NavLink
-          to='/achievements'
-          className={styles.navListItem}
-          activeClassName={styles.navListItemActive}
-        >
-          Достижения
-        </NavLink>
-      </li>
-    </ul>
+      {auth ? (
+        <>
+          <div className={styles.navList}>
+            <NavLink
+              to='/diary'
+              className={styles.navListItem}
+              activeClassName={styles.navListItemActive}
+            >
+              Дневник
+            </NavLink>
+
+            <NavLink
+              to='/calculator'
+              className={styles.navListItem}
+              activeClassName={styles.navListItemActive}
+            >
+              Калькулятор
+            </NavLink>
+
+            <NavLink
+              to='/achievements'
+              className={styles.navListItem}
+              activeClassName={styles.navListItemActive}
+            >
+              Достижения
+            </NavLink>
+          </div>
+          {isDesktop && <Nickname onOpenExitModal={openExitModal} />}
+        </>
+      ) : (
+        <div className={styles.loginContainer}>
+          <NavLink
+            to='/authorization'
+            className={styles.navListItem}
+            activeClassName={styles.navListItemActive}
+          >
+            Вход
+          </NavLink>
+          <NavLink
+            to='/authorization'
+            className={styles.navListItem}
+            activeClassName={styles.navListItemActive}
+          >
+            Регистрация
+          </NavLink>
+        </div>
+      )}
   </nav>
 );
 
-export default NavPage;
+const mapStateToProps = state => ({
+  auth: state.session.authenticated
+});
+
+export default connect(mapStateToProps)(NavPage);

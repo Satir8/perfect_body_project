@@ -1,15 +1,17 @@
-import React, { Component } from "react";
-import { connect } from "react-redux";
-import * as authSelectors from "../../redux/auth/authSelectors";
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import * as authSelectors from '../../redux/auth/authSelectors';
 
 const WithAuthRedirect = BaseComponent => {
   class WithAuthRedirect extends Component {
     componentDidMount() {
-      this.props.authenticated && this.props.history.replace("/");
+      this.props.authenticated && this.props.history.replace('/diary');
     }
 
-    componentDidUpdate() {
-      this.props.authenticated && this.props.history.replace("/");
+    componentDidUpdate(prevProps, prevState) {
+      if (prevProps.authenticated !== this.props.authenticated) {
+        this.props.authenticated && this.props.history.replace('/diary');
+      }
     }
 
     render() {
