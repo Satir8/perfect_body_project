@@ -1,0 +1,26 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+.pageWrapper {
+    padding: 36px 25px;
+    min-height: 100vh;
+}
+
+@media(min-width: 767px) {
+    .pageWrapper {
+        max-width: 85.6%;
+        padding: 70px 0 0;
+        margin: 0 auto;
+    }
+
+}
+
+@media(min-width: 1024px) {
+    .pageWrapper {
+        max-width: 82%;
+        padding: 20vh 0 0;
+        margin: 0 auto;
+    }
+}
