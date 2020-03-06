@@ -1,11 +1,39 @@
 import React, { Component } from "react";
+import { Switch, Route } from "react-router-dom";
 // import { connect } from "react-redux";
 import Summary from "../../components/summary/Summary";
+import diaryComp from "../../components/diary/diaryComp";
+import CalcForm from "../../components/calcForm/CalcFormContainer";
+import Achievements from "../../components/achievements/Achievements";
 
 class DashboardContainer extends Component {
-  state = {};
+  // state = {};
   render() {
-    return <Summary />;
+    const { isMobile } = this.props;
+    return (
+      <>
+        <Switch>
+          <Route path="/diary" component={diaryComp} />
+          {/* <Route path="/calculator" component={calcForm} /> */}
+          <Route
+            path="/calculator"
+            render={props => (
+              <Summary>
+                <CalcForm {...props} />
+              </Summary>
+            )}
+          />
+          <Route
+            path="/achievements"
+            render={props => (
+              <Summary>
+                <Achievements {...props} isMobile={isMobile} />
+              </Summary>
+            )}
+          />
+        </Switch>
+      </>
+    );
   }
 }
 

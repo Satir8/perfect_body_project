@@ -1,4 +1,4 @@
-.sectionSummary {
+.sectionSummary{
   background-image: url(../../images/img/backgroundSummary.jpg);
   background-repeat: no-repeat;
   background-size: cover;
@@ -8,7 +8,6 @@
   padding: 30px 20px;
 }
 .blockSummary {
-  /* outline: 1px solid black; */
   font-family: "Gotham Pro", sans-serif;
 }
 .title {
@@ -36,7 +35,7 @@
 }
 
 @media (min-width: 768px) {
-  .sectionSummary {
+  .sectionSummary{
     background-image: url(../../images/img/backgroundSummary.jpg);
     background-repeat: no-repeat;
     background-size: cover;
@@ -67,7 +66,7 @@
 }
 
 @media (min-width: 1024px) {
-  .sectionSummary {
+  .sectionSummary{
     background-image: none;
     width: auto;
     display: flex;
