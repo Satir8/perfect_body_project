@@ -1,10 +1,12 @@
 import React, { Component } from "react";
-import Header from "./header/Header";
 import { Switch, Route } from "react-router-dom";
+import { connect } from 'react-redux';
+import * as authOperations from '../redux/auth/authOperations'
 import NavPage from "../pages/navPage/NavPage";
 import HomePage from "../pages/homePage/HomePage";
 import DashboardPage from "../pages/dashboardPage/DashboardPage";
 import AuthorizationPage from "../pages/authorization/Authorization";
+import Header from "./header/Header";
 
 class App extends Component {
   state = {
@@ -15,6 +17,7 @@ class App extends Component {
 
   componentDidMount() {
     this.checkScreenWidth();
+    this.props.refreshUser()
   }
 
   checkScreenWidth = () => {
@@ -55,4 +58,9 @@ class App extends Component {
   }
 }
 
-export default App;
+const mapDispatchToProps = {
+  refreshUser: authOperations.refreshUser 
+}
+
+export default connect(null, mapDispatchToProps)(App);
+
