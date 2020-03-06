@@ -9,7 +9,10 @@ import Auth from "./pages/authorization/Authorization";
 // import CalcForm from "./components/calcForm/CalcForm";
 
 class App extends Component {
-  state = {  }
+  componentDidMount() {
+    this.props.refreshUser()
+  }
+
   render() {
     return (
       <>
@@ -23,7 +26,7 @@ class App extends Component {
 
 
 const mapDispatchToProps = {
-  refreshUser: authOperations.refreshUser
+  refreshUser: authOperations.refreshUser 
 }
 
 

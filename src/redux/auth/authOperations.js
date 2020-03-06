@@ -9,7 +9,7 @@ import {
   authError,
   logOut
 } from "./authActions";
-import {getToken} from './authSelectors'
+import * as sessionSelectors from './authSelectors'
 
 axios.defaults.baseURL = "https://slim-moms.goit.co.ua/api/v1";
 
@@ -39,29 +39,29 @@ export const signup = credential => dispatch => {
     .finally(()=>dispatch(loginRequest()))
 };
 
-export const refreshUser = (credential, getState) => dispatch => {
-  const token = getToken(getState())
+export const refreshUser = () => (dispatch, getState) => {
+  const token = sessionSelectors.getToken(getState())
 
-  if(!token) return
+  if(!token) return;
 
-  const options = {headers: {Autorization: token}}
+  dispatch(refreshUserRequest());
 
-  axios.get("/user", options, {
-        headers: {
-          "Content-Type": "application/json"
-        }
-      })
-      .then(response => console.log(response))
-  // dispatch(refreshUserRequest());
+  const options = {
+    headers: {
+      Authorization: `Bearer ${token}`
+    }
+  }
 
-  // axios.get("/user", credential, {
-  //     headers: {
-  //       "Content-Type": "application/json"
-  //     }
-  //   })
-  //   .then(response => dispatch(refreshUserSuccess(response.data)))
-  //   .catch(error => dispatch(authError(error.response)))
-  //   .finally(()=>dispatch(refreshUserRequest()))
+  console.log(token)
+  console.log(token)
+
+  axios.get( "/user", options )
+      .then(response => {console.log(response); dispatch(refreshUserSuccess(response.data))})
+      .catch(error => {console.log(error); dispatch(authError(error))})
+      .finally(()=>dispatch(refreshUserRequest()))
+ 
+ 
+ // dispatch(refreshUserRequest());
 };
 
 export const logout = () => dispatch => dispatch(logOut()); 

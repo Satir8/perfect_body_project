@@ -5,11 +5,13 @@ import * as authSelectors from '../../redux/auth/authSelectors'
 const WithAuthRedirect = BaseComponent => {
   class WithAuthRedirect extends Component {
     componentDidMount() {
-      this.props.authenticated && this.props.history.replace("/");
+      this.props.authenticated && this.props.history.replace("/diary");
+      !this.props.authenticated && this.props.history.push("/login");
     }
 
     componentDidUpdate() {
-      this.props.authenticated && this.props.history.replace("/");
+      this.props.authenticated && this.props.history.replace("/diary");
+      !this.props.authenticated && this.props.history.push("/login");
     }
 
     render() {
