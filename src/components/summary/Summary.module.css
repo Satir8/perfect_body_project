@@ -1,4 +1,4 @@
-.sectionSummary{
+.sectionSummary {
   background-image: url(../../images/img/backgroundSummary.jpg);
   background-repeat: no-repeat;
   background-size: cover;
@@ -35,7 +35,7 @@
 }
 
 @media (min-width: 768px) {
-  .sectionSummary{
+  .sectionSummary {
     background-image: url(../../images/img/backgroundSummary.jpg);
     background-repeat: no-repeat;
     background-size: cover;
@@ -66,12 +66,15 @@
 }
 
 @media (min-width: 1024px) {
-  .sectionSummary{
-    background-image: none;
-    width: auto;
+  .sectionSummary {
+    background-image: url(../../images/img/backGroundSummaryLap.jpg);
+    background-position-x: 100%;
+    background-size: 150%;
+    height: 90vh;
+    width: 490px;
     display: flex;
     justify-content: center;
-    padding: 30px 20px;
+    padding: 150px 0px 0px 0px;
   }
   .blockSummary {
     margin: 0;

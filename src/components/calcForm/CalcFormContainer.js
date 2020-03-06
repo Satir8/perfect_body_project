@@ -59,8 +59,13 @@ class CalcFormContainer extends Component {
   };
 
   render() {
+    console.log(this.props.location.pathname);
     return (
-      <CalcForm onSubmit={this.handleSubmit} onChange={this.handleChange} />
+      <CalcForm
+        onSubmit={this.handleSubmit}
+        onChange={this.handleChange}
+        location={this.props.location.pathname}
+      />
     );
   }
 }
