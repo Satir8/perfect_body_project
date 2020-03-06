@@ -1,6 +1,14 @@
-
+.sectionSummary {
+  background-image: url(../../images/img/backgroundSummary.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  width: auto;
+  display: flex;
+  justify-content: center;
+  padding: 30px 20px;
+}
 .blockSummary {
-  outline: 1px solid black;
+  /* outline: 1px solid black; */
   font-family: "Gotham Pro", sans-serif;
 }
 .title {
@@ -28,6 +36,15 @@
 }
 
 @media (min-width: 768px) {
+  .sectionSummary {
+    background-image: url(../../images/img/backgroundSummary.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: auto;
+    display: flex;
+    justify-content: center;
+    padding: 30px 0;
+  }
   .blockSummary {
     width: auto;
     margin: 0 auto;
@@ -50,6 +67,13 @@
 }
 
 @media (min-width: 1024px) {
+  .sectionSummary {
+    background-image: none;
+    width: auto;
+    display: flex;
+    justify-content: center;
+    padding: 30px 20px;
+  }
   .blockSummary {
     margin: 0;
     width: auto;
