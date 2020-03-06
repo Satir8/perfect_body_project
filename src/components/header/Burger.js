@@ -1,10 +1,15 @@
 import React from 'react';
 import { Link, withRouter } from 'react-router-dom';
 
-const Burger = ({ location, burgerIcon, closeIcon }) => (
+const Burger = ({location: { pathname },burgerIcon,closeIcon,location}) => (
   <Link
-    to={location.pathname === '/nav' ? '/' : '/nav'}
-    className={location.pathname !== '/nav' ? burgerIcon : closeIcon}
+    to={{
+      pathname: pathname === '/nav' ? location.state.from : '/nav',
+      state: {
+        from: pathname
+      }
+    }}
+    className={pathname !== '/nav' ? burgerIcon : closeIcon}
   ></Link>
 );
 

@@ -1,10 +1,12 @@
 import React, { Component } from "react";
-import Header from "./header/Header";
-import { Switch, Route } from "react-router-dom";
+import { Switch, Route, Redirect } from "react-router-dom";
+import { connect } from "react-redux";
 import NavPage from "../pages/navPage/NavPage";
-
 import HomePage from "../pages/homePage/HomePage";
 import DashboardPage from "../pages/dashboardPage/DashboardPage";
+import AuthorizationPage from "../pages/authorization/Authorization";
+import Header from "./header/Header";
+import * as authOperations from "../redux/auth/authOperations";
 
 class App extends Component {
   state = {
@@ -15,6 +17,8 @@ class App extends Component {
 
   componentDidMount() {
     this.checkScreenWidth();
+    this.props.refreshUser();
+    !this.props.authenticated && this.props.history.push("/");
   }
 
   checkScreenWidth = () => {
@@ -48,11 +52,20 @@ class App extends Component {
         <Switch>
           <Route exact path="/" component={HomePage} />
           <Route path="/nav" component={NavPage} />
-          {/* <Route path="/login" component={<div>Login/Signup</div>} /> */}
+          <Route path="/authorization" component={AuthorizationPage} />
+          {/* {!this.props.auth && <Redirect to="/authorization" />} */}
         </Switch>
       </>
     );
   }
 }
 
-export default App;
+const mapStateToProps = state => ({
+  auth: state.session.authenticated
+});
+
+const mapDispatchToProps = {
+  refreshUser: authOperations.refreshUser
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);

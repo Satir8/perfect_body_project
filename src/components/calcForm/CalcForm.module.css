@@ -134,4 +134,20 @@
   .sbmtBtn {
     margin: unset;
   }
+
+  .calculatorWrapper {
+    width: 620px;
+    margin: 0 auto;
+    padding-top: 100px;
+  }
+
+  .calculatorTitle {
+    font-family: Verdana, Tahoma, sans-serif;
+    font-weight: 700;
+    color: rgba(33, 33, 33, 0.9);
+    font-size: 30px;
+    line-height: 38px;
+    margin-bottom: 60px;
+    width: 576px;
+  }
 }

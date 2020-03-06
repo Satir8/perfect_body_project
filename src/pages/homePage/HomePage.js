@@ -66,13 +66,3 @@ class HomePage extends Component {
 }
 
 export default HomePage;
-
-// const mapStateToProps = state => ({
-//   calories: state.calcForm.calories,
-//   products: state.calcForm.dangerProducts
-// });
-
-// export default connect(mapStateToProps, {
-//   getTotalCalories,
-//   getDangerProducts
-// })(HomePage);
