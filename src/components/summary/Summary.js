@@ -12,14 +12,8 @@ const Summary = ({ calcForm, children }) => {
 
   return (
     <>
-      {children}
       <div className={css.sectionSummary}>
         <div className={css.blockSummary}>
-          {/* {window.outerWidth > 1023 && (
-          <div className={css.loginBox}>
-            <div className={css.blabla}></div>
-          </div>
-        )} */}
           <div className={css.blockProgres}>
             <p className={css.title}>
               Сводка за <span>{moment(data).format("MM.DD.Y")}</span>
@@ -73,7 +67,9 @@ const Summary = ({ calcForm, children }) => {
               Продукты, которые вам не рекомендовано употреблять:
             </p>
             <p className={css.products}>
-              {calcForm.dangerProducts[0].join(", ")}
+              {calcForm.dangerProducts
+                ? calcForm.dangerProducts[0].join(", ")
+                : ""}
             </p>
           </div>
         </div>
