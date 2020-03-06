@@ -2,6 +2,7 @@ import React from 'react';
 import styles from './Header.module.css';
 import Burger from './Burger';
 import NavPage from '../../pages/navPage/NavPage';
+import { connect } from 'react-redux';
 
 const burgerIcon = styles.hrdBurger;
 const closeIcon = styles.hrdBurgerClose;
@@ -25,4 +26,8 @@ const Header = ({ isMobile, isTablet, isDesktop }) => (
   </div>
 );
 
-export default Header;
+const mapStateToProps = (state) => ({
+  
+});
+
+export default connect(mapStateToProps)(Header);
