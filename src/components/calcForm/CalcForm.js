@@ -1,105 +1,74 @@
-import React, { Component } from "react";
-import PropTypes from "prop-types";
+import React from "react";
+// import PropTypes from "prop-types";
 import styles from "./CalcForm.module.css";
 
-// const getData = data => {
-//   console.log("data", data);
-// };
-
-class CalcForm extends Component {
-  state = {
-    height: " ",
-    age: " ",
-    currentWeight: " ",
-    futureWeight: " ",
-    groupBlood: " "
-  };
-
-  createList = e => {
-    e.preventDefault();
-    console.log(this.state);
-    // this.props.getData(this.state);
-  };
-
-  handleChange = e => {
-    const name = e.target.name;
-    this.setState({ [name]: e.target.value });
-  };
-
-  render() {
-    return (
-      <div className={styles.calkform}>
-        <div className={styles.calkformWrapper}>
-          <h2 className={styles.calkformTitile}>
-            Узнай свою суточную норму каллорий{" "}
-            <span className={styles.br}> прямо сейчас</span>
-          </h2>
-          <form className={styles.inputForm} onSubmit={this.createList}>
-            <div className={styles.inputFormLeft}>
-              <input
-                type="text"
-                className={styles.inputItem}
-                id="height"
-                placeholder="Рост *"
-                name="height"
-                onChange={this.handleChange}
-              />
-              <input
-                type="Text"
-                className={styles.inputItem}
-                id="age"
-                placeholder="Возраст *"
-                name="age"
-                onChange={this.handleChange}
-              />
-              <input
-                type="Text"
-                className={styles.inputItem}
-                id="currentWeight"
-                placeholder="Текущий вес *"
-                name="currentWeight"
-                onChange={this.handleChange}
-              />
-            </div>
-            <div className={styles.inputFormRight}>
-              <input
-                type="Text"
-                className={styles.inputItem}
-                id="futureWeight"
-                placeholder="Желаемый вес *"
-                name="futureWeight"
-                onChange={this.handleChange}
-              />
-              <select
-                id="groupBlood"
-                name="groupBlood"
-                className={styles.selectInput}
-                onChange={this.handleChange}
-              >
-                <option className={styles.option}>Группа крови</option>
-                <option className={styles.option}>1</option>
-                <option className={styles.option}>2</option>
-                <option className={styles.option}>3</option>
-                <option className={styles.option}>4</option>
-              </select>
-            </div>
-            <button
-              type="submit"
-              className={styles.inputMeasure}
-              onClick={this.getData}
-              id="submit"
+const CalcForm = ({ onSubmit, onChange }) => {
+  return (
+    <>
+      <h2 className={styles.calkformTitle}>
+        Просчитай свою суточную норму каллорий прямо сейчас
+      </h2>
+      <form className={styles.inputForm} onSubmit={onSubmit}>
+        <div className={styles.innerWrapper}>
+          <div className={styles.inputFormLeft}>
+            <input
+              required
+              type="text"
+              className={styles.inputItem}
+              placeholder="Рост *"
+              name="height"
+              onChange={onChange}
+            />
+            <input
+              required
+              type="Text"
+              className={styles.inputItem}
+              placeholder="Возраст *"
+              name="age"
+              onChange={onChange}
+            />
+            <input
+              required
+              type="Text"
+              className={styles.inputItem}
+              placeholder="Текущий вес *"
+              name="currentWeight"
+              onChange={onChange}
+            />
+          </div>
+          <div className={styles.inputFormRight}>
+            <input
+              type="Text"
+              required
+              className={styles.inputItem}
+              placeholder="Желаемый вес *"
+              name="futureWeight"
+              onChange={onChange}
+            />
+            <select
+              required
+              name="groupBlood"
+              className={styles.selectInput}
+              onChange={onChange}
             >
-              Похудеть
-            </button>
-          </form>
+              <option className={styles.option}>Группа крови</option>
+              <option className={styles.option}>1</option>
+              <option className={styles.option}>2</option>
+              <option className={styles.option}>3</option>
+              <option className={styles.option}>4</option>
+            </select>
+          </div>
         </div>
-      </div>
-    );
-  }
-}
+        <button type="submit" className={styles.sbmtBtn}>
+          Похудеть
+        </button>
+      </form>
+    </>
+  );
+};
 
 export default CalcForm;
 
-CalcForm.propTypes = {
-  getData: PropTypes.func
-};
+// CalcForm.propTypes = {
+//   getData: PropTypes.func
+// };
