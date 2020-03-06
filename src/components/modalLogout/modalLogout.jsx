@@ -1,7 +1,8 @@
 import React from 'react';
 import styles from './modalLogout.module.css';
+import { Link } from 'react-router-dom';
 
-const modalLogout = ({ closeModal }) => (
+const modalLogout = ({ closeModal, logOut }) => (
   <>
     <div className={styles.centerCase}>
       <div className={styles.moduleCase}>
@@ -14,7 +15,7 @@ const modalLogout = ({ closeModal }) => (
         <p className={styles.text}>Ты дейсвтительно хочешь выйти?</p>
         <hr className={styles.line}></hr>
         <div className={styles.btnCase}>
-          <button className={styles.btnYes}>Да</button>
+          <Link to='/authorization' onClick={() => {logOut(); closeModal();}} className={styles.btnYes}>Да</Link>
           <button onClick={() => closeModal()} className={styles.btnNo}>
             Нет, я хочу остаться
           </button>

@@ -4,6 +4,8 @@ import Burger from './Burger';
 import NavPage from '../../pages/navPage/NavPage';
 import { connect } from 'react-redux';
 import ModalLogout from '../modalLogout/modalLogout';
+import { Link } from 'react-router-dom';
+import { logOut } from '../../redux/auth/authActions';
 
 const burgerIcon = styles.hrdBurger;
 const closeIcon = styles.hrdBurgerClose;
@@ -23,20 +25,19 @@ class Header extends Component {
 
 
   render() {
-    console.log(this.state);
     const { showExitModal } = this.state
-    const { isMobile, isTablet, isDesktop, auth, nicname } = this.props;
+    const { isMobile, isTablet, isDesktop, auth, nickname, logOut } = this.props;
     return (
       <>
       <div className={styles.hdrContainer}>
-        <p className={styles.hdrLogo}>
+        <Link to='/' className={styles.hdrLogo}>
           Slim<span>Mom</span>
-        </p>
+        </Link>
         {isMobile && <Burger burgerIcon={burgerIcon} closeIcon={closeIcon} />}
         {isTablet && (
           <>
             <div className={styles.hdrAuthList}>
-              {true ? (
+              {auth ? (
                 <>
                   <p
                     className={[
@@ -44,7 +45,7 @@ class Header extends Component {
                       styles.hdrAuthListItemBold
                     ].join(' ')}
                   >
-                    nicname
+                    {nickname}
                   </p>
                   <p
                     onClick={() => this.openExitModal()}
@@ -58,22 +59,22 @@ class Header extends Component {
                 </>
               ) : (
                 <>
-                  <p
+                  <Link to="/authorization"
                     className={[
                       styles.hdrAuthListItem,
                       styles.hdrAuthListItemLink
                     ].join(' ')}
                   >
                     Вход
-                  </p>
-                  <p
+                  </Link>
+                  <Link to="/authorization"
                     className={[
                       styles.hdrAuthListItem,
                       styles.hdrAuthListItemLink
                     ].join(' ')}
                   >
                     Регистрация
-                  </p>
+                  </Link>
                 </>
               )}
             </div>
@@ -82,7 +83,7 @@ class Header extends Component {
         )}
         {isDesktop && <NavPage />}
       </div>
-      {showExitModal && <ModalLogout closeModal={this.closeModal} />}
+      {showExitModal && <ModalLogout closeModal={this.closeModal} logOut={logOut} />}
       </>
     );
   }
@@ -90,7 +91,7 @@ class Header extends Component {
 
 const mapStateToProps = state => ({
   auth: state.session.authenticated,
-  nicname: state.session.user
+  nickname: state.session.user
 });
 
-export default connect(mapStateToProps)(Header);
+export default connect(mapStateToProps, {logOut})(Header);

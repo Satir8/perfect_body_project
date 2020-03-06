@@ -1,17 +1,19 @@
-import React, { Component } from "react";
-import { connect } from "react-redux";
-import * as authSelectors from '../../redux/auth/authSelectors'
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import * as authSelectors from '../../redux/auth/authSelectors';
 
 const WithAuthRedirect = BaseComponent => {
   class WithAuthRedirect extends Component {
     componentDidMount() {
-      this.props.authenticated && this.props.history.replace("/diary");
-      !this.props.authenticated && this.props.history.push("/login");
+      this.props.authenticated && this.props.history.replace('/diary');
+      !this.props.authenticated && this.props.history.push('/authorization');
     }
 
-    componentDidUpdate() {
-      this.props.authenticated && this.props.history.replace("/diary");
-      !this.props.authenticated && this.props.history.push("/login");
+    componentDidUpdate(prevProps, prevState) {
+      if (prevProps.authenticated !== this.props.authenticated) {
+        this.props.authenticated && this.props.history.replace('/diary');
+        !this.props.authenticated && this.props.history.push('/authorization');
+      }
     }
 
     render() {
@@ -19,12 +21,11 @@ const WithAuthRedirect = BaseComponent => {
     }
   }
 
-  const mapStateToProps = (state) => ({
-      authenticated: authSelectors.getIsAuthenticated(state)
-  })
-  
-  return connect(mapStateToProps)(WithAuthRedirect)
-  
+  const mapStateToProps = state => ({
+    authenticated: authSelectors.getIsAuthenticated(state)
+  });
+
+  return connect(mapStateToProps)(WithAuthRedirect);
 };
 
 export default WithAuthRedirect;
