@@ -6,6 +6,7 @@ import { connect } from 'react-redux';
 import ModalLogout from '../modalLogout/modalLogout';
 import { Link } from 'react-router-dom';
 import { logOut } from '../../redux/auth/authActions';
+import Nickname from './Nickname';
 
 const burgerIcon = styles.hrdBurger;
 const closeIcon = styles.hrdBurgerClose;
@@ -37,27 +38,7 @@ class Header extends Component {
         {isTablet && (
           <>
             <div className={styles.hdrAuthList}>
-              {auth ? (
-                <>
-                  <p
-                    className={[
-                      styles.hdrAuthListItem,
-                      styles.hdrAuthListItemBold
-                    ].join(' ')}
-                  >
-                    {nickname}
-                  </p>
-                  <p
-                    onClick={() => this.openExitModal()}
-                    className={[
-                      styles.hdrAuthListItem,
-                      styles.hdrAuthListItemLink
-                    ].join(' ')}
-                  >
-                    Выйти
-                  </p>
-                </>
-              ) : (
+              {auth ? <Nickname onOpenExitModal={this.openExitModal} /> : (
                 <>
                   <Link to="/authorization"
                     className={[
@@ -78,10 +59,10 @@ class Header extends Component {
                 </>
               )}
             </div>
-            <Burger burgerIcon={burgerIcon} closeIcon={closeIcon} />
+            {auth && <Burger burgerIcon={burgerIcon} closeIcon={closeIcon} />}
           </>
         )}
-        {isDesktop && <NavPage />}
+        {isDesktop && <NavPage isDesktop={isDesktop} openExitModal={this.openExitModal} />}
       </div>
       {showExitModal && <ModalLogout closeModal={this.closeModal} logOut={logOut} />}
       </>
