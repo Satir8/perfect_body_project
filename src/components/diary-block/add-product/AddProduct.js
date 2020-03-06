@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import AsyncSelect from 'react-select/async';
 import axios from 'axios';
+//import { CSSTransition } from "react-transition-group";
+//import * as opacityTransition from "../../transitions/opacityTransition.module.css";
 import styles from './AddProduct.module.css';
 
 const customStyles = {
@@ -15,7 +17,8 @@ class AddProduct extends Component {
     selectedValue: '',
     quantityValue: '',
     products: [],
-    product: {}
+    product: {},
+    isErrorVisible: false,
   };
 
   handleSelectChange = value => {
@@ -30,7 +33,7 @@ class AddProduct extends Component {
     this.setState({ quantityValue: e.target.value });
   };
 
-  handleSubmit = e => {
+  handleSubmit = async e => {
     e.preventDefault();
     const { selectedValue, quantityValue } = this.state;
     if (!selectedValue.label) {
@@ -48,29 +51,15 @@ class AddProduct extends Component {
         date: Date.now()
       };
 
-      axios
-        .post(`/user/eats/${selectedValue.value}`, product)
-        .then(response => {
-          if (response.data.status === 'success') {
-            //console.log(product);
-            this.setState(prev => {
-              return {
-                products: [...prev.products, product]
-              };
-            });
-          }
-        })
-        .catch(function(error) {
-          console.log(error);
-        });
-      this.props.updateProducts(this.state.products);
-      console.log(this.state.products);
+       await axios.post(`/user/eats/${selectedValue.value}`, product);
+       this.props.getUpdateProducts()}
+
       this.setState({
         selectedValue: '',
         quantityValue: ''
       });
     }
-  };
+
 
   getAsyncOptions = async query => {
     if (query) {
@@ -89,7 +78,7 @@ class AddProduct extends Component {
   loadOptions = () => this.getAsyncOptions(this.state.inputValue);
 
   render() {
-    const { selectedValue, quantityValue } = this.state;
+    const { selectedValue, quantityValue, isErrorVisible } = this.state;
 
     return (
       <form className={styles.form} onSubmit={e => this.handleSubmit(e)}>
@@ -122,6 +111,14 @@ class AddProduct extends Component {
             <button type="submit">&#43;</button>
           </div>
         </div>
+        {/* <CSSTransition
+            in={isErrorVisible}
+            timeout={2000}
+            classNames={opacityTransition}
+            unmountOnExit
+          >
+            <p className={styles.errorNotification}>{errorMsg}</p>
+          </CSSTransition> */}
       </form>
     );
   }

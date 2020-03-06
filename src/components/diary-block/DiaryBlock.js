@@ -31,7 +31,8 @@ class DiaryBlock extends Component {
   state = {
     selectedDay: moment().toISOString(),
     products: [],
-    caloriesSumm: null
+    caloriesSumm: null,
+
   };
 
   getFetchData = async () => {
@@ -55,30 +56,23 @@ class DiaryBlock extends Component {
     });
   }
 
-  updateProducts = value => {
-    this.setState({
-      products: value
-    });
+  updateProducts = () => {
+    this.setState((prev) => ({
+      check: !prev.check
+    }));
   };
 
-  async componentDidUpdate(prevProps, prevState) {
-    if (prevState.products.length !== this.state.products.length) {
-      console.log('state has changed.');
-      const data = await axios.get(`/user/eats/${this.state.selectedDay}`);
-      this.setState({
-        products: data.data.products.reverse()
-      });
-      this.getCaloriesSumm();
-      console.log(this.state.caloriesSumm)
-    }
-  }
+
+
+
+
 
   deleteProduct = id => {
     axios
       .delete(`/user/eats/${id}`)
       .then(response => {
         if (response.data.status === 'success') {
-          console.log('ok');
+
           this.setState(prev => ({
             products: prev.products.filter(elem => elem._id !== id)
           }));
@@ -100,8 +94,18 @@ class DiaryBlock extends Component {
     });
   };
 
+  getUpdateProducts = async()=> {
+    const data = await axios.get(`/user/eats/${this.state.selectedDay}`);
+    this.getCaloriesSumm();
+      this.setState({
+        products:  data.data.products.reverse()
+      });
+  }
+
   render() {
     const { selectedDay, products } = this.state;
+    //console.log('products', products)
+
     //console.log('cal', this.getCaloriesSumm());
     //this.getCaloriesSumm();
 
@@ -123,7 +127,7 @@ class DiaryBlock extends Component {
             localeUtils: MomentLocaleUtils
           }}
         />
-        <AddProduct updateProducts={this.updateProducts} />
+        <AddProduct getUpdateProducts={this.getUpdateProducts} updateProducts={this.updateProducts} />
         <DiaryList productsList={products} deleteProduct={this.deleteProduct} />
       </>
     );
