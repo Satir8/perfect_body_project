@@ -18,7 +18,6 @@ class App extends Component {
   componentDidMount() {
     this.checkScreenWidth();
     this.props.refreshUser();
-    !this.props.authenticated && this.props.history.push("/");
   }
 
   checkScreenWidth = () => {
@@ -53,7 +52,6 @@ class App extends Component {
           <Route exact path="/" component={HomePage} />
           <Route path="/nav" component={NavPage} />
           <Route path="/authorization" component={AuthorizationPage} />
-          {/* {!this.props.auth && <Redirect to="/authorization" />} */}
         </Switch>
       </>
     );

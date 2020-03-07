@@ -1,16 +1,33 @@
 .datePicker {
-	font-size: 17px;
-	border: none;
-	font-weight: 700;
-	line-height: 1.529;
-	width: 120px;
-	color: var(--text-color-black);
-	font-family: Verdana,sans-serif;
-	letter-spacing: .02em;
-	-webkit-transition: all .2s linear;
-	transition: all .2s linear;
-	cursor: pointer;
-	
+  font-size: 17px;
+  border: none;
+  font-weight: 700;
+  line-height: 1.529;
+  width: 120px;
+  color: var(--text-color-black);
+  font-family: Verdana, sans-serif;
+  letter-spacing: 0.02em;
+  -webkit-transition: all 0.2s linear;
+  transition: all 0.2s linear;
+  cursor: pointer;
 }
 
+.diaryContainer {
+  display: block;
+  text-align: center;
+  padding: 40px 14px 30px 20px;
+}
 
+@media (min-width: 768px) {
+  .diaryContainer {
+    padding: 50px 60px 40px 60px;
+  }
+
+  .addProductContainer {
+    padding-left: 14px;
+  }
+
+  .dayPickerInputContainer {
+    margin-bottom: 30px;
+  }
+}

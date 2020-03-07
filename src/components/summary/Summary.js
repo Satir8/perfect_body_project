@@ -1,7 +1,7 @@
-import React from 'react';
-import { connect } from 'react-redux';
-import css from './Summary.module.css';
-import moment from 'moment';
+import React from "react";
+import { connect } from "react-redux";
+import css from "./Summary.module.css";
+import moment from "moment";
 
 const data = {
   consumed: 722
@@ -19,7 +19,7 @@ const Summary = ({ calcForm, children }) => {
               Сводка за <span>{moment(data).format("MM.DD.Y")}</span>
             </p> */}
             <p className={css.title}>
-              Сводка за <span>{moment(calcForm.date).format('L')}</span>
+              Сводка за <span>{moment(calcForm.date).format("L")}</span>
             </p>
             <ul className={css.listProgress}>
               <li className={css.progressItem}>
@@ -36,8 +36,8 @@ const Summary = ({ calcForm, children }) => {
                   calcForm.calories - data.consumed >= 0 ? (
                     <span> {calcForm.calories - data.consumed} ккал</span>
                   ) : (
-                    <span style={{ color: '#e70a0a94' }}>
-                      {Math.abs((calcForm.calories - data.consumed).toFixed(0))}{' '}
+                    <span style={{ color: "#e70a0a94" }}>
+                      {Math.abs((calcForm.calories - data.consumed).toFixed(0))}{" "}
                       ккал
                     </span>
                   )
@@ -66,13 +66,11 @@ const Summary = ({ calcForm, children }) => {
             </ul>
           </div>
           <div className={css.blockProducts}>
-            <p className={css.title}>
-              Продукты, которые вам не рекомендовано употреблять:
-            </p>
+            <p className={css.title}>Не рекомендуемые продукты :</p>
             <p className={css.products}>
               {calcForm.dangerProducts
-                ? calcForm.dangerProducts[0].join(', ')
-                : ''}
+                ? calcForm.dangerProducts[0].join(", ")
+                : ""}
             </p>
           </div>
         </div>
