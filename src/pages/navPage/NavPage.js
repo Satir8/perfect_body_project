@@ -41,6 +41,8 @@ const NavPage = ({ auth }) => {
               {isDesktop && <Nickname />}
             </>
           ) : (
+            <>
+            <div></div>
             <div className={styles.loginContainer}>
               <NavLink
                 to='/authorization'
@@ -57,6 +59,7 @@ const NavPage = ({ auth }) => {
                 Регистрация
               </NavLink>
             </div>
+            </>
           )}
         </nav>
       )}

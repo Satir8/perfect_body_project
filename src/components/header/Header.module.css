@@ -32,7 +32,8 @@
   font-weight: 300;
   font-size: 21px;
   letter-spacing: 3px;
-  color: rgba(33, 33, 33, 0.9);
+  color: #212121;
+
   background-image: url("../../images/img/logo.png");
   background-size: 50px 48px;
   background-repeat: no-repeat;
