@@ -33,7 +33,7 @@ class Header extends Component {
       <>
       <div className={styles.hdrContainer}>
         <Link to='/' className={styles.hdrLogo}>
-          Slim<span>Mom</span>
+          Perfect<span>Body</span>
         </Link>
         {isMobile && <Burger burgerIcon={burgerIcon} closeIcon={closeIcon} />}
         {isTablet && (

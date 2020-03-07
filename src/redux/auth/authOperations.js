@@ -53,7 +53,7 @@ export const refreshUser = () => (dispatch, getState) => {
   }
 
   axios.get( "/user", options )
-      .then(response => {console.log(response); dispatch(refreshUserSuccess(response.data))})
+      .then(response => {dispatch(refreshUserSuccess(response.data))})
       .catch(error => {console.log(error); dispatch(authError(error))})
       .finally(()=>dispatch(refreshUserRequest()))
 };
