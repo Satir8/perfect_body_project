@@ -59,7 +59,6 @@ class CalcFormContainer extends Component {
   };
 
   render() {
-    console.log(this.props.location.pathname);
     return (
       <CalcForm
         onSubmit={this.handleSubmit}

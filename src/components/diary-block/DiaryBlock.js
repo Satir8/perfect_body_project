@@ -112,34 +112,36 @@ class DiaryBlock extends Component {
 
     return (
       <>
-        <div className={styles.diaryContainer}>
-          <div className={styles.dayPickerInputContainer}>
-            <DayPickerInput
-              inputProps={{ style: customStyles }}
-              value={moment(selectedDay).format("L")}
-              onDayChange={this.handleDayChange}
-              formatDate={formatDate}
-              parseDate={parseDate}
-              //format="L"
-              // placeholder={`${moment().format('L')}`}
-              dayPickerProps={{
-                locale: "ru",
-                localeUtils: MomentLocaleUtils
-              }}
+        <div className={styles.DashboardContainer}>
+          <div className={styles.diaryContainer}>
+            <div className={styles.dayPickerInputContainer}>
+              <DayPickerInput
+                inputProps={{ style: customStyles }}
+                value={moment(selectedDay).format("L")}
+                onDayChange={this.handleDayChange}
+                formatDate={formatDate}
+                parseDate={parseDate}
+                //format="L"
+                // placeholder={`${moment().format('L')}`}
+                dayPickerProps={{
+                  locale: "ru",
+                  localeUtils: MomentLocaleUtils
+                }}
+              />
+            </div>
+            <div className={styles.addProductContainer}>
+              <AddProduct
+                getUpdateProducts={this.getUpdateProducts}
+                // updateProducts={this.updateProducts}
+              />
+            </div>
+            <DiaryList
+              productsList={products}
+              deleteProduct={this.deleteProduct}
             />
           </div>
-          <div className={styles.addProductContainer}>
-            <AddProduct
-              getUpdateProducts={this.getUpdateProducts}
-              // updateProducts={this.updateProducts}
-            />
-          </div>
-          <DiaryList
-            productsList={products}
-            deleteProduct={this.deleteProduct}
-          />
+          <Summary />
         </div>
-        <Summary />
       </>
     );
   }
