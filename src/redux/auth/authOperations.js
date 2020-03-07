@@ -13,6 +13,14 @@ import {
 
 axios.defaults.baseURL = "https://slim-moms.goit.co.ua/api/v1";
 
+// const setAuthToken = token => {
+//   axios.defaults.headers.common['Autorization'] = `Bearer ${token}`; 
+// }
+
+// const cleanAuthToken = () => {
+//   axios.defaults.headers.common['Autorization'] = null; 
+// }
+
 export const login = credential => dispatch => {
   dispatch(loginRequest());
 

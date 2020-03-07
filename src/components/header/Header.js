@@ -9,7 +9,7 @@ const closeIcon = styles.hrdBurgerClose;
 const Header = ({ isMobile, isTablet, isDesktop }) => (
   <div className={styles.hdrContainer}>
     <p className={styles.hdrLogo}>
-      Slim<span>Mom</span>
+    Perfect<span>Body</span> 
     </p>
     {isMobile && <Burger burgerIcon={burgerIcon} closeIcon={closeIcon} />}
     {isTablet && (
