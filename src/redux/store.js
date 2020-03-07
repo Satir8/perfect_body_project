@@ -12,10 +12,15 @@ const sessionPersistConfig = {
   whitelist: ["token"]
 };
 
+const calcFormConfig = {
+  key: "calcForm",
+  storage
+};
+
 const middleWares = [thunk];
 
 const rootReducer = combineReducers({
-  calcForm: calcFormReducer,
+  calcForm: persistReducer(calcFormConfig, calcFormReducer),
   session: persistReducer(sessionPersistConfig, authReducer)
 });
 

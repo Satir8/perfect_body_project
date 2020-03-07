@@ -2,7 +2,8 @@ import React from "react";
 import styles from "./CalcForm.module.css";
 import Summary from "../summary/Summary";
 
-const CalcForm = ({ onSubmit, onChange, location }) => {
+const CalcForm = ({ onSubmit, onChange, location, state }) => {
+  const { height, age, currentWeight, futureWeight, groupBlood } = state;
   return (
     <>
       {location === "/calculator" ? (
@@ -21,6 +22,7 @@ const CalcForm = ({ onSubmit, onChange, location }) => {
                       className={styles.inputItem}
                       placeholder="Рост *"
                       name="height"
+                      value={height}
                       onChange={onChange}
                     />
                     <input
@@ -29,6 +31,7 @@ const CalcForm = ({ onSubmit, onChange, location }) => {
                       className={styles.inputItem}
                       placeholder="Возраст *"
                       name="age"
+                      value={age}
                       onChange={onChange}
                     />
                     <input
@@ -37,6 +40,7 @@ const CalcForm = ({ onSubmit, onChange, location }) => {
                       className={styles.inputItem}
                       placeholder="Текущий вес *"
                       name="currentWeight"
+                      value={currentWeight}
                       onChange={onChange}
                     />
                   </div>
@@ -47,11 +51,13 @@ const CalcForm = ({ onSubmit, onChange, location }) => {
                       className={styles.inputItem}
                       placeholder="Желаемый вес *"
                       name="futureWeight"
+                      value={futureWeight}
                       onChange={onChange}
                     />
                     <select
                       required
                       name="groupBlood"
+                      value={groupBlood}
                       className={styles.selectInput}
                       onChange={onChange}
                     >

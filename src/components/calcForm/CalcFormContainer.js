@@ -5,7 +5,8 @@ import CalcForm from "./CalcForm";
 import dangerProducts from "./dangerProducts";
 import {
   getTotalCalories,
-  getDangerProducts
+  getDangerProducts,
+  getInfoForInputs
 } from "../../redux/calcForm/calcFormActions";
 
 class CalcFormContainer extends Component {
@@ -16,6 +17,19 @@ class CalcFormContainer extends Component {
     futureWeight: "",
     groupBlood: ""
   };
+
+  componentDidMount() {
+    const { infoForInputs } = this.props;
+    const {
+      height,
+      age,
+      currentWeight,
+      futureWeight,
+      groupBlood
+    } = infoForInputs;
+
+    this.setState({ height, age, currentWeight, futureWeight, groupBlood });
+  }
 
   handleChange = e => {
     const name = e.target.name;
@@ -37,6 +51,8 @@ class CalcFormContainer extends Component {
 
     this.props.getTotalCalories(totalCalories);
     this.props.getDangerProducts(currentDangerProducts);
+
+    this.props.getInfoForInputs({ ...this.state });
 
     if (this.props.location.pathname === "/") {
       this.props.onModalOpen();
@@ -61,6 +77,7 @@ class CalcFormContainer extends Component {
   render() {
     return (
       <CalcForm
+        state={this.state}
         onSubmit={this.handleSubmit}
         onChange={this.handleChange}
         location={this.props.location.pathname}
@@ -71,12 +88,14 @@ class CalcFormContainer extends Component {
 
 const mapStateToProps = state => ({
   calories: state.calcForm.calories,
-  products: state.calcForm.dangerProducts
+  products: state.calcForm.dangerProducts,
+  infoForInputs: state.calcForm.infoForInputs
 });
 
 export default withRouter(
   connect(mapStateToProps, {
     getTotalCalories,
-    getDangerProducts
+    getDangerProducts,
+    getInfoForInputs
   })(CalcFormContainer)
 );

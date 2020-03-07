@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import {
-  getTotalCalories,
+  getTotalUsedCalories,
   getDate
 } from "../../redux/calcForm/calcFormActions";
 import AddProduct from "./add-product/AddProduct";
@@ -96,7 +96,7 @@ class DiaryBlock extends Component {
     this.setState({
       caloriesSumm: Math.round(calSum)
     });
-    this.props.getTotalCalories(this.state.caloriesSumm);
+    this.props.getTotalUsedCalories(this.state.caloriesSumm);
   };
 
   getUpdateProducts = async () => {
@@ -148,7 +148,7 @@ class DiaryBlock extends Component {
 }
 
 const mapDispatchToProps = {
-  getTotalCalories,
+  getTotalUsedCalories,
   getDate
 };
 
