@@ -1,14 +1,15 @@
 import React, { Component } from 'react';
 import AsyncSelect from 'react-select/async';
 import axios from 'axios';
+//import { CSSTransition } from "react-transition-group";
+//import * as opacityTransition from "../../transitions/opacityTransition.module.css";
 import styles from './AddProduct.module.css';
 
 const customStyles = {
-  
-  container: (provided) => ({ ...provided, borderBottom: '1px solid #e5e5e5' }),
-  indicatorsContainer: (provided) => ({ ...provided, display: 'none' }),
-}
-
+  container: provided => ({ ...provided, borderBottom: '1px solid #e5e5e5' }),
+  indicatorsContainer: provided => ({ ...provided, display: 'none' }),
+  control: provided => ({ ...provided, border: 0, boxShadow: 'none' })
+};
 
 class AddProduct extends Component {
   state = {
@@ -16,7 +17,8 @@ class AddProduct extends Component {
     selectedValue: '',
     quantityValue: '',
     products: [],
-    product: {}
+    product: {},
+    isErrorVisible: false,
   };
 
   handleSelectChange = value => {
@@ -31,41 +33,33 @@ class AddProduct extends Component {
     this.setState({ quantityValue: e.target.value });
   };
 
-  handleSubmit = e => {
+  handleSubmit = async e => {
     e.preventDefault();
     const { selectedValue, quantityValue } = this.state;
-    this.setState({
-      product: { name: selectedValue.label, quantity: quantityValue }
-    });
-
-    const product = {
-      ...selectedValue,
-      weight: quantityValue,
-      date: Date.now()
-    };
-
-    axios
-      .post(`/user/eats/${selectedValue.value}`, product)
-      .then(response => {
-        if (response.data.status === 'success') {
-          //console.log(product);
-          this.setState(prev => {
-            return {
-              products: [...prev.products, product]
-            };
-          });
-        }
-      })
-      .catch(function(error) {
-        console.log(error);
+    if (!selectedValue.label) {
+      console.log('Выберите продукт');
+    } else if(!quantityValue) {
+      console.log('Выберите граммы');
+    } else {
+      this.setState({
+        product: { name: selectedValue.label, quantity: quantityValue }
       });
-    this.props.updateProducts(this.state.products);
-    console.log(this.state.products);
-    this.setState({
-      selectedValue: '',
-      quantityValue: '',
-    });
-  };
+
+      const product = {
+        ...selectedValue,
+        weight: quantityValue,
+        date: Date.now()
+      };
+
+       await axios.post(`/user/eats/${selectedValue.value}`, product);
+       this.props.getUpdateProducts()}
+
+      this.setState({
+        selectedValue: '',
+        quantityValue: ''
+      });
+    }
+
 
   getAsyncOptions = async query => {
     if (query) {
@@ -84,16 +78,10 @@ class AddProduct extends Component {
   loadOptions = () => this.getAsyncOptions(this.state.inputValue);
 
   render() {
-    const { selectedValue, quantityValue } = this.state;
-
-    // var d = new Date(1583150622043);
-    // var n = d.toISOString();
-    // console.log(n);
-
-    //console.log('add-comp',this.state.products);
+    const { selectedValue, quantityValue, isErrorVisible } = this.state;
 
     return (
-      <form className={styles.form} onSubmit={(e)=>this.handleSubmit(e)}>
+      <form className={styles.form} onSubmit={e => this.handleSubmit(e)}>
         <div className={styles.search}>
           <div className={styles.searchSelect}>
             <AsyncSelect
@@ -105,6 +93,8 @@ class AddProduct extends Component {
               onChange={this.handleSelectChange}
               value={selectedValue}
               className={styles.asyncSelect}
+              placeholder="Введите название продукта"
+              noOptionsMessage={() => 'Продукт не найден' || null}
             />
           </div>
           <div className={styles.searchInput}>
@@ -113,12 +103,22 @@ class AddProduct extends Component {
               name="quantityValue"
               onChange={this.handleChange}
               value={quantityValue}
+              autoComplete="off"
+              placeholder="граммы"
             />
           </div>
           <div className={styles.searchBtn}>
             <button type="submit">&#43;</button>
           </div>
         </div>
+        {/* <CSSTransition
+            in={isErrorVisible}
+            timeout={2000}
+            classNames={opacityTransition}
+            unmountOnExit
+          >
+            <p className={styles.errorNotification}>{errorMsg}</p>
+          </CSSTransition> */}
       </form>
     );
   }

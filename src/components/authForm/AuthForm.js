@@ -3,7 +3,8 @@ import { connect } from "react-redux";
 import { CSSTransition } from "react-transition-group";
 import * as authOperations from "../../redux/auth/authOperations";
 import * as authSelectors from "../../redux/auth/authSelectors";
-import * as opacityTransition from "../../transitions/opacityTransition.module.css";
+import * as opacityWithShakeTransition from "../../transitions/opacityWithShakeTransition.module.css";
+import { Loader } from "../loader/Loader";
 import css from "./AuthForm.module.css";
 
 // default authorization action
@@ -92,11 +93,24 @@ class AuthForm extends Component {
   state = { ...INITIAL_STATE };
 
   componentDidUpdate(_, prevState) {
-    if (prevState.isErrorVisible === true) {
-      // if (prevState.isErrorVisible === false) return;
-      // else
-      setTimeout(() => this.setState({ isErrorVisible: false }), 7000);
+    const { isErrorVisible, isSetTimeOut } = this.state
+    if (prevState.isErrorVisible === isErrorVisible) {
+
+      console.log(isErrorVisible)
+      if(isSetTimeOut === true) return
+
+      isErrorVisible === true && setTimeout(() => this.setState({ isErrorVisible: false }), 3000);
+
+      this.setState({isSetTimeOut: true});
+      
+      // console.log(this.state)
+      // console.log(prevState)
     }
+
+    // if (prevState.isErrorVisible === true) {
+    //   setTimeout(() => this.setState({ isErrorVisible: false, isSetTimeOut: true }), 7000);
+    // }
+    // console.log(this.state.isErrorVisible)
   }
 
   handleChange = e => {
@@ -143,11 +157,17 @@ class AuthForm extends Component {
   render() {
     const { action, isErrorVisible, errorMsg } = this.state;
     const { loading } = this.props;
+
     const changeLogin = activeActionLogin(action);
     const changeSignup = activeActionSignup(action);
+
     return (
       <>
-        <form className={css.form} onSubmit={this.handleSubmit}>
+        <form
+          className={css.form}
+          onSubmit={this.handleSubmit}
+          autoComplete="off"
+        >
           <button
             style={changeLogin}
             className={css.entryBtn}
@@ -182,7 +202,7 @@ class AuthForm extends Component {
           <CSSTransition
             in={isErrorVisible}
             timeout={700}
-            classNames={opacityTransition}
+            classNames={opacityWithShakeTransition}
             unmountOnExit
           >
             <p className={css.errorNotification}>{errorMsg}</p>
@@ -192,9 +212,7 @@ class AuthForm extends Component {
             {action}
           </button>
         </form>
-        {loading && (
-          <h2 style={{ color: "red", padding: "20px 20px" }}>Loading...</h2>
-        )}
+        {loading && <Loader />}
       </>
     );
   }
