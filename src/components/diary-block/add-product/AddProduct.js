@@ -18,7 +18,7 @@ class AddProduct extends Component {
     quantityValue: '',
     products: [],
     product: {},
-    isErrorVisible: false,
+    isErrorVisible: false
   };
 
   handleSelectChange = value => {
@@ -38,7 +38,7 @@ class AddProduct extends Component {
     const { selectedValue, quantityValue } = this.state;
     if (!selectedValue.label) {
       console.log('Выберите продукт');
-    } else if(!quantityValue) {
+    } else if (!quantityValue) {
       console.log('Выберите граммы');
     } else {
       this.setState({
@@ -51,15 +51,16 @@ class AddProduct extends Component {
         date: Date.now()
       };
 
-       await axios.post(`/user/eats/${selectedValue.value}`, product);
-       this.props.getUpdateProducts()}
+      await axios.post(`/user/eats/${selectedValue.value}`, product);
+      this.props.getUpdateProducts();
 
-      this.setState({
-        selectedValue: '',
-        quantityValue: ''
-      });
     }
 
+    this.setState({
+      selectedValue: '',
+      quantityValue: ''
+    });
+  };
 
   getAsyncOptions = async query => {
     if (query) {
