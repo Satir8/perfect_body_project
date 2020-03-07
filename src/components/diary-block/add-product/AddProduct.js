@@ -78,7 +78,7 @@ class AddProduct extends Component {
   loadOptions = () => this.getAsyncOptions(this.state.inputValue);
 
   render() {
-    const { selectedValue, quantityValue, isErrorVisible } = this.state;
+    const { selectedValue, quantityValue } = this.state;
 
     return (
       <form className={styles.form} onSubmit={e => this.handleSubmit(e)}>

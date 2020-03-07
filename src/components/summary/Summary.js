@@ -8,8 +8,6 @@ const data = {
 };
 
 const Summary = ({ calcForm, children }) => {
-  console.log(calcForm);
-
   return (
     <>
       <div className={css.sectionSummary}>

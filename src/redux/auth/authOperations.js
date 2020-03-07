@@ -58,4 +58,4 @@ export const refreshUser = () => (dispatch, getState) => {
       .finally(()=>dispatch(refreshUserRequest()))
 };
 
-export const logout = () => dispatch => dispatch(logOut()); 
+export const logout = () => dispatch => dispatch(logOut());
