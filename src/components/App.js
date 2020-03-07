@@ -1,5 +1,5 @@
 import React, { Component, createContext } from "react";
-import { Switch, Route, Redirect } from "react-router-dom";
+import { Switch, Route } from "react-router-dom";
 import { connect } from "react-redux";
 import NavPage from "../pages/navPage/NavPage";
 import HomePage from "../pages/homePage/HomePage";
@@ -20,8 +20,6 @@ class App extends Component {
 
   componentDidMount() {
     this.checkScreenWidth();
-    this.props.refreshUser();
-    !this.props.authenticated && this.props.history.push("/");
   }
 
   checkScreenWidth = () => {
@@ -64,7 +62,6 @@ class App extends Component {
           <Route exact path="/" component={HomePage} />
           <Route path="/nav" render={props => <NavPage {...props} isMobile={isMobile} isDesktop={isDesktop} />} />
           <Route path="/authorization" component={AuthorizationPage} />
-          {!this.props.auth && <Redirect to="/authorization" />}
         </Switch>
       </appContext.Provider>
     );

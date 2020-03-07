@@ -7,7 +7,6 @@ import styles from "./DashboardPage.module.css";
 
 class DashboardContainer extends Component {
   render() {
-    const { isMobile } = this.props;
     return (
       <>
         <div className={styles.DashboardContainer}>
@@ -17,7 +16,6 @@ class DashboardContainer extends Component {
             <Route
               path="/achievements"
               component={Achievements}
-              isMobile={isMobile}
             />
 
             {/* <Route

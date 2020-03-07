@@ -7,9 +7,8 @@ import { logOut } from '../../redux/auth/authActions';
 
 const modalLogout = ({ logOut }) => (
   <appContext.Consumer>
-    {
-      ({ closeModal }) => (
-        <div className={styles.centerCase}>
+    {({ closeModal }) => (
+      <div className={styles.centerCase}>
         <div className={styles.moduleCase}>
           <img
             alt='close'
@@ -20,15 +19,23 @@ const modalLogout = ({ logOut }) => (
           <p className={styles.text}>Ты дейсвтительно хочешь выйти?</p>
           <hr className={styles.line}></hr>
           <div className={styles.btnCase}>
-            <Link to='/authorization' onClick={() => {logOut(); closeModal();}} className={styles.btnYes}>Да</Link>
+            <Link
+              to='/authorization'
+              onClick={() => {
+                logOut();
+                closeModal();
+              }}
+              className={styles.btnYes}
+            >
+              Да
+            </Link>
             <button onClick={() => closeModal()} className={styles.btnNo}>
               Нет, я хочу остаться
             </button>
           </div>
         </div>
       </div>
-      )
-    }
+    )}
   </appContext.Consumer>
 );
 
