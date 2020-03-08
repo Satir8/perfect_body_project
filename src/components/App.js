@@ -1,23 +1,29 @@
-import React, { Component } from "react";
+import React, { Component, createContext } from "react";
 import { Switch, Route } from "react-router-dom";
-import { connect } from 'react-redux';
+import { connect } from "react-redux";
 import NavPage from "../pages/navPage/NavPage";
 import HomePage from "../pages/homePage/HomePage";
-import DashboardPage from "../pages/dashboardPage/DashboardPage";
+// import DashboardPage from "../pages/dashboardPage/DashboardPage";
 import AuthorizationPage from "../pages/authorization/Authorization";
 import Header from "./header/Header";
-import * as authOperations from '../redux/auth/authOperations'
+import * as authOperations from "../redux/auth/authOperations";
+import Diary from "./diary-block/DiaryBlock";
+import CalcForm from "./calcForm/CalcFormContainer";
+import Achievements from "./achievements/Achievements";
+
+export const appContext = createContext();
 
 class App extends Component {
   state = {
     isMobile: false,
     isTablet: false,
-    isDesktop: false
+    isDesktop: false,
+    showExitModal: false
   };
 
   componentDidMount() {
     this.checkScreenWidth();
-    this.props.refreshUser()
+    this.props.refreshUser();
   }
 
   checkScreenWidth = () => {
@@ -42,25 +48,54 @@ class App extends Component {
     }
   };
 
+  openExitModal = () => {
+    this.setState({ showExitModal: true });
+  };
+
+  closeModal = () => {
+    this.setState({ showExitModal: false });
+  };
+
   render() {
-    const { isMobile, isTablet, isDesktop } = this.state;
+    const { isMobile, isTablet, isDesktop, showExitModal } = this.state;
     return (
-      <>
-        <Header isMobile={isMobile} isTablet={isTablet} isDesktop={isDesktop} />
-        <DashboardPage isMobile={isMobile} />
+      <appContext.Provider
+        value={{
+          isMobile,
+          isTablet,
+          isDesktop,
+          showExitModal,
+          openExitModal: this.openExitModal,
+          closeModal: this.closeModal
+        }}
+      >
+        <Header />
         <Switch>
           <Route exact path="/" component={HomePage} />
-          <Route path="/nav" component={NavPage} />
+          <Route
+            path="/nav"
+            render={props => (
+              <NavPage {...props} isMobile={isMobile} isDesktop={isDesktop} />
+            )}
+          />
           <Route path="/authorization" component={AuthorizationPage} />
+          {/*  */}
+          <Route path="/diary" component={Diary} />
+          <Route path="/calculator" component={CalcForm} />
+          <Route path="/achievements" component={Achievements} />
+          {/*  */}
         </Switch>
-      </>
+      </appContext.Provider>
     );
   }
 }
 
+const mapStateToProps = state => ({
+  auth: state.session.authenticated
+});
+
 const mapDispatchToProps = {
-  refreshUser: authOperations.refreshUser 
-}
+  refreshUser: authOperations.refreshUser
+};
 
-export default connect(null, mapDispatchToProps)(App);
-
+export default connect(mapStateToProps, mapDispatchToProps)(App);

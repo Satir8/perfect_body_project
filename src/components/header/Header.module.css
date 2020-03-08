@@ -32,6 +32,7 @@
   font-weight: 300;
   font-size: 21px;
   letter-spacing: 3px;
+  color: #212121;
 
   background-image: url("../../images/img/logo.png");
   background-size: 50px 48px;
@@ -42,13 +43,6 @@
 
 .hdrLogo span {
   color: #fc842c;
-}
-
-@media (min-width: 768px) {
-  .hdrContainer {
-    justify-content: space-between;
-    padding: 0 40px 0 70px;
-  }
 }
 
 .hdrAuthList {
@@ -66,9 +60,26 @@
 .hdrAuthListItem:nth-child(1) {
   border-right: 2px solid #999daa;
 }
+.hdrAuthListItemLink {
+  cursor: pointer;
+}
+
+@media (min-width: 768px) {
+  .hdrContainer {
+    justify-content: space-between;
+    padding: 0 40px 0 70px;
+  }
+  .hdrAuthListItemBold {
+    color: #212121;
+  }
+}
 
 @media (min-width: 1200px) {
   .hdrContainer {
     justify-content: flex-start;
   }
+}
+
+.nickNameContainer {
+  display: flex;
 }

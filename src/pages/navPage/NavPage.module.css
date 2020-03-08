@@ -2,6 +2,9 @@
   background-color: #284060;
   text-align: center;
   padding-top: 70px;
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
 }
 
 .navListItem {
@@ -20,11 +23,23 @@
   .navigation {
     height: 100vh;
   }
+  .navList {
+    margin: 0 auto;
+  }
+  .loginContainer {
+    margin: 0 auto;
+  }
 }
 
 @media (max-width: 1199px) {
   .navigation {
     height: 100vh;
+  }
+  .navList {
+    margin: 0 auto;
+  }
+  .loginContainer {
+    margin: 0 auto;
   }
 }
 
@@ -53,5 +68,8 @@
   }
   .navListItemActive {
     color: #212121;
+  }
+  .loginContainer {
+    display: flex;
   }
 }
