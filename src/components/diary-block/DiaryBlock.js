@@ -13,6 +13,7 @@ import 'moment/locale/ru';
 //import styles from './DiaryBlock.module.css'
 import 'react-day-picker/lib/style.css';
 //import {classNames} from '../../../images/icons/calendar/baseline-date_range-black-24/2x/baseline_date_range_black_24dp.png'
+import WithAuthRedirect from '../hoc/WithAuthRedirect'
 
 axios.defaults.baseURL = 'https://slim-moms.goit.co.ua/api/v1';
 axios.defaults.headers.common['Authorization'] =
@@ -98,6 +99,7 @@ class DiaryBlock extends Component {
 
     //console.log(selectedDay);
     //console.log(moment('2019-03-20').toISOString());
+    console.log(this.props)
     return (
       <>
         <DayPickerInput
@@ -121,4 +123,4 @@ class DiaryBlock extends Component {
   }
 }
 
-export default DiaryBlock;
+export default WithAuthRedirect(DiaryBlock);

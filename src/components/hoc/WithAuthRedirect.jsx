@@ -5,17 +5,27 @@ import * as authSelectors from "../../redux/auth/authSelectors";
 const WithAuthRedirect = BaseComponent => {
   class WithAuthRedirect extends Component {
     componentDidMount() {
-      this.props.authenticated && this.props.history.replace("/diary");
+      const { location, history, authenticated } = this.props
+      location.pathname === "/diary" && !authenticated && history.replace("/authorization");
+      location.pathname === "/authorization" && authenticated && history.replace("/diary");
     }
 
     componentDidUpdate(prevProps) {
-      prevProps.authenticated !== this.props.authenticated && this.props.authenticated && this.props.history.replace("/diary");
-    }
+
+      if(prevProps.authenticated !== this.props.authenticated) {
+
+        const { location, history, authenticated } = this.props;
+        location.pathname === "/diary" && !authenticated && history.replace("/authorization");
+        location.pathname === "/authorization" && authenticated && history.replace("/diary");
+
+      };
+
+    };
 
     render() {
       return <BaseComponent {...this.props} />;
     }
-  }
+  };
 
   const mapStateToProps = state => ({
     authenticated: authSelectors.getIsAuthenticated(state)

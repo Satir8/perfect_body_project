@@ -4,15 +4,14 @@
 }
 
 .pageWrapper {
-    padding: 36px 25px;
+    padding: 36px 24px;
     min-height: 90vh;
 }
 
 @media(min-width: 768px) {
     .pageWrapper {
-        /* max-width: 638px; */
-        max-width: 85.6%;
-        padding: 70px 0;
+        max-width: 76.6%;
+        padding: 142px 0;
         margin: 0 auto;
     }
 
@@ -22,6 +21,5 @@
     .pageWrapper {
         max-width: 82%;
         padding: 20vh 0 0;
-        margin: 0 auto;
     }
 }
