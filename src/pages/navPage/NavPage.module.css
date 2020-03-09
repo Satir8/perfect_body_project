@@ -21,7 +21,8 @@
 
 @media (max-width: 375px) {
   .navigation {
-    height: 100vh;
+    overflow: hidden;
+    height: calc(100vh - 80px);
   }
   .navList {
     margin: 0 auto;
