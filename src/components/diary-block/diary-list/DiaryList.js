@@ -1,7 +1,5 @@
 import React from 'react';
 import { Table, Tbody, Tr, Td } from 'react-super-responsive-table';
-//import 'react-super-responsive-table/dist/SuperResponsiveTableStyle.css'
-
 import styles from './DiaryList.module.css';
 
 // const productsList1 = [
@@ -40,9 +38,6 @@ const DiaryList = ({ productsList, deleteProduct }) => {
         ))}
         </Tbody>
       </Table>
-      <div className={styles.searchBtn}>
-        <button type="submit">&#43;</button>
-      </div>
     </>
   );
 };

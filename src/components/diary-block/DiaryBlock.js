@@ -5,6 +5,7 @@ import {
   getDate
 } from "../../redux/calcForm/calcFormActions";
 import AddProduct from "./add-product/AddProduct";
+import AddProductModal from "./add-product-modal/addProductModal";
 import DiaryList from "./diary-list/DiaryList";
 import Summary from "../summary/Summary";
 import axios from "axios";
@@ -19,6 +20,7 @@ import "moment/locale/ru";
 import styles from "./DiaryBlock.module.css";
 import "react-day-picker/lib/style.css";
 import calendarIcon from "./baseline_date_range_black_24dp.png";
+import { appContext } from "../App";
 import WithAuthRedirect from "../hoc/WithAuthRedirect";
 
 axios.defaults.baseURL = "https://slim-moms.goit.co.ua/api/v1";
@@ -40,7 +42,9 @@ class DiaryBlock extends Component {
   state = {
     selectedDay: moment().toISOString(),
     products: [],
-    caloriesSumm: null
+    caloriesSumm: null,
+    modal: false,
+    isOpen: true
   };
 
   getFetchData = async () => {
@@ -71,6 +75,9 @@ class DiaryBlock extends Component {
       products: data.data.products.reverse()
     });
     this.getCaloriesSumm();
+    const date = moment().toISOString();
+    console.log("date", date);
+    this.props.getDate(date);
   }
 
   deleteProduct = id => {
@@ -113,43 +120,86 @@ class DiaryBlock extends Component {
     this.getCaloriesSumm();
   };
 
-  render() {
-    const { selectedDay, products } = this.state;
+  showModal = () => {
+    this.setState(prevState => ({
+      modal: !prevState.modal
+    }));
+  };
 
+  render() {
+    const { selectedDay, products, modal } = this.state;
+    // console.log(this.state.selectedDay)
     return (
-      <>
-        <div className={styles.DashboardContainer}>
-          <div className={styles.diaryContainer}>
-            <div className={styles.dayPickerInputContainer}>
-              <DayPickerInput
-                inputProps={{ style: customStyles }}
-                value={moment(selectedDay).format("L")}
-                onDayChange={this.handleDayChange}
-                formatDate={formatDate}
-                parseDate={parseDate}
-                //format="L"
-                // placeholder={`${moment().format('L')}`}
-                dayPickerProps={{
-                  locale: "ru",
-                  localeUtils: MomentLocaleUtils
-                }}
-              />
+      <appContext.Consumer>
+        {({ isMobile }) => (
+          <>
+            <div className={styles.DashboardContainer}>
+              <div className={styles.diaryContainer}>
+                {!modal && (
+                  <div className={styles.dayPickerInputContainer}>
+                    <DayPickerInput
+                      className={styles.dayPickerInput}
+                      inputProps={{ style: customStyles }}
+                      value={moment(selectedDay).format("L")}
+                      onDayChange={this.handleDayChange}
+                      formatDate={formatDate}
+                      parseDate={parseDate}
+                      dayPickerProps={{
+                        locale: "ru",
+                        localeUtils: MomentLocaleUtils
+                      }}
+                    />
+                  </div>
+                )}
+                {!isMobile && (
+                  <div className={styles.addProductContainer}>
+                    <AddProduct
+                      getUpdateProducts={this.getUpdateProducts}
+                      token={this.props.token}
+                      selectedDay={selectedDay}
+                      isMobile={isMobile}
+                      showModal={this.showModal}
+                    />
+                  </div>
+                )}
+                {!modal && (
+                  <DiaryList
+                    productsList={products}
+                    deleteProduct={this.deleteProduct}
+                  />
+                )}
+              </div>
+              {isMobile && (
+                <>
+                  {modal && (
+                    <AddProductModal showModal={this.showModal}>
+                      <AddProduct
+                        stylestyle={{ backround: "red" }}
+                        // {...styles}
+                        text={isMobile}
+                        {...this.props}
+                        getUpdateProducts={this.getUpdateProducts}
+                        token={this.props.token}
+                        selectedDay={selectedDay}
+                        isMobile={isMobile}
+                        showModal={this.showModal}
+                      />
+                    </AddProductModal>
+                  )}
+                  {!modal && (
+                    <div className={styles.searchBtn}>
+                      <button type="button" onClick={this.showModal}>
+                        &#43;
+                      </button>
+                    </div>
+                  )}
+                </>
+              )}
+              <Summary />
             </div>
-            <div className={styles.addProductContainer}>
-              <AddProduct
-                getUpdateProducts={this.getUpdateProducts}
-                token={this.props.token}
-                selectedDay={selectedDay}
-              />
-            </div>
-            <DiaryList
-              productsList={products}
-              deleteProduct={this.deleteProduct}
-            />
-          </div>
-          <Summary />
-        </div>
-      </>
+          </>
+        )}
+      </appContext.Consumer>
     );
   }
 }
