@@ -1,24 +1,53 @@
-import React, { Component } from "react";
-import { Switch, Route, Redirect } from "react-router-dom";
+import React, { lazy, Suspense, Component, createContext } from "react";
+import { Switch, Route } from "react-router-dom";
 import { connect } from "react-redux";
 import NavPage from "../pages/navPage/NavPage";
-import HomePage from "../pages/homePage/HomePage";
-import DashboardPage from "../pages/dashboardPage/DashboardPage";
-import AuthorizationPage from "../pages/authorization/Authorization";
 import Header from "./header/Header";
 import * as authOperations from "../redux/auth/authOperations";
+import { Loader } from "./loader/Loader";
 
+export const appContext = createContext();
+
+// lazy import
+
+const HomePage = lazy(() =>
+  import("../pages/homePage/HomePage" /* webpackChunkName: "home-page" */)
+);
+
+const AuthPage = lazy(() =>
+  import(
+    "../pages/authorization/Authorization" /* webpackChunkName: "auth-page" */
+  )
+);
+
+const Diary = lazy(() =>
+  import("./diary-block/DiaryBlock" /* webpackChunkName: "diary-block" */)
+);
+
+const CalcForm = lazy(() =>
+  import(
+    "./calcForm/CalcFormContainer" /* webpackChunkName: "calcForm-block" */
+  )
+);
+
+const Achievements = lazy(() =>
+  import(
+    "./achievements/Achievements" /* webpackChunkName: "achievements-block" */
+  )
+);
+
+// component
 class App extends Component {
   state = {
     isMobile: false,
     isTablet: false,
-    isDesktop: false
+    isDesktop: false,
+    showExitModal: false
   };
 
   componentDidMount() {
     this.checkScreenWidth();
     this.props.refreshUser();
-    !this.props.authenticated && this.props.history.push("/");
   }
 
   checkScreenWidth = () => {
@@ -43,19 +72,46 @@ class App extends Component {
     }
   };
 
+  openExitModal = () => {
+    this.setState({ showExitModal: true });
+  };
+
+  closeModal = () => {
+    this.setState({ showExitModal: false });
+  };
+
   render() {
-    const { isMobile, isTablet, isDesktop } = this.state;
+    const { isMobile, isTablet, isDesktop, showExitModal } = this.state;
     return (
-      <>
-        <Header isMobile={isMobile} isTablet={isTablet} isDesktop={isDesktop} />
-        <DashboardPage isMobile={isMobile} />
-        <Switch>
-          <Route exact path="/" component={HomePage} />
-          <Route path="/nav" component={NavPage} />
-          <Route path="/authorization" component={AuthorizationPage} />
-          {/* {!this.props.auth && <Redirect to="/authorization" />} */}
-        </Switch>
-      </>
+      <appContext.Provider
+        value={{
+          isMobile,
+          isTablet,
+          isDesktop,
+          showExitModal,
+          openExitModal: this.openExitModal,
+          closeModal: this.closeModal
+        }}
+      >
+        <Header />
+        <Suspense fallback={<Loader />}>
+          <Switch>
+            <Route exact path="/" component={HomePage} />
+            <Route
+              path="/nav"
+              render={props => (
+                <NavPage {...props} isMobile={isMobile} isDesktop={isDesktop} />
+              )}
+            />
+            <Route path="/authorization" component={AuthPage} />
+            {/*  */}
+            <Route path="/diary" component={Diary} />
+            <Route path="/calculator" component={CalcForm} />
+            <Route path="/achievements" component={Achievements} />
+            {/*  */}
+          </Switch>
+        </Suspense>
+      </appContext.Provider>
     );
   }
 }

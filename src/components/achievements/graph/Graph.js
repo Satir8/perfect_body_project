@@ -3,6 +3,7 @@ import { Line } from 'react-chartjs-2';
 import axios from 'axios';
 import styles from './Graph.module.css';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 
 const options = {
   maintainAspectRatio: false,
@@ -23,8 +24,6 @@ const options = {
     ]
   }
 };
-
-const BASE_URL = `https://slim-moms.goit.co.ua/api/v1/user/eats/achievement/${Date.now()}`;
 
 class Graph extends Component {
   state = {
@@ -55,11 +54,8 @@ class Graph extends Component {
     }
   };
   async componentDidMount() {
-    const headers = {
-      Authorization:
-        'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI1ZTU5M2E4YmY0ZTlhNjQxNjE3MjkwNjgiLCJjcmVhdGVkRGF0ZSI6MTU4MzQwMzA2NTI1MSwiZXhwIjoxNTg1OTk1MDY1fQ.dkjUYy8a2EKnOilAjvfDcUXGw6ljrp--xOKIyyrwc-4'
-    };
-    const data = await axios.get(BASE_URL, { headers });
+    const headers = { Authorization: this.props.token };
+    const data = await axios.get(`https://slim-moms.goit.co.ua/api/v1/user/eats/achievement/${Date.now()}`, { headers });
     const day = data.data.graphData.labels;
 
     this.setState(prev => ({
@@ -143,4 +139,8 @@ Graph.propTypes = {
   isMobile: PropTypes.bool
 };
 
-export default Graph;
+const mapStateToProps = (state) => ({
+  token: state.session.token
+});
+
+export default connect(mapStateToProps)(Graph);

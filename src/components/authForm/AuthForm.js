@@ -1,10 +1,11 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { CSSTransition } from "react-transition-group";
+import { Loader } from "../loader/Loader";
+import { getLoginError, getPasswordError, getRequestError } from "../../verification/authVerification";
 import * as authOperations from "../../redux/auth/authOperations";
 import * as authSelectors from "../../redux/auth/authSelectors";
 import * as opacityWithShakeTransition from "../../transitions/opacityWithShakeTransition.module.css";
-import { Loader } from "../loader/Loader";
 import css from "./AuthForm.module.css";
 
 // default authorization action
@@ -32,52 +33,6 @@ const activeActionSignup = activeAction => {
     };
 };
 
-// testing
-
-const test = {
-  isLatin: value => new RegExp("^[a-zA-Z0-9]+$").test(value), // regLatin = new RegExp('^[a-zA-Z0-9]+$');
-  isTrueSimbols: value => new RegExp(`^[0-9]`).test(value) // regFirstNum = new RegExp(`^[0-9]`);
-};
-
-const getLoginError = login => {
-  if (test.isTrueSimbols(login) && login.length >= 0)
-    return "Логин не может начинаться с цифры.";
-  else if (!test.isLatin(login) && login.length >= 0)
-    return "Логин не может содержать кириллицу и спец символы.";
-  else if (login.length >= 0 && login.length < 5)
-    return "Логин должен состоять минимум из 5 знаков.";
-  else if (login.length >= 0 && login.length > 16)
-    return "Логин должен состоять максимум из 16 символов.";
-  else return null;
-};
-
-const getPasswordError = password => {
-  if (test.isTrueSimbols(password) && password.length >= 0)
-    return "Пароль не может начинаться с цифры.";
-  else if (!test.isLatin(password) && password.length >= 0)
-    return "Пароль не может содержать кириллицу и спец символы.";
-  else if (password.length >= 0 && password.length < 5)
-    return "Пароль должен состоять минимум из 5 знаков.";
-  else if (password.length >= 0 && password.length > 16)
-    return "Пароль должен состоять максимум из 16 символов.";
-  else return null;
-};
-
-const getRequestError = (action, error) => {
-  if (action === actions.login && error !== null && error.status === 400)
-    return (
-      (error.data.err === "User doesnt exist" ||
-        error.data.err === "Password is invalid") &&
-      "Неправильный пароль или логин!"
-    );
-
-  if (action === actions.signup && error !== null && error.status === 400)
-    return (
-      error.data.message === "nickname already exist" &&
-      "Этот логин уже используеться!"
-    );
-};
-
 // default state
 
 const INITIAL_STATE = {
@@ -92,29 +47,9 @@ const INITIAL_STATE = {
 class AuthForm extends Component {
   state = { ...INITIAL_STATE };
 
-  componentDidUpdate(_, prevState) {
-    const { isErrorVisible, isSetTimeOut } = this.state
-    if (prevState.isErrorVisible === isErrorVisible) {
-
-      console.log(isErrorVisible)
-      if(isSetTimeOut === true) return
-
-      isErrorVisible === true && setTimeout(() => this.setState({ isErrorVisible: false }), 3000);
-
-      this.setState({isSetTimeOut: true});
-      
-      // console.log(this.state)
-      // console.log(prevState)
-    }
-
-    // if (prevState.isErrorVisible === true) {
-    //   setTimeout(() => this.setState({ isErrorVisible: false, isSetTimeOut: true }), 7000);
-    // }
-    // console.log(this.state.isErrorVisible)
-  }
-
   handleChange = e => {
     this.setState({ [e.target.name]: e.target.value });
+    e.target.value !== "" && this.setState({isErrorVisible: false});
   };
 
   handleSubmit = e => {
@@ -122,31 +57,37 @@ class AuthForm extends Component {
 
     const { onLogin, onSignup, error } = this.props;
     const { login, password, action } = this.state;
+    
+    const loginInput = e.target.elements[2];
+    const passwordInput = e.target.elements[3];
 
-    if (getLoginError(login)) {
-      this.setState({
-        isErrorVisible: true,
-        errorMsg: getLoginError(login)
-      });
-    } else if (getPasswordError(password)) {
-      this.setState({
-        isErrorVisible: true,
-        errorMsg: getPasswordError(password)
-      });
-    } else this.setState({ isErrorVisible: false, errorMsg: null });
+    const loginError = getLoginError(login);
+    const passwordError = getPasswordError(password);
+    const errorRequest = getRequestError(action, error, actions); 
 
-    if (!getLoginError(login) && !getPasswordError(password)) {
+    if (loginError) 
+      (this.setState({
+        isErrorVisible: true,
+        errorMsg: loginError
+      }));
+    else if (passwordError) 
+      (this.setState({
+        isErrorVisible: true,
+        errorMsg: passwordError
+      }));
+    else (this.setState({ isErrorVisible: false, errorMsg: null }));
+
+    if (!loginError && !passwordError) {
       action === actions.login && onLogin({ nickname: login, password });
       action === actions.signup && onSignup({ nickname: login, password });
 
-      getRequestError(action, error) &&
         this.setState({
           isErrorVisible: true,
-          errorMsg: getRequestError(action, error)
+          errorMsg: errorRequest
         });
 
-      e.target.elements[0].value = "";
-      e.target.elements[1].value = "";
+        loginInput.value = "";
+        passwordInput.value = "";
     }
   };
 
@@ -217,6 +158,13 @@ class AuthForm extends Component {
     );
   }
 }
+
+// AuthForm.propTypes = {
+//   history: PropTypes.string.isRequired,
+//   loginUser: PropTypes.func.isRequired,
+//   userData: PropTypes.shape({}).isRequired,
+//   registerUser: PropTypes.func.isRequired
+// };
 
 const mapStateToProps = state => ({
   error: authSelectors.getError(state),

@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import AsyncSelect from 'react-select/async';
 import axios from 'axios';
-//import { CSSTransition } from "react-transition-group";
-//import * as opacityTransition from "../../transitions/opacityTransition.module.css";
+import { CSSTransition } from "react-transition-group";
+import * as opacityWithShakeTransition from "../../../transitions/opacityTransition.module.css";
 import styles from './AddProduct.module.css';
 
 const customStyles = {
@@ -19,6 +19,7 @@ class AddProduct extends Component {
     products: [],
     product: {},
     isErrorVisible: false,
+    errorMsg: ''
   };
 
   handleSelectChange = value => {
@@ -33,37 +34,67 @@ class AddProduct extends Component {
     this.setState({ quantityValue: e.target.value });
   };
 
+  // showError = (product, grams) => {
+  //   let error = '';
+  //   if (product === '') {
+     
+  //     // this.setState({
+  //     //   errorMsg: 'Выберите продукт'
+  //     // });
+  //     error = 'Выберите продукт';
+  //     //console.log()
+  //   } else if (!grams) {
+  //     this.setState({
+  //       errorMsg: 'Введите количество грамм'
+  //     });
+  //     return;
+  //   }
+  // };
+
   handleSubmit = async e => {
     e.preventDefault();
     const { selectedValue, quantityValue } = this.state;
     if (!selectedValue.label) {
-      console.log('Выберите продукт');
-    } else if(!quantityValue) {
-      console.log('Выберите граммы');
+      this.setState({
+        isErrorVisible: true,
+        errorMsg: 'Выберите продукт'
+      });
+      return;
+    } else if (!quantityValue) {
+      this.setState({
+        isErrorVisible: true,
+        errorMsg: 'Выберите граммы'
+      });
+      return;
     } else {
       this.setState({
+        isErrorVisible: false,
         product: { name: selectedValue.label, quantity: quantityValue }
       });
 
       const product = {
         ...selectedValue,
         weight: quantityValue,
-        date: Date.now()
+        date: this.props.selectedDay
       };
 
-       await axios.post(`/user/eats/${selectedValue.value}`, product);
-       this.props.getUpdateProducts()}
-
-      this.setState({
-        selectedValue: '',
-        quantityValue: ''
+      const headers = { Authorization: this.props.token };
+      await axios.post(`/user/eats/${selectedValue.value}`, product, {
+        headers
       });
+      this.props.getUpdateProducts();
     }
 
+    this.setState({
+      selectedValue: '',
+      quantityValue: ''
+    });
+  };
 
   getAsyncOptions = async query => {
     if (query) {
-      const data = await axios.get(`/products?search=${query}`);
+      const headers = { Authorization: this.props.token };
+      const data = await axios.get(`/products?search=${query}`, { headers });
       const productsOptions = data.data.productsOptions;
       return this.filterProducts(productsOptions);
     }
@@ -71,14 +102,13 @@ class AddProduct extends Component {
 
   filterProducts = data => {
     const products = data.filter(elem => elem.label);
-    //console.log(products);
     return products;
   };
 
   loadOptions = () => this.getAsyncOptions(this.state.inputValue);
 
   render() {
-    const { selectedValue, quantityValue, isErrorVisible } = this.state;
+    const { selectedValue, quantityValue, isErrorVisible, errorMsg } = this.state;
 
     return (
       <form className={styles.form} onSubmit={e => this.handleSubmit(e)}>
@@ -111,14 +141,14 @@ class AddProduct extends Component {
             <button type="submit">&#43;</button>
           </div>
         </div>
-        {/* <CSSTransition
+        <CSSTransition
             in={isErrorVisible}
             timeout={2000}
-            classNames={opacityTransition}
+            classNames={opacityWithShakeTransition}
             unmountOnExit
           >
             <p className={styles.errorNotification}>{errorMsg}</p>
-          </CSSTransition> */}
+          </CSSTransition>
       </form>
     );
   }

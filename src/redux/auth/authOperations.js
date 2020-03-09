@@ -1,5 +1,5 @@
-import axios from 'axios'
-import * as sessionSelectors from './authSelectors'
+import axios from "axios";
+import * as sessionSelectors from "./authSelectors";
 import {
   loginRequest,
   loginSuccess,
@@ -13,49 +13,65 @@ import {
 
 axios.defaults.baseURL = "https://slim-moms.goit.co.ua/api/v1";
 
+const setAuthToken = token => {
+  axios.defaults.headers.common["Autorization"] = `Bearer ${token}`;
+};
+
+const cleanAuthToken = () => {
+  axios.defaults.headers.common["Autorization"] = null;
+};
+
 export const login = credential => dispatch => {
   dispatch(loginRequest());
 
-  axios.post("/login", credential, {
+  axios
+    .post("/login", credential, {
       headers: {
         "Content-Type": "application/json"
       }
     })
-    .then(response => dispatch(loginSuccess(response.data)))
+    .then(response => {
+      setAuthToken(response.data.user.token);
+      dispatch(loginSuccess(response.data));
+    })
     .catch(error => dispatch(authError(error.response)))
-    .finally(()=>dispatch(loginRequest()))
+    .finally(() => dispatch(loginRequest()));
 };
 
 export const signup = credential => dispatch => {
   dispatch(signupRequest());
 
-  axios.post("/register", credential, {
+  axios
+    .post("/register", credential, {
       headers: {
         "Content-Type": "application/json"
       }
     })
-    .then(response => dispatch(signupSuccess(response.data)))
+    .then(response => {
+      setAuthToken(response.data.user.token);
+      dispatch(signupSuccess(response.data));
+    })
     .catch(error => dispatch(authError(error.response)))
-    .finally(()=>dispatch(loginRequest()))
+    .finally(() => dispatch(loginRequest()));
 };
 
 export const refreshUser = () => (dispatch, getState) => {
-  const token = sessionSelectors.getToken(getState())
+  const token = sessionSelectors.getToken(getState());
 
-  if(!token) return;
+  if (!token) return;
+
+  setAuthToken(token);
 
   dispatch(refreshUserRequest());
 
-  const options = {
-    headers: {
-      Authorization: `Bearer ${token}`
-    }
-  }
-
-  axios.get( "/user", options )
-      .then(response => dispatch(refreshUserSuccess(response.data)))
-      .catch(error => dispatch(authError(error.response)))
-      .finally(()=>dispatch(refreshUserRequest()))
+  axios
+    .get("/user")
+    .then(response => dispatch(refreshUserSuccess(response.data)))
+    .catch(error => dispatch(authError(error.response)))
+    .finally(() => dispatch(refreshUserRequest()));
 };
 
-export const logout = () => dispatch => dispatch(logOut()); 
+export const logout = () => dispatch => {
+  cleanAuthToken();
+  dispatch(logOut());
+};

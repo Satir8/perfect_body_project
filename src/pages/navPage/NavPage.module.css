@@ -26,6 +26,9 @@
   .navList {
     margin: 0 auto;
   }
+  .loginContainer {
+    margin: 0 auto;
+  }
 }
 
 @media (max-width: 1199px) {
@@ -33,6 +36,9 @@
     height: 100vh;
   }
   .navList {
+    margin: 0 auto;
+  }
+  .loginContainer {
     margin: 0 auto;
   }
 }
@@ -66,8 +72,4 @@
   .loginContainer {
     display: flex;
   }
-}
-
-.loginContainer {
-  margin: 0 auto;
 }
