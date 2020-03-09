@@ -1,8 +1,8 @@
-import React, { Component } from 'react';
-import data from './quotesData';
-import styles from './Quote.module.css';
-import { CSSTransition } from 'react-transition-group';
-import animation from './quoteAnimation.module.css';
+import React, { Component } from "react";
+import data from "./quotesData";
+import styles from "./Quote.module.css";
+import { CSSTransition } from "react-transition-group";
+import animation from "./quoteAnimation.module.css";
 
 class Quote extends Component {
   state = {
@@ -12,15 +12,13 @@ class Quote extends Component {
   };
 
   componentDidMount() {
+    const { idx } = this.state;
+    this.setState({ currentQuote: data[idx + data.length - 1] });
     this.openNextQuote(data);
   }
 
-  componentDidUpdate(prevProps, prevState) {
-    if (prevState.idx !== this.state.idx) {
-      this.setState({
-        visible: false
-      });
-    }
+  componentWillUnmount() {
+    this.openNextQuote(data);
   }
 
   openNextQuote = arr => {
@@ -28,13 +26,20 @@ class Quote extends Component {
       const { idx } = this.state;
       this.setState(prev => ({
         idx: prev.idx + 1,
-        currentQuote: arr[idx],
         visible: true
       }));
+
+      setTimeout(() => {
+        this.setState(prev => ({
+          visible: false,
+          currentQuote: arr[idx]
+        }));
+      }, 1000);
+
       if (idx === arr.length - 1) {
         this.setState({ idx: 0 });
       }
-    }, 7000);
+    }, 3000);
   };
 
   render() {

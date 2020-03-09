@@ -18,11 +18,10 @@ import MomentLocaleUtils, {
 import "moment/locale/ru";
 import styles from "./DiaryBlock.module.css";
 import "react-day-picker/lib/style.css";
-import calendarIcon from './baseline_date_range_black_24dp.png';
-import WithAuthRedirect from '../hoc/WithAuthRedirect'
+import calendarIcon from "./baseline_date_range_black_24dp.png";
+import WithAuthRedirect from "../hoc/WithAuthRedirect";
 
 axios.defaults.baseURL = "https://slim-moms.goit.co.ua/api/v1";
-//axios.defaults.headers.common["Authorization"] = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI1ZTYyOTY0MjA2NzdhNDFlYTczY2Y0YzkiLCJjcmVhdGVkRGF0ZSI6MTU4MzYwNzg4ODcxNiwiZXhwIjoxNTg2MTk5ODg4fQ.VgxOGtciHMFq6IJ-hx-ZM7NnZZiJNZOSNH00uKKO1e4";
 
 const customStyles = {
   border: "none",
@@ -32,12 +31,10 @@ const customStyles = {
   cursor: "pointer",
   outline: "none",
   background: `url(${calendarIcon})`,
-  backgroundRepeat: 'no-repeat',
-  backgroundSize: '20px 20px',
-  backgroundPosition: 'top right'
+  backgroundRepeat: "no-repeat",
+  backgroundSize: "20px 20px",
+  backgroundPosition: "top right"
 };
-
-
 
 class DiaryBlock extends Component {
   state = {
@@ -48,7 +45,9 @@ class DiaryBlock extends Component {
 
   getFetchData = async () => {
     const headers = { Authorization: this.props.token };
-    const data = await axios.get(`/user/eats/${this.state.selectedDay}`, { headers });
+    const data = await axios.get(`/user/eats/${this.state.selectedDay}`, {
+      headers
+    });
     this.setState({
       products: data.data.products.reverse()
     });
@@ -65,7 +64,9 @@ class DiaryBlock extends Component {
 
   async componentDidMount() {
     const headers = { Authorization: this.props.token };
-    const data = await axios.get(`/user/eats/${moment().format()}`, { headers });
+    const data = await axios.get(`/user/eats/${moment().format()}`, {
+      headers
+    });
     this.setState({
       products: data.data.products.reverse()
     });
@@ -103,7 +104,9 @@ class DiaryBlock extends Component {
 
   getUpdateProducts = async () => {
     const headers = { Authorization: this.props.token };
-    const data = await axios.get(`/user/eats/${this.state.selectedDay}`, { headers });
+    const data = await axios.get(`/user/eats/${this.state.selectedDay}`, {
+      headers
+    });
     this.setState({
       products: data.data.products.reverse()
     });
@@ -150,14 +153,15 @@ class DiaryBlock extends Component {
     );
   }
 }
-const mapStateToProps = (state) => ({
+const mapStateToProps = state => ({
   token: state.session.token
-})
-
+});
 
 const mapDispatchToProps = {
   getTotalUsedCalories,
   getDate
 };
 
-export default WithAuthRedirect(connect(mapStateToProps, mapDispatchToProps)(DiaryBlock));
+export default WithAuthRedirect(
+  connect(mapStateToProps, mapDispatchToProps)(DiaryBlock)
+);

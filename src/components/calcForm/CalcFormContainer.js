@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
-import WithAuthRedirect from '../hoc/WithAuthRedirect'
+import WithAuthRedirect from "../hoc/WithAuthRedirect";
 import CalcForm from "./CalcForm";
 import dangerProducts from "./dangerProducts";
 import {
@@ -19,20 +19,6 @@ class CalcFormContainer extends Component {
     futureWeight: "",
     groupBlood: ""
   };
-
-  // componentDidMount() {
-  //   // const { infoForInputs } = this.props;
-  //   // const {
-  //   //   height,
-  //   //   age,
-  //   //   currentWeight,
-  //   //   futureWeight,
-  //   //   groupBlood
-  //   // } = infoForInputs;
-
-  //   // this.setState({ height, age, currentWeight, futureWeight, groupBlood });
-
-  // }
 
   componentDidMount = async () => {
     if (this.props.session.authenticated) {
@@ -118,10 +104,12 @@ const mapStateToProps = state => ({
   infoForInputs: state.calcForm.infoForInputs
 });
 
-export default WithAuthRedirect(withRouter(
-  connect(mapStateToProps, {
-    getTotalCalories,
-    getDangerProducts,
-    getInfoForInputs
-  })(CalcFormContainer))
+export default WithAuthRedirect(
+  withRouter(
+    connect(mapStateToProps, {
+      getTotalCalories,
+      getDangerProducts,
+      getInfoForInputs
+    })(CalcFormContainer)
+  )
 );
