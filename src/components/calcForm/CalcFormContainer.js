@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
+import WithAuthRedirect from '../hoc/WithAuthRedirect'
 import CalcForm from "./CalcForm";
 import dangerProducts from "./dangerProducts";
 import {
@@ -92,10 +93,10 @@ const mapStateToProps = state => ({
   infoForInputs: state.calcForm.infoForInputs
 });
 
-export default withRouter(
+export default WithAuthRedirect(withRouter(
   connect(mapStateToProps, {
     getTotalCalories,
     getDangerProducts,
     getInfoForInputs
-  })(CalcFormContainer)
+  })(CalcFormContainer))
 );

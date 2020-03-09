@@ -35,7 +35,7 @@
   }
 }
 
-@media (min-width: 1024px) {
+@media (min-width: 1280px) {
   .homePageWrapper {
     padding-bottom: 110px;
     background-image: url(../../images/img/background_desktop.png);

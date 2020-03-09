@@ -45,14 +45,14 @@ const NavPage = ({ auth }) => {
             <div></div>
             <div className={styles.loginContainer}>
               <NavLink
-                to='/authorization'
+                to='/login'
                 className={styles.navListItem}
                 activeClassName={styles.navListItemActive}
               >
                 Вход
               </NavLink>
               <NavLink
-                to='/authorization'
+                to='/signup'
                 className={styles.navListItem}
                 activeClassName={styles.navListItemActive}
               >

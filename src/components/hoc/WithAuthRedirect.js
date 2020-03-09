@@ -5,9 +5,14 @@ import * as authSelectors from "../../redux/auth/authSelectors";
 const WithAuthRedirect = BaseComponent => {
   class WithAuthRedirect extends Component {
     componentDidMount() {
-      const { location, history, authenticated } = this.props
-      location.pathname === "/diary" && !authenticated && history.replace("/authorization");
-      location.pathname === "/authorization" && authenticated && history.replace("/diary");
+      const { location, history, authenticated } = this.props;
+
+      location && location.pathname === "/login" && authenticated && history.replace("/diary");
+      location && location.pathname === "/signup" && authenticated && history.replace("/diary");
+
+      location && location.pathname === "/diary" && !authenticated && history.replace("/login");
+      location && location.pathname === "/calculator" && !authenticated && history.replace("/login");
+      location && location.pathname === "/achievements" && !authenticated && history.replace("/login");
     }
 
     componentDidUpdate(prevProps) {
@@ -15,8 +20,13 @@ const WithAuthRedirect = BaseComponent => {
       if(prevProps.authenticated !== this.props.authenticated) {
 
         const { location, history, authenticated } = this.props;
-        location.pathname === "/diary" && !authenticated && history.replace("/authorization");
-        location.pathname === "/authorization" && authenticated && history.replace("/diary");
+
+        location && location.pathname === "/login" && authenticated && history.replace("/diary");
+        location && location.pathname === "/signup" && authenticated && history.replace("/diary");
+
+        location && location.pathname === "/diary" && !authenticated && history.replace("/login");
+        location && location.pathname === "/calculator" && !authenticated && history.replace("/login");
+        location && location.pathname === "/achievements" && !authenticated && history.replace("/login");
 
       };
 

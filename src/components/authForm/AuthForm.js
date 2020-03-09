@@ -1,8 +1,14 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+// import { withRouter } from "react-router";
+import { NavLink } from "react-router-dom";
 import { CSSTransition } from "react-transition-group";
 import { Loader } from "../loader/Loader";
-import { getLoginError, getPasswordError, getRequestError } from "../../verification/authVerification";
+import {
+  getLoginError,
+  getPasswordError,
+  getRequestError
+} from "../../verification/authVerification";
 import * as authOperations from "../../redux/auth/authOperations";
 import * as authSelectors from "../../redux/auth/authSelectors";
 import * as opacityWithShakeTransition from "../../transitions/opacityWithShakeTransition.module.css";
@@ -47,9 +53,15 @@ const INITIAL_STATE = {
 class AuthForm extends Component {
   state = { ...INITIAL_STATE };
 
+  componentDidMount() {
+    const { location } = this.props;
+    location && location.pathname && location.pathname === "/login" && this.setState({action: actions.login});
+    location && location.pathname && location.pathname === "/signup" && this.setState({action: actions.signup});
+  }
+
   handleChange = e => {
     this.setState({ [e.target.name]: e.target.value });
-    e.target.value !== "" && this.setState({isErrorVisible: false});
+    e.target.value !== "" && this.setState({ isErrorVisible: false });
   };
 
   handleSubmit = e => {
@@ -57,37 +69,37 @@ class AuthForm extends Component {
 
     const { onLogin, onSignup, error } = this.props;
     const { login, password, action } = this.state;
-    
+
     const loginInput = e.target.elements[2];
     const passwordInput = e.target.elements[3];
 
     const loginError = getLoginError(login);
     const passwordError = getPasswordError(password);
-    const errorRequest = getRequestError(action, error, actions); 
+    const errorRequest = getRequestError(action, error, actions);
 
-    if (loginError) 
-      (this.setState({
+    if (loginError)
+      this.setState({
         isErrorVisible: true,
         errorMsg: loginError
-      }));
-    else if (passwordError) 
-      (this.setState({
+      });
+    else if (passwordError)
+      this.setState({
         isErrorVisible: true,
         errorMsg: passwordError
-      }));
-    else (this.setState({ isErrorVisible: false, errorMsg: null }));
+      });
+    else this.setState({ isErrorVisible: false, errorMsg: null });
 
     if (!loginError && !passwordError) {
       action === actions.login && onLogin({ nickname: login, password });
       action === actions.signup && onSignup({ nickname: login, password });
 
-        this.setState({
-          isErrorVisible: true,
-          errorMsg: errorRequest
-        });
+      this.setState({
+        isErrorVisible: true,
+        errorMsg: errorRequest
+      });
 
-        loginInput.value = "";
-        passwordInput.value = "";
+      loginInput.value = "";
+      passwordInput.value = "";
     }
   };
 
@@ -109,25 +121,31 @@ class AuthForm extends Component {
           onSubmit={this.handleSubmit}
           autoComplete="off"
         >
-          <button
-            style={changeLogin}
-            className={css.entryBtn}
-            type="button"
-            name={actions.login}
-            onClick={this.handleClick}
-          >
-            {actions.login}
-          </button>
-          <span className={css.entryBtn}> / </span>
-          <button
-            style={changeSignup}
-            className={css.entryBtn}
-            type="button"
-            name={actions.signup}
-            onClick={this.handleClick}
-          >
-            {actions.signup}
-          </button>
+          <div className={css.navWrapper}>
+            <NavLink to="/login" className={css.entryBtn}>
+              <button
+                style={changeLogin}
+                className={css.entryBtn}
+                type="button"
+                name={actions.login}
+                onClick={this.handleClick}
+              >
+                {actions.login}
+              </button>
+            </NavLink>
+            <span className={css.entrySpan}> / </span>
+            <NavLink to="/signup" className={css.entryBtn}>
+              <button
+                style={changeSignup}
+                className={css.entryBtn}
+                type="button"
+                name={actions.signup}
+                onClick={this.handleClick}
+              >
+                {actions.signup}
+              </button>
+            </NavLink>
+          </div>
           <input
             type="text"
             name="login"

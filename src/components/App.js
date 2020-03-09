@@ -98,7 +98,7 @@ class App extends Component {
         }}
       >
         <Header />
-        <Suspense fallback={<Loader />}>
+        <Suspense fallback={<Loader/>}>
           <Switch>
             <Route exact path="/" component={HomePage} />
             <Route
@@ -107,12 +107,13 @@ class App extends Component {
                 <NavPage {...props} isMobile={isMobile} isDesktop={isDesktop} />
               )}
             />
-            <Route path="/authorization" component={AuthPage} />
-            {/*  */}
+            <Route path="/login" component={AuthPage} />
+            <Route path="/signup" component={AuthPage} />
+           
             <Route path="/diary" component={Diary} />
             <Route path="/calculator" component={CalcForm} />
             <Route path="/achievements" component={Achievements} />
-            {/*  */}
+            
           </Switch>
         </Suspense>
       </appContext.Provider>
