@@ -32,8 +32,11 @@
 	font-size: 25px;
   padding: 0px;
   outline: none;
+  transition: 0.5s;
 }
-
+.searchBtn button:hover {
+  transform: scale(1.1);
+}
 .asyncSelect div:first-child {
   border: none;
   outline: none !important;
