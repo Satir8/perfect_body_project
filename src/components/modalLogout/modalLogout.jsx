@@ -20,11 +20,7 @@ const modalLogout = ({ logOut }) => (
           <hr className={styles.line}></hr>
           <div className={styles.btnCase}>
             <Link
-<<<<<<< HEAD
               to='/'
-=======
-              to="/authorization"
->>>>>>> dev
               onClick={() => {
                 logOut();
                 closeModal();

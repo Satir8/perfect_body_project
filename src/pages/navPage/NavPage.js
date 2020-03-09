@@ -45,7 +45,6 @@ const NavPage = ({ auth, location }) => {
               {isDesktop && <Nickname />}
             </>
           ) : (
-<<<<<<< HEAD
             <>
             <div></div>
             <div className={styles.loginContainer}>
@@ -65,29 +64,6 @@ const NavPage = ({ auth, location }) => {
               </NavLink>
             </div>
             </>
-=======
-            location.pathname !== '/authorization' && (
-              <>
-                <div></div>
-                <div className={styles.loginContainer}>
-                  <NavLink
-                    to='/authorization'
-                    className={styles.navListItem}
-                    activeClassName={styles.navListItemActive}
-                  >
-                    Вход
-                  </NavLink>
-                  <NavLink
-                    to='/authorization'
-                    className={styles.navListItem}
-                    activeClassName={styles.navListItemActive}
-                  >
-                    Регистрация
-                  </NavLink>
-                </div>
-              </>
-            )
->>>>>>> dev
           )}
         </nav>
       )}
