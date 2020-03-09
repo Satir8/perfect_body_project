@@ -9,7 +9,7 @@ import authReducer from "./auth/authReducer";
 const sessionPersistConfig = {
   key: "session",
   storage,
-  whitelist: ["token"]
+  whitelist: ["token", "authenticated"]
 };
 
 const calcFormConfig = {
