@@ -25,6 +25,7 @@
 
   .addProductContainer {
     padding-left: 14px;
+    margin-bottom: 20px;
   }
 
   .dayPickerInputContainer {
@@ -45,9 +46,17 @@
   }
 }
 
-@media (min-width: 1024px) {
+@media (min-width: 1280px) {
   .DashboardContainer {
     flex-direction: row;
+  }
+  .diaryContainer {
+    padding: 80px 50px 0px 50px;
+    margin: 0 auto;
+    width: 65%;
+  }
+
+  .addProductContainer {
   }
 }
 /*  */

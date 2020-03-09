@@ -1,11 +1,11 @@
 import React from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, withRouter } from 'react-router-dom';
 import styles from './NavPage.module.css';
 import { connect } from 'react-redux';
 import Nickname from '../../components/header/Nickname';
 import { appContext } from '../../components/App';
 
-const NavPage = ({ auth }) => {
+const NavPage = ({ auth, location }) => {
   return (
     <appContext.Consumer>
       {({ isMobile, isDesktop, openExitModal }) => (
@@ -36,11 +36,16 @@ const NavPage = ({ auth }) => {
                 >
                   Достижения
                 </NavLink>
-                {isMobile && (<p onClick={openExitModal} className={styles.navListItem}>Выход</p>)}
+                {isMobile && (
+                  <p onClick={openExitModal} className={styles.navListItem}>
+                    Выход
+                  </p>
+                )}
               </div>
               {isDesktop && <Nickname />}
             </>
           ) : (
+<<<<<<< HEAD
             <>
             <div></div>
             <div className={styles.loginContainer}>
@@ -60,6 +65,29 @@ const NavPage = ({ auth }) => {
               </NavLink>
             </div>
             </>
+=======
+            location.pathname !== '/authorization' && (
+              <>
+                <div></div>
+                <div className={styles.loginContainer}>
+                  <NavLink
+                    to='/authorization'
+                    className={styles.navListItem}
+                    activeClassName={styles.navListItemActive}
+                  >
+                    Вход
+                  </NavLink>
+                  <NavLink
+                    to='/authorization'
+                    className={styles.navListItem}
+                    activeClassName={styles.navListItemActive}
+                  >
+                    Регистрация
+                  </NavLink>
+                </div>
+              </>
+            )
+>>>>>>> dev
           )}
         </nav>
       )}
@@ -71,4 +99,4 @@ const mapStateToProps = state => ({
   auth: state.session.authenticated
 });
 
-export default connect(mapStateToProps)(NavPage);
+export default withRouter(connect(mapStateToProps)(NavPage));

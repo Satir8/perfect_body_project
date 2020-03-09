@@ -84,6 +84,10 @@ class App extends Component {
     this.setState({ showExitModal: false });
   };
 
+  closeOnBackdrop = e => {
+    e.target === e.currentTarget && this.setState({ showExitModal: false });
+  }
+
   render() {
     const { isMobile, isTablet, isDesktop, showExitModal } = this.state;
     return (
@@ -94,7 +98,8 @@ class App extends Component {
           isDesktop,
           showExitModal,
           openExitModal: this.openExitModal,
-          closeModal: this.closeModal
+          closeModal: this.closeModal,
+          closeOnBackdrop: this.closeOnBackdrop
         }}
       >
         <Header />

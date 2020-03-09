@@ -9,6 +9,7 @@ import {
   getDangerProducts,
   getInfoForInputs
 } from "../../redux/calcForm/calcFormActions";
+import axios from "axios";
 
 class CalcFormContainer extends Component {
   state = {
@@ -19,18 +20,32 @@ class CalcFormContainer extends Component {
     groupBlood: ""
   };
 
-  componentDidMount() {
-    const { infoForInputs } = this.props;
-    const {
-      height,
-      age,
-      currentWeight,
-      futureWeight,
-      groupBlood
-    } = infoForInputs;
+  // componentDidMount() {
+  //   // const { infoForInputs } = this.props;
+  //   // const {
+  //   //   height,
+  //   //   age,
+  //   //   currentWeight,
+  //   //   futureWeight,
+  //   //   groupBlood
+  //   // } = infoForInputs;
 
-    this.setState({ height, age, currentWeight, futureWeight, groupBlood });
-  }
+  //   // this.setState({ height, age, currentWeight, futureWeight, groupBlood });
+
+  // }
+
+  componentDidMount = async () => {
+    if (this.props.session.authenticated) {
+      await axios
+        .get("https://slim-moms.goit.co.ua/api/v1/user", {
+          headers: {
+            Authorization: this.props.session.token,
+            "Content-Type": "application/json"
+          }
+        })
+        .then(data => this.setState({ ...data.data.user.userData }));
+    }
+  };
 
   handleChange = e => {
     const name = e.target.name;
@@ -53,7 +68,16 @@ class CalcFormContainer extends Component {
     this.props.getTotalCalories(totalCalories);
     this.props.getDangerProducts(currentDangerProducts);
 
-    this.props.getInfoForInputs({ ...this.state });
+    axios.put(
+      `https://slim-moms.goit.co.ua/api/v1/user`,
+      { ...this.state },
+      {
+        headers: {
+          Authorization: this.props.session.token,
+          "Content-Type": "application/json"
+        }
+      }
+    );
 
     if (this.props.location.pathname === "/") {
       this.props.onModalOpen();
@@ -88,6 +112,7 @@ class CalcFormContainer extends Component {
 }
 
 const mapStateToProps = state => ({
+  session: state.session,
   calories: state.calcForm.calories,
   products: state.calcForm.dangerProducts,
   infoForInputs: state.calcForm.infoForInputs
