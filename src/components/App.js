@@ -54,6 +54,11 @@ class App extends Component {
     this.props.refreshUser();
   }
 
+  componentDidUpdate() {
+    // this.checkScreenWidth();
+    this.props.refreshUser();
+  }
+
   checkScreenWidth = () => {
     if (window.innerWidth < 768) {
       this.setState({
