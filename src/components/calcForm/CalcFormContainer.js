@@ -67,8 +67,6 @@ class CalcFormContainer extends Component {
     this.props.getTotalCalories(totalCalories);
     this.props.getDangerProducts(currentDangerProducts);
 
-    // this.props.getInfoForInputs({ ...this.state });
-
     axios.put(
       `https://slim-moms.goit.co.ua/api/v1/user`,
       { ...this.state },

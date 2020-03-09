@@ -65,7 +65,7 @@
   }
 }
 
-@media (min-width: 1024px) {
+@media (min-width: 1280px) {
   .sectionSummary {
     background-image: url(../../images/img/backGroundSummaryLap.jpg);
     background-position-x: 100%;
@@ -74,7 +74,7 @@
     width: 490px;
     display: flex;
     justify-content: center;
-    padding: 150px 0px 0px 0px;
+    padding: 100px 0px 0px 0px;
   }
   .blockSummary {
     margin: 0;

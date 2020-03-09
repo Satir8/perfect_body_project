@@ -11,7 +11,7 @@ const CalcForm = ({ onSubmit, onChange, location, state }) => {
           <div className={styles.DashboardContainer}>
             <div className={styles.calculatorWrapper}>
               <h2 className={styles.calculatorTitle}>
-                Просчитай свою суточную норму каллорий прямо сейчас
+                Пересчитай свою суточную норму каллорий
               </h2>
               <form className={styles.inputForm} onSubmit={onSubmit}>
                 <div className={styles.innerWrapper}>
