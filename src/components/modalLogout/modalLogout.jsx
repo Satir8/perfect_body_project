@@ -7,20 +7,20 @@ import { logOut } from '../../redux/auth/authActions';
 
 const modalLogout = ({ logOut }) => (
   <appContext.Consumer>
-    {({ closeModal }) => (
-      <div className={styles.centerCase}>
+    {({ closeModal, closeOnBackdrop }) => (
+      <div onClick={e => closeOnBackdrop(e)} className={styles.centerCase}>
         <div className={styles.moduleCase}>
           <img
-            alt='close'
+            alt="close"
             onClick={() => closeModal()}
             className={styles.btnClose}
-            src='https://avatanplus.com/files/resources/mid/5968a2c8f2ed115d40bbe123.png'
+            src="https://avatanplus.com/files/resources/mid/5968a2c8f2ed115d40bbe123.png"
           />
           <p className={styles.text}>Ты дейсвтительно хочешь выйти?</p>
           <hr className={styles.line}></hr>
           <div className={styles.btnCase}>
             <Link
-              to='/authorization'
+              to="/authorization"
               onClick={() => {
                 logOut();
                 closeModal();

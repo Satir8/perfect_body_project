@@ -4,6 +4,7 @@ import Diary from "../../components/diary-block/DiaryBlock";
 import CalcForm from "../../components/calcForm/CalcFormContainer";
 import Achievements from "../../components/achievements/Achievements";
 import styles from "./DashboardPage.module.css";
+import Summary from "../../components/summary/Summary"
 
 class DashboardContainer extends Component {
   render() {
