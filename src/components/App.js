@@ -1,18 +1,46 @@
-import React, { Component, createContext } from "react";
+import React, { lazy, Suspense, Component, createContext } from "react";
 import { Switch, Route } from "react-router-dom";
 import { connect } from "react-redux";
 import NavPage from "../pages/navPage/NavPage";
-import HomePage from "../pages/homePage/HomePage";
-// import DashboardPage from "../pages/dashboardPage/DashboardPage";
-import AuthorizationPage from "../pages/authorization/Authorization";
 import Header from "./header/Header";
 import * as authOperations from "../redux/auth/authOperations";
-import Diary from "./diary-block/DiaryBlock";
-import CalcForm from "./calcForm/CalcFormContainer";
-import Achievements from "./achievements/Achievements";
+import {Loader} from './loader/Loader'
 
 export const appContext = createContext();
 
+// lazy import
+
+const HomePage = lazy(() =>
+  import(
+    "../pages/homePage/HomePage" /* webpackChunkName: "home-page" */
+  )
+);
+
+const AuthPage = lazy(() =>
+  import(
+    "../pages/authorization/Authorization" /* webpackChunkName: "auth-page" */
+  )
+);
+
+const Diary = lazy(() =>
+  import(
+    "./diary-block/DiaryBlock" /* webpackChunkName: "diary-block" */
+  )
+);
+
+const CalcForm = lazy(() =>
+  import(
+    "./calcForm/CalcFormContainer" /* webpackChunkName: "calcForm-block" */
+  )
+);
+
+const Achievements = lazy(() =>
+  import(
+    "./achievements/Achievements" /* webpackChunkName: "achievements-block" */
+  )
+);
+
+// component
 class App extends Component {
   state = {
     isMobile: false,
@@ -70,6 +98,7 @@ class App extends Component {
         }}
       >
         <Header />
+        <Suspense fallback={<Loader/>}>
         <Switch>
           <Route exact path="/" component={HomePage} />
           <Route
@@ -78,13 +107,14 @@ class App extends Component {
               <NavPage {...props} isMobile={isMobile} isDesktop={isDesktop} />
             )}
           />
-          <Route path="/authorization" component={AuthorizationPage} />
+          <Route path="/authorization" component={AuthPage} />
           {/*  */}
           <Route path="/diary" component={Diary} />
           <Route path="/calculator" component={CalcForm} />
           <Route path="/achievements" component={Achievements} />
           {/*  */}
         </Switch>
+        </Suspense>
       </appContext.Provider>
     );
   }

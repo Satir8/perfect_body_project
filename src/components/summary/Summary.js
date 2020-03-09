@@ -3,9 +3,9 @@ import { connect } from "react-redux";
 import css from "./Summary.module.css";
 import moment from "moment";
 
-const data = {
-  consumed: 722
-};
+// const data = {
+//   consumed: 722
+// };
 
 const Summary = ({ calcForm }) => {
   const { calories, usedCalories, dangerProducts } = calcForm;

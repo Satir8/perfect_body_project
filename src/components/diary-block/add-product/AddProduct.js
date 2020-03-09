@@ -72,7 +72,6 @@ class AddProduct extends Component {
 
   filterProducts = data => {
     const products = data.filter(elem => elem.label);
-    //console.log(products);
     return products;
   };
 

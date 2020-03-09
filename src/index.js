@@ -11,11 +11,7 @@ ReactDOM.render(
   <Provider store={store}>
     <PersistGate loading={null} persistor={persistor}>
       <Router>
-<<<<<<< HEAD
-        <Route component={App}/>
-=======
         <Route component={App} />
->>>>>>> dev
       </Router>
     </PersistGate>
   </Provider>,
