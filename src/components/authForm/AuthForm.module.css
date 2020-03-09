@@ -45,6 +45,7 @@
     padding-bottom: 4px;
     outline: none;
     cursor: pointer;
+    transition: 0.5s;
 }
 
 .entryBtn {
@@ -71,6 +72,7 @@
     height: 40px;
     cursor: pointer;
     outline: none;
+    transition: 0.5s;
 }
 
 .submitBtn:hover,

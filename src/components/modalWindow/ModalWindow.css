@@ -5,6 +5,7 @@
   width: 100vw;
   height: 100vh;
   background-color: rgba(0, 0, 0, 0.3);
+  z-index: 10000;
 }
 
 /* width*/
@@ -111,6 +112,10 @@ li:last-child {
   background-color: rgb(252, 132, 44);
   box-shadow: 0px 6px 10px 0px rgba(252, 132, 44, 0.6);
   margin: 0 auto;
+  transition: 0.5s;
+}
+.startLoosingWeight:hover {
+  transform: scale(1.1);
 }
 
 @media screen and (min-width: 768px) {
