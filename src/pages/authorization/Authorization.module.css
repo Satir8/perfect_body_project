@@ -25,7 +25,7 @@
 
 @media(min-width: 1280px) {
     .pageWrapper {
-        background-image: url(../../images/img/background_desktop.png);
+        /* background-image: url(../../images/img/background_desktop.png); */
         background-repeat: no-repeat;
         background-size: cover;
     }
