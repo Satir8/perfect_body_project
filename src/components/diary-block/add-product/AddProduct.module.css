@@ -30,7 +30,8 @@
 	box-shadow: 0px 6px 10px 0px rgba(252, 132, 44, 0.33);
 	border-radius: 50%;
 	font-size: 25px;
-	padding: 0px;
+  padding: 0px;
+  outline: none;
 }
 
 .asyncSelect div:first-child {
@@ -46,10 +47,9 @@
 .errorNotification {
   color: red;
   position: absolute;
-  font-size: 0.625rem;
+  font-size: 0.8rem;
   transform: translateX(-50%);
-  left: 50%;
-  bottom: 96px;
+
 }
 
 @media (min-width: 768px) {

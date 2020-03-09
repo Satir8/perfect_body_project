@@ -17,13 +17,11 @@ import MomentLocaleUtils, {
 } from "react-day-picker/moment";
 import "moment/locale/ru";
 import styles from "./DiaryBlock.module.css";
-
 import "react-day-picker/lib/style.css";
-//import {classNames} from '../../../images/icons/calendar/baseline-date_range-black-24/2x/baseline_date_range_black_24dp.png'
+import calendarIcon from './baseline_date_range_black_24dp.png'
 
 axios.defaults.baseURL = "https://slim-moms.goit.co.ua/api/v1";
-axios.defaults.headers.common["Authorization"] =
-  "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI1ZTVhNmQxNGY0ZTlhNjQxNjE3MjkwNzYiLCJjcmVhdGVkRGF0ZSI6MTU4Mjk4NDYyNDIzMSwiZXhwIjoxNTg1NTc2NjI0fQ.viN0Tv3O8ppDN8dKn87jBDEqBcDD900IUFQPIEwoMfY";
+//axios.defaults.headers.common["Authorization"] = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI1ZTYyOTY0MjA2NzdhNDFlYTczY2Y0YzkiLCJjcmVhdGVkRGF0ZSI6MTU4MzYwNzg4ODcxNiwiZXhwIjoxNTg2MTk5ODg4fQ.VgxOGtciHMFq6IJ-hx-ZM7NnZZiJNZOSNH00uKKO1e4";
 
 const customStyles = {
   border: "none",
@@ -31,9 +29,15 @@ const customStyles = {
   fontWeight: 700,
   width: "120px",
   cursor: "pointer",
-  backgroundImage:
-    "url(../../../images/icons/calendar/baseline-date_range-black-24/2x/baseline_date_range_black_24dp.png)"
+  outline: "none",
+  background: `url(${calendarIcon})`,
+  backgroundRepeat: 'no-repeat',
+  backgroundSize: '20px 20px',
+  backgroundPosition: 'top right'
 };
+
+
+
 class DiaryBlock extends Component {
   state = {
     selectedDay: moment().toISOString(),
@@ -42,7 +46,8 @@ class DiaryBlock extends Component {
   };
 
   getFetchData = async () => {
-    const data = await axios.get(`/user/eats/${this.state.selectedDay}`);
+    const headers = { Authorization: this.props.token };
+    const data = await axios.get(`/user/eats/${this.state.selectedDay}`, { headers });
     this.setState({
       products: data.data.products.reverse()
     });
@@ -58,22 +63,18 @@ class DiaryBlock extends Component {
   };
 
   async componentDidMount() {
-    const data = await axios.get(`/user/eats/${moment().format()}`);
+    const headers = { Authorization: this.props.token };
+    const data = await axios.get(`/user/eats/${moment().format()}`, { headers });
     this.setState({
       products: data.data.products.reverse()
     });
     this.getCaloriesSumm();
   }
 
-  // updateProducts = () => {
-  //   this.setState(prev => ({
-  //     check: !prev.check
-  //   }));
-  // };
-
   deleteProduct = id => {
+    const headers = { Authorization: this.props.token };
     axios
-      .delete(`/user/eats/${id}`)
+      .delete(`/user/eats/${id}`, { headers })
       .then(response => {
         if (response.data.status === "success") {
           this.setState(prev => ({
@@ -100,7 +101,8 @@ class DiaryBlock extends Component {
   };
 
   getUpdateProducts = async () => {
-    const data = await axios.get(`/user/eats/${this.state.selectedDay}`);
+    const headers = { Authorization: this.props.token };
+    const data = await axios.get(`/user/eats/${this.state.selectedDay}`, { headers });
     this.setState({
       products: data.data.products.reverse()
     });
@@ -132,7 +134,8 @@ class DiaryBlock extends Component {
             <div className={styles.addProductContainer}>
               <AddProduct
                 getUpdateProducts={this.getUpdateProducts}
-                // updateProducts={this.updateProducts}
+                token={this.props.token}
+                selectedDay={selectedDay}
               />
             </div>
             <DiaryList
@@ -146,10 +149,14 @@ class DiaryBlock extends Component {
     );
   }
 }
+const mapStateToProps = (state) => ({
+  token: state.session.token
+})
+
 
 const mapDispatchToProps = {
   getTotalUsedCalories,
   getDate
 };
 
-export default connect(null, mapDispatchToProps)(DiaryBlock);
+export default connect(mapStateToProps, mapDispatchToProps)(DiaryBlock);
