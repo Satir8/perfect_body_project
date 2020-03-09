@@ -9,10 +9,6 @@
   transition: opacity 700ms ease-in-out, transform 700ms ease-in-out;
 }
 
-.enterDone {
-  animation: shake 0.82s cubic-bezier(.36, .07, .19, .97) both;
-  transform: translate3d(0, 0, 0);
-}
 
 .exit {
   opacity: 0;
@@ -26,6 +22,14 @@
 }
 
 
+
+@media(min-width: 767px) {
+  .enterDone {
+    animation: shake 0.82s cubic-bezier(.36, .07, .19, .97) both;
+    transform: translate3d(0, 0, 0);
+    backface-visibility: hidden;
+  }
+}
 
 @keyframes shake {
 

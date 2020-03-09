@@ -55,8 +55,8 @@ class HomePage extends Component {
             <CalcForm
               onModalOpen={this.openModal}
               onPrepareModalObject={this.prepareObjectForModal}
-              onSubmit={this.handleSubmit}
-              onChange={this.handleChange}
+              // onSubmit={this.handleSubmit}
+              // onChange={this.handleChange}
             />
           </div>
         </div>

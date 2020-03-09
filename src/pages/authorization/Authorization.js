@@ -7,7 +7,9 @@ class AuthPage extends Component {
   render() {
     return (
       <div className={css.pageWrapper}>
-        <AuthForm />
+        <div className={css.pageContainer}>
+          <AuthForm />
+        </div>
       </div>
     );
   }

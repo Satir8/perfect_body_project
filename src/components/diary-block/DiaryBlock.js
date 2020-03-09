@@ -18,7 +18,8 @@ import MomentLocaleUtils, {
 import "moment/locale/ru";
 import styles from "./DiaryBlock.module.css";
 import "react-day-picker/lib/style.css";
-import calendarIcon from './baseline_date_range_black_24dp.png'
+import calendarIcon from './baseline_date_range_black_24dp.png';
+import WithAuthRedirect from '../hoc/WithAuthRedirect'
 
 axios.defaults.baseURL = "https://slim-moms.goit.co.ua/api/v1";
 //axios.defaults.headers.common["Authorization"] = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI1ZTYyOTY0MjA2NzdhNDFlYTczY2Y0YzkiLCJjcmVhdGVkRGF0ZSI6MTU4MzYwNzg4ODcxNiwiZXhwIjoxNTg2MTk5ODg4fQ.VgxOGtciHMFq6IJ-hx-ZM7NnZZiJNZOSNH00uKKO1e4";
@@ -159,4 +160,4 @@ const mapDispatchToProps = {
   getDate
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(DiaryBlock);
+export default WithAuthRedirect(connect(mapStateToProps, mapDispatchToProps)(DiaryBlock));
