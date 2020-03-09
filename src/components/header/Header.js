@@ -2,27 +2,65 @@ import React from 'react';
 import styles from './Header.module.css';
 import Burger from './Burger';
 import NavPage from '../../pages/navPage/NavPage';
+import { connect } from 'react-redux';
+import ModalLogout from '../modalLogout/modalLogout';
+import { Link } from 'react-router-dom';
+import Nickname from './Nickname';
+import { appContext } from '../App';
 
 const burgerIcon = styles.hrdBurger;
 const closeIcon = styles.hrdBurgerClose;
 
-const Header = ({ isMobile, isTablet, isDesktop }) => (
-  <div className={styles.hdrContainer}>
-    <p className={styles.hdrLogo}>
-    Perfect<span>Body</span> 
-    </p>
-    {isMobile && <Burger burgerIcon={burgerIcon} closeIcon={closeIcon} />}
-    {isTablet && (
+const Header = ({ auth }) => (
+  <appContext.Consumer>
+    {({ isMobile, isTablet, isDesktop, showExitModal }) => (
       <>
-      <ul className={styles.hdrAuthList}>
-        <li className={styles.hdrAuthListItem}>Nicname</li>
-        <li className={styles.hdrAuthListItem}>Выйти</li>
-      </ul>
-      <Burger burgerIcon={burgerIcon} closeIcon={closeIcon} />
+        <div className={styles.hdrContainer}>
+          <Link to='/' className={styles.hdrLogo}>
+            Perfect<span>Body</span>
+          </Link>
+          {isMobile && <Burger burgerIcon={burgerIcon} closeIcon={closeIcon} />}
+          {isTablet && (
+            <>
+              <div className={styles.hdrAuthList}>
+                {auth ? (
+                  <Nickname />
+                ) : (
+                  <>
+                    <Link
+                      to='/authorization'
+                      className={[
+                        styles.hdrAuthListItem,
+                        styles.hdrAuthListItemLink
+                      ].join(' ')}
+                    >
+                      Вход
+                    </Link>
+                    <Link
+                      to='/authorization'
+                      className={[
+                        styles.hdrAuthListItem,
+                        styles.hdrAuthListItemLink
+                      ].join(' ')}
+                    >
+                      Регистрация
+                    </Link>
+                  </>
+                )}
+              </div>
+              {auth && <Burger burgerIcon={burgerIcon} closeIcon={closeIcon} />}
+            </>
+          )}
+          {isDesktop && <NavPage />}
+        </div>
+        {showExitModal && (<ModalLogout />)}
       </>
     )}
-    {isDesktop && <NavPage />}
-  </div>
+  </appContext.Consumer>
 );
 
-export default Header;
+const mapStateToProps = state => ({
+  auth: state.session.authenticated
+});
+
+export default connect(mapStateToProps)(Header);

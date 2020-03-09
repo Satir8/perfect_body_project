@@ -1,5 +1,5 @@
-import axios from 'axios'
-import * as sessionSelectors from './authSelectors'
+import axios from "axios";
+import * as sessionSelectors from "./authSelectors";
 import {
   loginRequest,
   loginSuccess,
@@ -24,37 +24,39 @@ const cleanAuthToken = () => {
 export const login = credential => dispatch => {
   dispatch(loginRequest());
 
-  axios.post("/login", credential, {
+  axios
+    .post("/login", credential, {
       headers: {
         "Content-Type": "application/json"
       }
     })
     .then(response => {
       setAuthToken(response.data.user.token);
-      dispatch(loginSuccess(response.data))
+      dispatch(loginSuccess(response.data));
     })
     .catch(error => dispatch(authError(error.response)))
-    .finally(() => dispatch(loginRequest()))
+    .finally(() => dispatch(loginRequest()));
 };
 
 export const signup = credential => dispatch => {
   dispatch(signupRequest());
 
-  axios.post("/register", credential, {
+  axios
+    .post("/register", credential, {
       headers: {
         "Content-Type": "application/json"
       }
     })
     .then(response => {
       setAuthToken(response.data.user.token);
-      dispatch(signupSuccess(response.data))
+      dispatch(signupSuccess(response.data));
     })
     .catch(error => dispatch(authError(error.response)))
-    .finally(() => dispatch(loginRequest()))
+    .finally(() => dispatch(loginRequest()));
 };
 
 export const refreshUser = () => (dispatch, getState) => {
-  const token = sessionSelectors.getToken(getState())
+  const token = sessionSelectors.getToken(getState());
 
   if (!token) return;
 
@@ -62,13 +64,14 @@ export const refreshUser = () => (dispatch, getState) => {
 
   dispatch(refreshUserRequest());
 
-  axios.get("/user")
+  axios
+    .get("/user")
     .then(response => dispatch(refreshUserSuccess(response.data)))
     .catch(error => dispatch(authError(error.response)))
-    .finally(() => dispatch(refreshUserRequest()))
+    .finally(() => dispatch(refreshUserRequest()));
 };
 
 export const logout = () => dispatch => {
   cleanAuthToken();
-  dispatch(logOut())
+  dispatch(logOut());
 };

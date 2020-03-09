@@ -4,16 +4,14 @@ import { connect } from "react-redux";
 import NavPage from "../pages/navPage/NavPage";
 import Header from "./header/Header";
 import * as authOperations from "../redux/auth/authOperations";
-import {Loader} from './loader/Loader'
+import { Loader } from "./loader/Loader";
 
 export const appContext = createContext();
 
 // lazy import
 
 const HomePage = lazy(() =>
-  import(
-    "../pages/homePage/HomePage" /* webpackChunkName: "home-page" */
-  )
+  import("../pages/homePage/HomePage" /* webpackChunkName: "home-page" */)
 );
 
 const AuthPage = lazy(() =>
@@ -23,9 +21,7 @@ const AuthPage = lazy(() =>
 );
 
 const Diary = lazy(() =>
-  import(
-    "./diary-block/DiaryBlock" /* webpackChunkName: "diary-block" */
-  )
+  import("./diary-block/DiaryBlock" /* webpackChunkName: "diary-block" */)
 );
 
 const CalcForm = lazy(() =>
@@ -55,7 +51,6 @@ class App extends Component {
   }
 
   componentDidUpdate() {
-    // this.checkScreenWidth();
     this.props.refreshUser();
   }
 
@@ -103,22 +98,22 @@ class App extends Component {
         }}
       >
         <Header />
-        <Suspense fallback={<Loader/>}>
-        <Switch>
-          <Route exact path="/" component={HomePage} />
-          <Route
-            path="/nav"
-            render={props => (
-              <NavPage {...props} isMobile={isMobile} isDesktop={isDesktop} />
-            )}
-          />
-          <Route path="/authorization" component={AuthPage} />
-          {/*  */}
-          <Route path="/diary" component={Diary} />
-          <Route path="/calculator" component={CalcForm} />
-          <Route path="/achievements" component={Achievements} />
-          {/*  */}
-        </Switch>
+        <Suspense fallback={<Loader />}>
+          <Switch>
+            <Route exact path="/" component={HomePage} />
+            <Route
+              path="/nav"
+              render={props => (
+                <NavPage {...props} isMobile={isMobile} isDesktop={isDesktop} />
+              )}
+            />
+            <Route path="/authorization" component={AuthPage} />
+            {/*  */}
+            <Route path="/diary" component={Diary} />
+            <Route path="/calculator" component={CalcForm} />
+            <Route path="/achievements" component={Achievements} />
+            {/*  */}
+          </Switch>
         </Suspense>
       </appContext.Provider>
     );
