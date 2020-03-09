@@ -50,7 +50,7 @@ class ModalWindow extends Component {
             )}
           </div>
           <div className="modalFooter">
-            <Link to="/authorization">
+            <Link to="/login">
               <button type="button" className="startLoosingWeight">
                 Начать худеть
               </button>

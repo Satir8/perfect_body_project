@@ -20,14 +20,14 @@ const modalLogout = ({ logOut }) => (
           <hr className={styles.line}></hr>
           <div className={styles.btnCase}>
             <Link
-              to='/'
+              to="/"
               onClick={() => {
                 logOut();
                 closeModal();
               }}
               className={styles.btnYes}
             >
-              Да!
+              Да
             </Link>
             <button onClick={() => closeModal()} className={styles.btnNo}>
               Нет, я хочу остаться
