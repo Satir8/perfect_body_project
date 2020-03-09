@@ -53,6 +53,7 @@ class AddProduct extends Component {
 
   handleSubmit = async e => {
     e.preventDefault();
+    this.props.showModal();
     const { selectedValue, quantityValue } = this.state;
     if (!selectedValue.label) {
       this.setState({
@@ -139,7 +140,8 @@ class AddProduct extends Component {
             />
           </div>
           <div className={styles.searchBtn}>
-            <button type="submit">&#43;</button>
+          <button type="submit">{this.props.text === true ? "Add" : '+'}</button>
+       
           </div>
         </div>
         <CSSTransition
