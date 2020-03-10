@@ -95,6 +95,7 @@ class AddProduct extends Component {
           selectedValue: "",
           quantityValue: ""
         });
+      this.props.showModal();
     } else {
       const { selectedValue, quantityValue } = this.state;
       if (!selectedValue.label) {
