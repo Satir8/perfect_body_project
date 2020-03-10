@@ -12,6 +12,8 @@ const customStyles = {
 };
 
 class AddProduct extends Component {
+  _isMount = false;
+
   state = {
     inputValue: "",
     selectedValue: "",
@@ -21,6 +23,10 @@ class AddProduct extends Component {
     isErrorVisible: false,
     errorMsg: ""
   };
+
+  componentDidMount() {
+    this._isMount = true;
+  }
 
   handleSelectChange = value => {
     this.setState({ selectedValue: value });
@@ -34,72 +40,100 @@ class AddProduct extends Component {
     this.setState({ quantityValue: e.target.value });
   };
 
-  // showError = (product, grams) => {
-  //   let error = '';
-  //   if (product === '') {
-
-  //     // this.setState({
-  //     //   errorMsg: 'Выберите продукт'
-  //     // });
-  //     error = 'Выберите продукт';
-  //     //console.log()
-  //   } else if (!grams) {
-  //     this.setState({
-  //       errorMsg: 'Введите количество грамм'
-  //     });
-  //     return;
-  //   }
-  // };
-
   componentWillUnmount() {
-    this.props.showModal();
+    this._isMount = false;
   }
 
   handleSubmit = async e => {
     e.preventDefault();
-    console.log(this.props.isMobile);
 
     if (this.props.isMobile) {
-      console.log("showModal");
-      this.props.showModal();
-    }
+      const { selectedValue, quantityValue } = this.state;
+      if (!selectedValue.label) {
+        this.setState({
+          isErrorVisible: true,
+          errorMsg: "Выберите продукт"
+        });
+        setTimeout(() => {
+          this.setState({
+            isErrorVisible: false
+          });
+        }, 2000);
+        return;
+      } else if (!quantityValue) {
+        this.setState({
+          isErrorVisible: true,
+          errorMsg: "Выберите граммы"
+        });
+        setTimeout(() => {
+          this.setState({
+            isErrorVisible: false
+          });
+        }, 2000);
+        return;
+      } else {
+        this.setState({
+          isErrorVisible: false,
+          product: { name: selectedValue.label, quantity: quantityValue }
+        });
 
-    const { selectedValue, quantityValue } = this.state;
-    if (!selectedValue.label) {
-      this.setState({
-        isErrorVisible: true,
-        errorMsg: "Выберите продукт"
-      });
-      return;
-    } else if (!quantityValue) {
-      this.setState({
-        isErrorVisible: true,
-        errorMsg: "Выберите граммы"
-      });
-      return;
+        const product = {
+          ...selectedValue,
+          weight: quantityValue,
+          date: this.props.selectedDay
+        };
+
+        const headers = { Authorization: this.props.token };
+        await axios.post(`/user/eats/${selectedValue.value}`, product, {
+          headers
+        });
+        this.props.getUpdateProducts();
+      }
+
+      this._isMount &&
+        this.setState({
+          selectedValue: "",
+          quantityValue: ""
+        });
     } else {
-      this.setState({
-        isErrorVisible: false,
-        product: { name: selectedValue.label, quantity: quantityValue }
-      });
+      const { selectedValue, quantityValue } = this.state;
+      if (!selectedValue.label) {
+        this.setState({
+          isErrorVisible: true,
+          errorMsg: "Выберите продукт"
+        });
+        return;
+      } else if (!quantityValue) {
+        this.setState({
+          isErrorVisible: true,
+          errorMsg: "Выберите граммы"
+        });
+        return;
+      } else {
+        this.setState({
+          isErrorVisible: false,
+          product: { name: selectedValue.label, quantity: quantityValue }
+        });
 
-      const product = {
-        ...selectedValue,
-        weight: quantityValue,
-        date: this.props.selectedDay
-      };
+        const product = {
+          ...selectedValue,
+          weight: quantityValue,
+          date: this.props.selectedDay
+        };
 
-      const headers = { Authorization: this.props.token };
-      await axios.post(`/user/eats/${selectedValue.value}`, product, {
-        headers
-      });
-      this.props.getUpdateProducts();
+        const headers = { Authorization: this.props.token };
+        await axios.post(`/user/eats/${selectedValue.value}`, product, {
+          headers
+        });
+        this.props.getUpdateProducts();
+      }
+
+      this._isMount &&
+        this.setState({
+          selectedValue: "",
+          quantityValue: ""
+        });
     }
-
-    this.setState({
-      selectedValue: "",
-      quantityValue: ""
-    });
   };
 
   getAsyncOptions = async query => {
@@ -159,12 +193,7 @@ class AddProduct extends Component {
             </button>
           </div>
         </div>
-        <CSSTransition
-          in={isErrorVisible}
-          timeout={2000}
-          classNames={opacityWithShakeTransition}
-          unmountOnExit
-        >
+        <CSSTransition in={isErrorVisible} timeout={2000} unmountOnExit>
           <p className={styles.errorNotification}>{errorMsg}</p>
         </CSSTransition>
       </form>

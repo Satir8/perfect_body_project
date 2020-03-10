@@ -28,7 +28,7 @@
 }
 
 .searchBtn button {
-  margin: 30px auto;
+  margin: 40px auto;
   height: 42px;
   width: 176px;
   border-radius: 18px;
@@ -75,11 +75,16 @@
   z-index: 1;
 }
 
+.errorNotification {
+  color: red;
+  position: absolute;
+  font-size: 0.8rem;
+  top: 92px;
+  left: 108px;
+}
+
 @media (min-width: 768px) {
   .errorNotification {
-    color: red;
-    position: absolute;
-    font-size: 0.8rem;
     top: 230px;
     left: 72px;
   }

@@ -39,6 +39,8 @@ const customStyles = {
 };
 
 class DiaryBlock extends Component {
+  _isMount = false;
+
   state = {
     selectedDay: moment().toISOString(),
     products: [],
@@ -67,16 +69,23 @@ class DiaryBlock extends Component {
   };
 
   async componentDidMount() {
+    this._isMount = true;
     const headers = { Authorization: this.props.token };
     const data = await axios.get(`/user/eats/${moment().format()}`, {
       headers
     });
-    this.setState({
-      products: data.data.products.reverse()
-    });
+
+    this._isMount &&
+      this.setState({
+        products: data.data.products.reverse()
+      });
     this.getCaloriesSumm();
     const date = moment().toISOString();
     this.props.getDate(date);
+  }
+
+  componentWillUnmount() {
+    this._isMount = false;
   }
 
   deleteProduct = id => {
@@ -102,9 +111,10 @@ class DiaryBlock extends Component {
       (totalCal, product) => totalCal + product.calories,
       0
     );
-    this.setState({
-      caloriesSumm: Math.round(calSum)
-    });
+    this._isMount &&
+      this.setState({
+        caloriesSumm: Math.round(calSum)
+      });
     this.props.getTotalUsedCalories(this.state.caloriesSumm);
   };
 
@@ -120,14 +130,11 @@ class DiaryBlock extends Component {
   };
 
   showModal = () => {
+    console.log("modal");
     this.setState(prevState => ({
       modal: !prevState.modal
     }));
   };
-
-  // componentWillUnmount() {
-
-  // }
 
   render() {
     const { selectedDay, products, modal } = this.state;
