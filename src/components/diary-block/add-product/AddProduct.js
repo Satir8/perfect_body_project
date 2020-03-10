@@ -151,7 +151,7 @@ class AddProduct extends Component {
           </div>
           <div className={styles.searchBtn}>
             <button type="submit">
-              {this.props.text === true ? "Add" : "+"}
+              {this.props.text === true ? "Добавить" : "+"}
             </button>
           </div>
         </div>
