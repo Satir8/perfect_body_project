@@ -34,13 +34,17 @@
   padding: 0px;
 }
 
+.noProducts {
+  margin-top: 10px;
+  text-align: left;
+}
+
 @media (min-width: 768px) {
   .diaryContainer {
     padding: 50px 60px 40px 60px;
   }
 
   .addProductContainer {
-    padding-left: 14px;
     margin-bottom: 20px;
   }
 

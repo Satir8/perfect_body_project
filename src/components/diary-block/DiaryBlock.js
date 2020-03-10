@@ -1,41 +1,41 @@
-import React, { Component } from "react";
-import { connect } from "react-redux";
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import {
   getTotalUsedCalories,
   getDate
-} from "../../redux/calcForm/calcFormActions";
-import AddProduct from "./add-product/AddProduct";
-import AddProductModal from "./add-product-modal/addProductModal";
-import DiaryList from "./diary-list/DiaryList";
-import Summary from "../summary/Summary";
-import axios from "axios";
-import moment from "moment";
-import DayPickerInput from "react-day-picker/DayPickerInput";
-import "react-day-picker/lib/style.css";
+} from '../../redux/calcForm/calcFormActions';
+import AddProduct from './add-product/AddProduct';
+import AddProductModal from './add-product-modal/addProductModal';
+import DiaryList from './diary-list/DiaryList';
+import Summary from '../summary/Summary';
+import axios from 'axios';
+import moment from 'moment';
+import DayPickerInput from 'react-day-picker/DayPickerInput';
+import 'react-day-picker/lib/style.css';
 import MomentLocaleUtils, {
   formatDate,
   parseDate
-} from "react-day-picker/moment";
-import "moment/locale/ru";
-import styles from "./DiaryBlock.module.css";
-import "react-day-picker/lib/style.css";
-import calendarIcon from "./baseline_date_range_black_24dp.png";
-import { appContext } from "../App";
-import WithAuthRedirect from "../hoc/WithAuthRedirect";
+} from 'react-day-picker/moment';
+import 'moment/locale/ru';
+import styles from './DiaryBlock.module.css';
+import 'react-day-picker/lib/style.css';
+import calendarIcon from './baseline_date_range_black_24dp.png';
+import { appContext } from '../App';
+import WithAuthRedirect from '../hoc/WithAuthRedirect';
 
-axios.defaults.baseURL = "https://slim-moms.goit.co.ua/api/v1";
+axios.defaults.baseURL = 'https://slim-moms.goit.co.ua/api/v1';
 
 const customStyles = {
-  border: "none",
-  fontSize: "18px",
+  border: 'none',
+  fontSize: '18px',
   fontWeight: 700,
-  width: "120px",
-  cursor: "pointer",
-  outline: "none",
+  width: '120px',
+  cursor: 'pointer',
+  outline: 'none',
   background: `url(${calendarIcon})`,
-  backgroundRepeat: "no-repeat",
-  backgroundSize: "20px 20px",
-  backgroundPosition: "top right"
+  backgroundRepeat: 'no-repeat',
+  backgroundSize: '20px 20px',
+  backgroundPosition: 'top right'
 };
 
 class DiaryBlock extends Component {
@@ -76,7 +76,6 @@ class DiaryBlock extends Component {
     });
     this.getCaloriesSumm();
     const date = moment().toISOString();
-    console.log("date", date);
     this.props.getDate(date);
   }
 
@@ -85,7 +84,7 @@ class DiaryBlock extends Component {
     axios
       .delete(`/user/eats/${id}`, { headers })
       .then(response => {
-        if (response.data.status === "success") {
+        if (response.data.status === 'success') {
           this.setState(prev => ({
             products: prev.products.filter(elem => elem._id !== id)
           }));
@@ -128,7 +127,7 @@ class DiaryBlock extends Component {
 
   render() {
     const { selectedDay, products, modal } = this.state;
-    // console.log(this.state.selectedDay)
+
     return (
       <appContext.Consumer>
         {({ isMobile }) => (
@@ -140,12 +139,12 @@ class DiaryBlock extends Component {
                     <DayPickerInput
                       className={styles.dayPickerInput}
                       inputProps={{ style: customStyles }}
-                      value={moment(selectedDay).format("L")}
+                      value={moment(selectedDay).format('L')}
                       onDayChange={this.handleDayChange}
                       formatDate={formatDate}
                       parseDate={parseDate}
                       dayPickerProps={{
-                        locale: "ru",
+                        locale: 'ru',
                         localeUtils: MomentLocaleUtils
                       }}
                     />
@@ -163,10 +162,18 @@ class DiaryBlock extends Component {
                   </div>
                 )}
                 {!modal && (
-                  <DiaryList
-                    productsList={products}
-                    deleteProduct={this.deleteProduct}
-                  />
+                  <>
+                    {products.length === 0 && (
+                      <p className={styles.noProducts}>
+                        Здесь будет отображаться Ваш рацион
+                      </p>
+                    )}
+
+                    <DiaryList
+                      productsList={products}
+                      deleteProduct={this.deleteProduct}
+                    />
+                  </>
                 )}
               </div>
               {isMobile && (
@@ -174,7 +181,7 @@ class DiaryBlock extends Component {
                   {modal && (
                     <AddProductModal showModal={this.showModal}>
                       <AddProduct
-                        stylestyle={{ backround: "red" }}
+                        stylestyle={{ backround: 'red' }}
                         // {...styles}
                         text={isMobile}
                         {...this.props}
