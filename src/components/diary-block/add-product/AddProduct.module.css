@@ -55,12 +55,10 @@
   display: none;
 } */
 
-.errorNotification {
-  color: red;
-  position: absolute;
-  font-size: 0.8rem;
-  top: 200px;
-  left: 75px;
+.addBtn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .closeBtn {
@@ -78,6 +76,13 @@
 }
 
 @media (min-width: 768px) {
+  .errorNotification {
+    color: red;
+    position: absolute;
+    font-size: 0.8rem;
+    top: 230px;
+    left: 72px;
+  }
   .search {
     display: flex;
     width: 500px;
@@ -115,5 +120,12 @@
     font-size: 25px;
     padding: 0px;
     outline: none;
+  }
+}
+
+@media (min-width: 1280px) {
+  .errorNotification {
+    top: 258px;
+    left: 60px;
   }
 }

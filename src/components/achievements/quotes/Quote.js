@@ -41,7 +41,7 @@ class Quote extends Component {
       if (idx === arr.length - 1) {
         this.setState({ idx: 0 });
       }
-    }, 3000);
+    }, 7000);
   };
 
   render() {
