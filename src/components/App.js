@@ -50,6 +50,10 @@ class App extends Component {
     this.props.refreshUser();
   }
 
+  componentDidUpdate() {
+    this.props.refreshUser();
+  }
+
   checkScreenWidth = () => {
     if (window.innerWidth < 768) {
       this.setState({
@@ -80,6 +84,10 @@ class App extends Component {
     this.setState({ showExitModal: false });
   };
 
+  closeOnBackdrop = e => {
+    e.target === e.currentTarget && this.setState({ showExitModal: false });
+  }
+
   render() {
     const { isMobile, isTablet, isDesktop, showExitModal } = this.state;
     return (
@@ -90,11 +98,12 @@ class App extends Component {
           isDesktop,
           showExitModal,
           openExitModal: this.openExitModal,
-          closeModal: this.closeModal
+          closeModal: this.closeModal,
+          closeOnBackdrop: this.closeOnBackdrop
         }}
       >
         <Header />
-        <Suspense fallback={<Loader />}>
+        <Suspense fallback={<Loader/>}>
           <Switch>
             <Route exact path="/" component={HomePage} />
             <Route
@@ -103,12 +112,13 @@ class App extends Component {
                 <NavPage {...props} isMobile={isMobile} isDesktop={isDesktop} />
               )}
             />
-            <Route path="/authorization" component={AuthPage} />
-            {/*  */}
+            <Route path="/login" component={AuthPage} />
+            <Route path="/signup" component={AuthPage} />
+           
             <Route path="/diary" component={Diary} />
             <Route path="/calculator" component={CalcForm} />
             <Route path="/achievements" component={Achievements} />
-            {/*  */}
+            
           </Switch>
         </Suspense>
       </appContext.Provider>

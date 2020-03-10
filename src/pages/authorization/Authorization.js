@@ -8,7 +8,7 @@ class AuthPage extends Component {
     return (
       <div className={css.pageWrapper}>
         <div className={css.pageContainer}>
-          <AuthForm />
+          <AuthForm {...this.props} />
         </div>
       </div>
     );

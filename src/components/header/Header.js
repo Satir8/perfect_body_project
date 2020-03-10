@@ -28,7 +28,7 @@ const Header = ({ auth }) => (
                 ) : (
                   <>
                     <Link
-                      to='/authorization'
+                      to='/login'
                       className={[
                         styles.hdrAuthListItem,
                         styles.hdrAuthListItemLink
@@ -37,7 +37,7 @@ const Header = ({ auth }) => (
                       Вход
                     </Link>
                     <Link
-                      to='/authorization'
+                      to='/signup'
                       className={[
                         styles.hdrAuthListItem,
                         styles.hdrAuthListItemLink

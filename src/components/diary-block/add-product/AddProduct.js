@@ -1,25 +1,25 @@
-import React, { Component } from 'react';
-import AsyncSelect from 'react-select/async';
-import axios from 'axios';
+import React, { Component } from "react";
+import AsyncSelect from "react-select/async";
+import axios from "axios";
 import { CSSTransition } from "react-transition-group";
 import * as opacityWithShakeTransition from "../../../transitions/opacityTransition.module.css";
-import styles from './AddProduct.module.css';
+import styles from "./AddProduct.module.css";
 
 const customStyles = {
-  container: provided => ({ ...provided, borderBottom: '1px solid #e5e5e5' }),
-  indicatorsContainer: provided => ({ ...provided, display: 'none' }),
-  control: provided => ({ ...provided, border: 0, boxShadow: 'none' })
+  container: provided => ({ ...provided, borderBottom: "1px solid #e5e5e5" }),
+  indicatorsContainer: provided => ({ ...provided, display: "none" }),
+  control: provided => ({ ...provided, border: 0, boxShadow: "none" })
 };
 
 class AddProduct extends Component {
   state = {
-    inputValue: '',
-    selectedValue: '',
-    quantityValue: '',
+    inputValue: "",
+    selectedValue: "",
+    quantityValue: "",
     products: [],
     product: {},
     isErrorVisible: false,
-    errorMsg: ''
+    errorMsg: ""
   };
 
   handleSelectChange = value => {
@@ -37,7 +37,7 @@ class AddProduct extends Component {
   // showError = (product, grams) => {
   //   let error = '';
   //   if (product === '') {
-     
+
   //     // this.setState({
   //     //   errorMsg: 'Выберите продукт'
   //     // });
@@ -53,17 +53,24 @@ class AddProduct extends Component {
 
   handleSubmit = async e => {
     e.preventDefault();
+    console.log(this.props.isMobile);
+
+    if (this.props.isMobile) {
+      console.log("showModal");
+      this.props.showModal();
+    }
+
     const { selectedValue, quantityValue } = this.state;
     if (!selectedValue.label) {
       this.setState({
         isErrorVisible: true,
-        errorMsg: 'Выберите продукт'
+        errorMsg: "Выберите продукт"
       });
       return;
     } else if (!quantityValue) {
       this.setState({
         isErrorVisible: true,
-        errorMsg: 'Выберите граммы'
+        errorMsg: "Выберите граммы"
       });
       return;
     } else {
@@ -86,8 +93,8 @@ class AddProduct extends Component {
     }
 
     this.setState({
-      selectedValue: '',
-      quantityValue: ''
+      selectedValue: "",
+      quantityValue: ""
     });
   };
 
@@ -108,7 +115,12 @@ class AddProduct extends Component {
   loadOptions = () => this.getAsyncOptions(this.state.inputValue);
 
   render() {
-    const { selectedValue, quantityValue, isErrorVisible, errorMsg } = this.state;
+    const {
+      selectedValue,
+      quantityValue,
+      isErrorVisible,
+      errorMsg
+    } = this.state;
 
     return (
       <form className={styles.form} onSubmit={e => this.handleSubmit(e)}>
@@ -124,7 +136,7 @@ class AddProduct extends Component {
               value={selectedValue}
               className={styles.asyncSelect}
               placeholder="Введите название продукта"
-              noOptionsMessage={() => 'Продукт не найден' || null}
+              noOptionsMessage={() => "Продукт не найден" || null}
             />
           </div>
           <div className={styles.searchInput}>
@@ -138,17 +150,19 @@ class AddProduct extends Component {
             />
           </div>
           <div className={styles.searchBtn}>
-            <button type="submit">&#43;</button>
+            <button type="submit">
+              {this.props.text === true ? "Add" : "+"}
+            </button>
           </div>
         </div>
         <CSSTransition
-            in={isErrorVisible}
-            timeout={2000}
-            classNames={opacityWithShakeTransition}
-            unmountOnExit
-          >
-            <p className={styles.errorNotification}>{errorMsg}</p>
-          </CSSTransition>
+          in={isErrorVisible}
+          timeout={2000}
+          classNames={opacityWithShakeTransition}
+          unmountOnExit
+        >
+          <p className={styles.errorNotification}>{errorMsg}</p>
+        </CSSTransition>
       </form>
     );
   }

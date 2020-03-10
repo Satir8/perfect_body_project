@@ -28,7 +28,12 @@
     margin-bottom: 66px;
 }
 
-.entryBtn {
+.navWrapper {
+    margin-bottom: 50px;
+}
+
+.entryBtn,
+.entrySpan {
     font-family: "GothamPro", "Verdana", "Geneva", "Tahoma", sans-serif;
     font-weight: bold;
     font-size: 0.875rem;
@@ -38,9 +43,13 @@
     text-transform: uppercase;
     border-bottom: 1px solid #fc832c00;
     padding-bottom: 4px;
-    margin-bottom: 50px;
     outline: none;
     cursor: pointer;
+    transition: 0.5s;
+}
+
+.entryBtn {
+    display: inline-block;
 }
 
 .entryBtn:hover,
@@ -63,6 +72,7 @@
     height: 40px;
     cursor: pointer;
     outline: none;
+    transition: 0.5s;
 }
 
 .submitBtn:hover,

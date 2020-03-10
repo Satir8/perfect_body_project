@@ -3,6 +3,7 @@ import Quote from "./quotes/Quote";
 import Graph from "./graph/Graph";
 import styles from "./Achievements.module.css";
 import Summary from "../../components/summary/Summary";
+import WithAuthRedirect from '../hoc/WithAuthRedirect'
 import { appContext } from "../App";
 
 const Achievements = () => (
@@ -21,4 +22,4 @@ const Achievements = () => (
   </appContext.Consumer>
 );
 
-export default Achievements;
+export default WithAuthRedirect(Achievements);

@@ -5,6 +5,7 @@ import {
   getDate
 } from "../../redux/calcForm/calcFormActions";
 import AddProduct from "./add-product/AddProduct";
+import AddProductModal from "./add-product-modal/addProductModal";
 import DiaryList from "./diary-list/DiaryList";
 import Summary from "../summary/Summary";
 import axios from "axios";
@@ -18,11 +19,11 @@ import MomentLocaleUtils, {
 import "moment/locale/ru";
 import styles from "./DiaryBlock.module.css";
 import "react-day-picker/lib/style.css";
-import calendarIcon from './baseline_date_range_black_24dp.png';
-import WithAuthRedirect from '../hoc/WithAuthRedirect'
+import calendarIcon from "./baseline_date_range_black_24dp.png";
+import { appContext } from "../App";
+import WithAuthRedirect from "../hoc/WithAuthRedirect";
 
 axios.defaults.baseURL = "https://slim-moms.goit.co.ua/api/v1";
-//axios.defaults.headers.common["Authorization"] = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI1ZTYyOTY0MjA2NzdhNDFlYTczY2Y0YzkiLCJjcmVhdGVkRGF0ZSI6MTU4MzYwNzg4ODcxNiwiZXhwIjoxNTg2MTk5ODg4fQ.VgxOGtciHMFq6IJ-hx-ZM7NnZZiJNZOSNH00uKKO1e4";
 
 const customStyles = {
   border: "none",
@@ -32,23 +33,25 @@ const customStyles = {
   cursor: "pointer",
   outline: "none",
   background: `url(${calendarIcon})`,
-  backgroundRepeat: 'no-repeat',
-  backgroundSize: '20px 20px',
-  backgroundPosition: 'top right'
+  backgroundRepeat: "no-repeat",
+  backgroundSize: "20px 20px",
+  backgroundPosition: "top right"
 };
-
-
 
 class DiaryBlock extends Component {
   state = {
     selectedDay: moment().toISOString(),
     products: [],
-    caloriesSumm: null
+    caloriesSumm: null,
+    modal: false,
+    isOpen: true
   };
 
   getFetchData = async () => {
     const headers = { Authorization: this.props.token };
-    const data = await axios.get(`/user/eats/${this.state.selectedDay}`, { headers });
+    const data = await axios.get(`/user/eats/${this.state.selectedDay}`, {
+      headers
+    });
     this.setState({
       products: data.data.products.reverse()
     });
@@ -65,11 +68,16 @@ class DiaryBlock extends Component {
 
   async componentDidMount() {
     const headers = { Authorization: this.props.token };
-    const data = await axios.get(`/user/eats/${moment().format()}`, { headers });
+    const data = await axios.get(`/user/eats/${moment().format()}`, {
+      headers
+    });
     this.setState({
       products: data.data.products.reverse()
     });
     this.getCaloriesSumm();
+    const date = moment().toISOString();
+    console.log("date", date);
+    this.props.getDate(date);
   }
 
   deleteProduct = id => {
@@ -103,61 +111,107 @@ class DiaryBlock extends Component {
 
   getUpdateProducts = async () => {
     const headers = { Authorization: this.props.token };
-    const data = await axios.get(`/user/eats/${this.state.selectedDay}`, { headers });
+    const data = await axios.get(`/user/eats/${this.state.selectedDay}`, {
+      headers
+    });
     this.setState({
       products: data.data.products.reverse()
     });
     this.getCaloriesSumm();
   };
 
-  render() {
-    const { selectedDay, products } = this.state;
+  showModal = () => {
+    this.setState(prevState => ({
+      modal: !prevState.modal
+    }));
+  };
 
+  render() {
+    const { selectedDay, products, modal } = this.state;
+    // console.log(this.state.selectedDay)
     return (
-      <>
-        <div className={styles.DashboardContainer}>
-          <div className={styles.diaryContainer}>
-            <div className={styles.dayPickerInputContainer}>
-              <DayPickerInput
-                inputProps={{ style: customStyles }}
-                value={moment(selectedDay).format("L")}
-                onDayChange={this.handleDayChange}
-                formatDate={formatDate}
-                parseDate={parseDate}
-                //format="L"
-                // placeholder={`${moment().format('L')}`}
-                dayPickerProps={{
-                  locale: "ru",
-                  localeUtils: MomentLocaleUtils
-                }}
-              />
+      <appContext.Consumer>
+        {({ isMobile }) => (
+          <>
+            <div className={styles.DashboardContainer}>
+              <div className={styles.diaryContainer}>
+                {!modal && (
+                  <div className={styles.dayPickerInputContainer}>
+                    <DayPickerInput
+                      className={styles.dayPickerInput}
+                      inputProps={{ style: customStyles }}
+                      value={moment(selectedDay).format("L")}
+                      onDayChange={this.handleDayChange}
+                      formatDate={formatDate}
+                      parseDate={parseDate}
+                      dayPickerProps={{
+                        locale: "ru",
+                        localeUtils: MomentLocaleUtils
+                      }}
+                    />
+                  </div>
+                )}
+                {!isMobile && (
+                  <div className={styles.addProductContainer}>
+                    <AddProduct
+                      getUpdateProducts={this.getUpdateProducts}
+                      token={this.props.token}
+                      selectedDay={selectedDay}
+                      isMobile={isMobile}
+                      showModal={this.showModal}
+                    />
+                  </div>
+                )}
+                {!modal && (
+                  <DiaryList
+                    productsList={products}
+                    deleteProduct={this.deleteProduct}
+                  />
+                )}
+              </div>
+              {isMobile && (
+                <>
+                  {modal && (
+                    <AddProductModal showModal={this.showModal}>
+                      <AddProduct
+                        stylestyle={{ backround: "red" }}
+                        // {...styles}
+                        text={isMobile}
+                        {...this.props}
+                        getUpdateProducts={this.getUpdateProducts}
+                        token={this.props.token}
+                        selectedDay={selectedDay}
+                        isMobile={isMobile}
+                        showModal={this.showModal}
+                      />
+                    </AddProductModal>
+                  )}
+                  {!modal && (
+                    <div className={styles.searchBtn}>
+                      <button type="button" onClick={this.showModal}>
+                        &#43;
+                      </button>
+                    </div>
+                  )}
+                </>
+              )}
+              <Summary />
             </div>
-            <div className={styles.addProductContainer}>
-              <AddProduct
-                getUpdateProducts={this.getUpdateProducts}
-                token={this.props.token}
-                selectedDay={selectedDay}
-              />
-            </div>
-            <DiaryList
-              productsList={products}
-              deleteProduct={this.deleteProduct}
-            />
-          </div>
-          <Summary />
-        </div>
-      </>
+          </>
+        )}
+      </appContext.Consumer>
     );
   }
 }
-const mapStateToProps = (state) => ({
+const mapStateToProps = state => ({
   token: state.session.token
-})
-
+});
 
 const mapDispatchToProps = {
   getTotalUsedCalories,
   getDate
 };
 
-export default WithAuthRedirect(connect(mapStateToProps, mapDispatchToProps)(DiaryBlock));
+export default WithAuthRedirect(
+  connect(mapStateToProps, mapDispatchToProps)(DiaryBlock)
+);

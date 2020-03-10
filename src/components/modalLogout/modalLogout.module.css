@@ -1,12 +1,21 @@
 .centerCase {
-  display: flex;
-  justify-content: center;
-  margin-top: 50px;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  position: fixed;
+  background-color: rgba(0, 0, 0, 0.8);
+  z-index: 10000;
 }
 
 .moduleCase {
+  overflow: hidden;
+  background-color: rgb(255, 255, 255);
   width: 320px;
-  position: relative;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   display: flex;
   flex-direction: column;
   text-align: center;
@@ -26,7 +35,7 @@
 .text {
   padding-top: 39px;
   margin-bottom: 48px;
-  color: #212121;
+  color: rgba(33, 33, 33, 0.9);
   font-size: 22px;
   font-weight: 600;
   font-family: Verdana, Geneva, Tahoma, sans-serif;
@@ -58,6 +67,7 @@
   color: white;
   text-shadow: 0 0 01em;
   box-shadow: 0 0 10px orange;
+  transition: 0.5s;
 }
 
 .btnYes {
@@ -72,14 +82,17 @@
   color: white;
   text-shadow: 0 0 01em;
   box-shadow: 0 0 10px orange;
+  transition: 0.5s;
+}
+
+.btnYes:hover,
+.btnNo:hover {
+  transform: scale(1.1);
 }
 
 @media (min-width: 768px) {
   .moduleCase {
     width: 500px;
-  }
-
-  .btnClose {
   }
 
   .text {
@@ -97,7 +110,7 @@
 
   .btnYes {
     width: 180px;
-    margin-right: 5px;
+    margin-right: 20px;
     margin-bottom: 0;
   }
 
