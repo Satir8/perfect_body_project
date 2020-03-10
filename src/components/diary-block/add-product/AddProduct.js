@@ -51,6 +51,10 @@ class AddProduct extends Component {
   //   }
   // };
 
+  componentWillUnmount() {
+    this.props.showModal();
+  }
+
   handleSubmit = async e => {
     e.preventDefault();
     console.log(this.props.isMobile);

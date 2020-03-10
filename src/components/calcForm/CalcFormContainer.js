@@ -17,7 +17,8 @@ class CalcFormContainer extends Component {
     age: "",
     currentWeight: "",
     futureWeight: "",
-    groupBlood: ""
+    groupBlood: "",
+    dailyRate: 0
   };
 
   componentDidMount = async () => {
@@ -33,6 +34,21 @@ class CalcFormContainer extends Component {
     }
   };
 
+  componentDidUpdate(prevProps, prevState) {
+    if (prevState.dailyRate !== this.state.dailyRate) {
+      axios.put(
+        `https://slim-moms.goit.co.ua/api/v1/user`,
+        { ...this.state },
+        {
+          headers: {
+            Authorization: this.props.session.token,
+            "Content-Type": "application/json"
+          }
+        }
+      );
+    }
+  }
+
   handleChange = e => {
     const name = e.target.name;
     this.setState({ [name]: e.target.value });
@@ -43,6 +59,9 @@ class CalcFormContainer extends Component {
     const { groupBlood } = this.state;
 
     const totalCalories = this.calcCalories();
+
+    this.setState({ dailyRate: totalCalories });
+
     const currentDangerProducts = Object.values(
       this.getDangerProductList(groupBlood, dangerProducts)
     );
@@ -54,16 +73,18 @@ class CalcFormContainer extends Component {
     this.props.getTotalCalories(totalCalories);
     this.props.getDangerProducts(currentDangerProducts);
 
-    axios.put(
-      `https://slim-moms.goit.co.ua/api/v1/user`,
-      { ...this.state },
-      {
-        headers: {
-          Authorization: this.props.session.token,
-          "Content-Type": "application/json"
-        }
-      }
-    );
+    console.log(this.state.dailyRate);
+
+    // axios.put(
+    //   `https://slim-moms.goit.co.ua/api/v1/user`,
+    //   { ...this.state },
+    //   {
+    //     headers: {
+    //       Authorization: this.props.session.token,
+    //       "Content-Type": "application/json"
+    //     }
+    //   }
+    // );
 
     if (this.props.location.pathname === "/") {
       this.props.onModalOpen();
