@@ -5,6 +5,8 @@ import { CSSTransition } from "react-transition-group";
 import animation from "./quoteAnimation.module.css";
 
 class Quote extends Component {
+  carouselID = 0;
+
   state = {
     idx: 0,
     currentQuote: data[0],
@@ -18,11 +20,11 @@ class Quote extends Component {
   }
 
   componentWillUnmount() {
-    this.openNextQuote(data);
+    clearInterval(this.carouselID);
   }
 
   openNextQuote = arr => {
-    setInterval(() => {
+    this.carouselID = setInterval(() => {
       const { idx } = this.state;
       this.setState(prev => ({
         idx: prev.idx + 1,
