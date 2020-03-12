@@ -43,7 +43,7 @@ class App extends Component {
     const { isMobile, isTablet, isDesktop } = this.state;
     return (
       <>
-        <DashboardPage />
+        {/* <DashboardPage /> */}
         <Header isMobile={isMobile} isTablet={isTablet} isDesktop={isDesktop} />
         <Switch>
           <Route exact path="/" component={() => <HomePage />} />

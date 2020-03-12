@@ -45,11 +45,6 @@ class HomePage extends Component {
   };
 
   prepareObjectForModal = (calories, products) => {
-    // console.log(products);
-    // const test = products[0].forEach(element => {
-    //   console.log(element);
-    // });
-    // console.log(test);
     this.setState({
       modalObject: {
         calories,
@@ -103,11 +98,7 @@ class HomePage extends Component {
         {isModalOpen && (
           <ModalWindow data={modalObject} onCloseModal={this.closeModal} />
         )}
-
         <div className="homePageWrapper">
-          <div className="homePageHeader">
-            <img src={logo} alt="header" width="320" height="80" />
-          </div>
           <div className="homePageBody">
             <CalcForm
               onSubmit={this.handleSubmit}

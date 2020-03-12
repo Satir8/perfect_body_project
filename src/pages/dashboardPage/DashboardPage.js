@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+// import Header from "../../components/header/Header"
 import logo from "../../images/header_desktop.jpg";
 // import { connect } from "react-redux";
 // import Summary from "../../components/summary/Summary";
@@ -14,7 +15,7 @@ class DashboardContainer extends Component {
     const { isCalc } = this.state
     return (
       <>
-      <h2>HEADER</h2>
+      {/* <Header /> */}
         <div className="dashboardPageBody">
           {isCalc && <div className="calcForm">Форма/Достижения</div>}
           <div className="summary">
